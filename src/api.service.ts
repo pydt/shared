@@ -67,18 +67,33 @@ export class ApiService {
     @Inject(API_CREDENTIALS_PROVIDER_TOKEN) private credentials: ApiCredentialsProvider
   ) {}
 
-  getLoginUrl() {
+  getPublicJson(url: string): Promise<any> {
+    return this.http.get(url)
+      .map(res => {
+        return res.json();
+      }).toPromise();
+  }
+
+  getLoginUrl(): Promise<string> {
     return this.get(this.aup.url + '/auth/steam', true).then(data => {
       return data.redirectURL;
     });
   }
 
-  validateSteamCredentials(queryString: string) {
+  setToken(token: string): Promise<void> {
+    return this.credentials.store(token, null)
+      .then(() => {
+        return this.get(this.aup.url + '/user/steamProfile');
+      })
+      .then(profile => {
+        return this.credentials.store(token, profile);    
+      });
+  }
+
+  validateSteamCredentials(queryString: string): Promise<void> {
     return this.get(this.aup.url + '/auth/steam/validate' + queryString, true).then(data => {
       if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('steamProfile', JSON.stringify(data.steamProfile));
-        return data;
+        return this.credentials.store(data.token, data.steamProfile);
       }
 
       throw data;
