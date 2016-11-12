@@ -1,11 +1,71 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, OpaqueToken } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+export let API_URL_PROVIDER_TOKEN = new OpaqueToken('ApiUrlProvider');
+export let API_CREDENTIALS_PROVIDER_TOKEN = new OpaqueToken('ApiCredentialsProvider');
+
+export interface SteamProfile {
+    steamid: string;
+    personaname: string;
+    profileurl: string;
+    avatar: string;
+    avatarmedium: string;
+    avatarfull: string;
+}
+
+export interface GamePlayer {
+  steamId: string;
+  civType: string;
+}
+
+export interface Game {
+  gameId: string;
+  createdBySteamId: string;
+  inProgress: boolean;
+  displayName: string;
+  players: GamePlayer[];
+  currentPlayerSteamId: string;
+  turnTimerMinutes: number;
+  gameTurnInGame: number;
+  gameTurnRangeKey: number;
+}
+
+export interface UserGames {
+  data: Game[];
+  pollUrl: string;
+}
+
+export interface User {
+  steamId: string;
+  displayName: string;
+  emailAddress: string;
+  activeGameIds: string[];
+  inactiveGameIds: string[];
+}
+
+export interface StartTurnSubmitResponse {
+  putUrl: string;
+}
+
+export interface ApiUrlProvider {
+    url: string;
+}
+
+export interface ApiCredentialsProvider {
+    store(token: string, profile: SteamProfile): Promise<void>;
+    getToken(): Promise<string>;
+    getSteamProfile(): Promise<SteamProfile>;
+}
+
 @Injectable()
 export class ApiService {
-  constructor (private http: Http, private aup: ApiUrlProvider, private credentials: ApiCredentialsProvider) {}
+  constructor (
+    private http: Http,
+    @Inject(API_URL_PROVIDER_TOKEN) private aup: ApiUrlProvider,
+    @Inject(API_CREDENTIALS_PROVIDER_TOKEN) private credentials: ApiCredentialsProvider
+  ) {}
 
   getLoginUrl() {
     return this.get(this.aup.url + '/auth/steam', true).then(data => {
@@ -43,7 +103,7 @@ export class ApiService {
     });
   }
 
-  startTurnSubmit(gameId: string): Promise<Game> {
+  startTurnSubmit(gameId: string): Promise<StartTurnSubmitResponse> {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/startSubmit', {});
   }
 
@@ -120,53 +180,4 @@ export class ApiService {
       }).toPromise();
     });
   }
-}
-
-export interface ApiUrlProvider {
-    url: string;
-}
-
-export interface ApiCredentialsProvider {
-    store(token: string, profile: SteamProfile): Promise<void>;
-    getToken(): Promise<string>;
-    getSteamProfile(): Promise<SteamProfile>;
-}
-
-export interface SteamProfile {
-    steamid: string;
-    personaname: string;
-    profileurl: string;
-    avatar: string;
-    avatarmedium: string;
-    avatarfull: string;
-}
-
-export interface Game {
-  gameId: string;
-  createdBySteamId: string;
-  inProgress: boolean;
-  displayName: string;
-  players: GamePlayer[];
-  currentPlayerSteamId: string;
-  turnTimerMinutes: number,
-  gameTurnInGame: number;
-  gameTurnRangeKey: number;
-}
-
-export interface GamePlayer {
-  steamId: string;
-  civType: string;
-}
-
-export interface UserGames {
-  data: Game[];
-  pollUrl: string;
-}
-
-export interface User {
-  steamId: string;
-  displayName: string;
-  emailAddress: string,
-  activeGameIds: string[],
-  inactiveGameIds: string[]
 }
