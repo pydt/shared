@@ -86,7 +86,7 @@ export class ApiService {
         return this.get(this.aup.url + '/user/steamProfile');
       })
       .then(profile => {
-        return this.credentials.store(token, profile);    
+        return this.credentials.store(token, profile);
       });
   }
 
@@ -116,6 +116,10 @@ export class ApiService {
     return this.get(this.aup.url + '/game/' + gameId + '/turn').then(data => {
       return data.downloadUrl;
     });
+  }
+
+  revertTurn(gameId: string): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + gameId + '/turn/revert', {});
   }
 
   startTurnSubmit(gameId: string): Promise<StartTurnSubmitResponse> {
