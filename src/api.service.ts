@@ -26,6 +26,7 @@ export interface Game {
   inProgress: boolean;
   displayName: string;
   players: GamePlayer[];
+  discourseTopicId: number;
   currentPlayerSteamId: string;
   turnTimerMinutes: number;
   gameTurnInGame: number;
