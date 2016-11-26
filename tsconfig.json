@@ -5,6 +5,7 @@
         "target": "ES5",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
         "declaration": true,
         "outDir": "dist"
