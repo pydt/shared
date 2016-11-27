@@ -25,6 +25,9 @@ export interface Game {
   createdBySteamId: string;
   inProgress: boolean;
   displayName: string;
+  description: string;
+  slots: number;
+  humans: number;
   players: GamePlayer[];
   discourseTopicId: number;
   currentPlayerSteamId: string;
