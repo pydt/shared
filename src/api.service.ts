@@ -71,6 +71,11 @@ export interface CreateGameRequestBody {
   player1Civ: string;
 }
 
+export interface JoinGameRequestBody {
+  gameId: string;
+  playerCiv: string;
+}
+
 @Injectable()
 export class ApiService {
   constructor (
@@ -116,8 +121,8 @@ export class ApiService {
     return this.get(this.aup.url + '/game/' + id, true);
   }
 
-  joinGame(id: string): Promise<Game> {
-    return this.post(this.aup.url + '/game/' + id + '/join', {});
+  joinGame(data: JoinGameRequestBody): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + data.gameId + '/join', data);
   }
 
   startGame(id: string): Promise<Game> {
