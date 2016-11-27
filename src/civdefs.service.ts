@@ -11,6 +11,10 @@ export class CivDef {
     return `${this.civKey.replace('CIVILIZATION_', '')}_${this.leaderKey.replace('LEADER_', '')}.png`;
   }
 
+  getFullDisplayName() {
+    return `${this.leaderDisplayName} (${this.civDisplayName})`;
+  }
+
   private defaultDisplayName(str: string) {
     str = str.replace('CIVILIZATION_', '').replace('LEADER_', '').replace(/_/g, ' ');
 
