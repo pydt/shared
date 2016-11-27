@@ -159,7 +159,7 @@ export class ApiService {
   }
 
   getSteamProfiles(steamIds: string[]): Promise<SteamProfile[]> {
-    return this.get(this.aup.url + '/user/steamProfiles?steamIds=' + steamIds.join());
+    return this.get(this.aup.url + '/user/steamProfiles?steamIds=' + steamIds.join(), true);
   }
 
   getSteamProfile(): Promise<SteamProfile> {
