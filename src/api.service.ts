@@ -113,7 +113,7 @@ export class ApiService {
   }
 
   getGame(id: string): Promise<Game> {
-    return this.get(this.aup.url + '/game/' + id);
+    return this.get(this.aup.url + '/game/' + id, true);
   }
 
   joinGame(id: string): Promise<Game> {
