@@ -60,6 +60,14 @@ export interface ApiCredentialsProvider {
     getSteamProfile(): Promise<SteamProfile>;
 }
 
+export interface CreateGameRequestBody {
+  displayName: string;
+  description: string;
+  slots: number;
+  humans: number;
+  player1Civ: string;
+}
+
 @Injectable()
 export class ApiService {
   constructor (
@@ -135,8 +143,8 @@ export class ApiService {
     return this.get(this.aup.url + '/user/games');
   }
 
-  createGame(gameName: string): Promise<Game> {
-    return this.post(this.aup.url + '/game/create', {'displayName': gameName});
+  createGame(data: CreateGameRequestBody): Promise<Game> {
+    return this.post(this.aup.url + '/game/create', data);
   }
 
   getUser(): Promise<User> {

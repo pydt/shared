@@ -2,18 +2,17 @@ export class CivDef {
   public civDisplayName: string;
   public leaderDisplayName: string;
 
-  constructor(public civKey: string, public leaderKey: string, public isDLC: boolean, leaderDisplayName?: string){
+  constructor(public civKey: string, public leaderKey: string, public isDLC: boolean, leaderDisplayName?: string) {
     this.civDisplayName = this.defaultDisplayName(civKey);
     this.leaderDisplayName = leaderDisplayName || this.defaultDisplayName(leaderKey);
   }
 
   getImageFileName() {
-    return `${this.civKey.replace("CIVILIZATION_", "")}_${this.leaderKey.replace("LEADER_", "")}.png`;
+    return `${this.civKey.replace('CIVILIZATION_', '')}_${this.leaderKey.replace('LEADER_', '')}.png`;
   }
 
-  private defaultDisplayName(str: string)
-  {
-    str = str.replace("CIVILIZATION_", "").replace("LEADER_", "").replace(/_/g, " ");
+  private defaultDisplayName(str: string) {
+    str = str.replace('CIVILIZATION_', '').replace('LEADER_', '').replace(/_/g, ' ');
 
     return str.replace(/\w\S*/g, txt => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
