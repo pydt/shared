@@ -125,6 +125,10 @@ export class ApiService {
     return this.post(this.aup.url + '/game/' + data.gameId + '/join', data);
   }
 
+  changeCiv(data: JoinGameRequestBody): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + data.gameId + '/changeCiv', data);
+  }
+
   startGame(id: string): Promise<Game> {
     return this.post(this.aup.url + '/game/' + id + '/start', {});
   }
