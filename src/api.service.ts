@@ -63,11 +63,18 @@ export interface ApiCredentialsProvider {
     getSteamProfile(): Promise<SteamProfile>;
 }
 
-export interface CreateGameRequestBody {
+export interface GameRequestBody {
   displayName: string;
   description: string;
   slots: number;
   humans: number;
+}
+
+export interface EditGameRequestBody extends GameRequestBody {
+  gameId: string;
+}
+
+export interface CreateGameRequestBody extends GameRequestBody {
   player1Civ: string;
 }
 
@@ -157,6 +164,10 @@ export class ApiService {
 
   createGame(data: CreateGameRequestBody): Promise<Game> {
     return this.post(this.aup.url + '/game/create', data);
+  }
+
+  editGame(data: EditGameRequestBody): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + data.gameId + '/edit', data);
   }
 
   getUser(): Promise<User> {
