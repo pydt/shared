@@ -150,6 +150,10 @@ export class ApiService {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/revert', {});
   }
 
+  surrender(gameId: string): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + gameId + '/surrender', {});
+  }
+
   startTurnSubmit(gameId: string): Promise<StartTurnSubmitResponse> {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/startSubmit', {});
   }
