@@ -18,6 +18,7 @@ export interface SteamProfile {
 export interface GamePlayer {
   steamId: string;
   civType: string;
+  hasSurrendered?: boolean;
 }
 
 export interface Game {
