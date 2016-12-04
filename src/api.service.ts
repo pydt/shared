@@ -27,6 +27,7 @@ export interface Game {
   inProgress: boolean;
   displayName: string;
   description: string;
+  dlc: string[];
   slots: number;
   humans: number;
   players: GamePlayer[];
@@ -67,6 +68,7 @@ export interface ApiCredentialsProvider {
 export interface GameRequestBody {
   displayName: string;
   description: string;
+  dlc: string[];
   slots: number;
   humans: number;
 }
