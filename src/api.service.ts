@@ -171,6 +171,10 @@ export class ApiService {
     return this.post(this.aup.url + '/game/create', data);
   }
 
+  deleteGame(gameId: string): Promise<void> {
+    return this.post(this.aup.url + '/game/' + gameId + '/delete', {});
+  }
+
   editGame(data: EditGameRequestBody): Promise<Game> {
     return this.post(this.aup.url + '/game/' + data.gameId + '/edit', data);
   }
