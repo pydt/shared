@@ -173,6 +173,10 @@ export class ApiService {
     return this.get(this.aup.url + '/user/games');
   }
 
+  listOpenGames(): Promise<Game[]> {
+    return this.get(this.aup.url + '/game/listOpen', true);
+  }
+
   createGame(data: CreateGameRequestBody): Promise<Game> {
     return this.post(this.aup.url + '/game/create', data);
   }
