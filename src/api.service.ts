@@ -28,6 +28,7 @@ export interface Game {
   displayName: string;
   description: string;
   dlc: string[];
+  hashedPassword: string;
   slots: number;
   humans: number;
   players: GamePlayer[];
@@ -68,6 +69,7 @@ export interface ApiCredentialsProvider {
 export interface GameRequestBody {
   displayName: string;
   description: string;
+  password: string;
   dlc: string[];
   slots: number;
   humans: number;
@@ -81,9 +83,13 @@ export interface CreateGameRequestBody extends GameRequestBody {
   player1Civ: string;
 }
 
-export interface JoinGameRequestBody {
+export interface ChangeCivRequestBody {
   gameId: string;
   playerCiv: string;
+}
+
+export interface JoinGameRequestBody extends ChangeCivRequestBody {
+  password: string;
 }
 
 @Injectable()
@@ -139,7 +145,7 @@ export class ApiService {
     return this.post(this.aup.url + '/game/' + gameId + '/leave', {});
   }
 
-  changeCiv(data: JoinGameRequestBody): Promise<Game> {
+  changeCiv(data: ChangeCivRequestBody): Promise<Game> {
     return this.post(this.aup.url + '/game/' + data.gameId + '/changeCiv', data);
   }
 
