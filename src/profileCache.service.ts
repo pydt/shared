@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService, SteamProfile } from './api.service';
+import { ApiService, Game, SteamProfile } from './api.service';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ProfileCacheService {
@@ -7,6 +8,21 @@ export class ProfileCacheService {
   private lastRequest = Promise.resolve(new Map<string, SteamProfile>());
 
   constructor (private api: ApiService) {
+  }
+
+  getProfilesForGames(games: Game[]) {
+    const steamIds = _.chain(games)
+      .map('players')
+      .flatten()
+      .map('steamId')
+      .uniq()
+      .value() as string[];
+
+    return this.getProfiles(steamIds);
+  }
+
+  getProfilesForGame(game: Game) {
+    return this.getProfiles(_.map(game.players, _.property('steamId')) as string[]);
   }
 
   getProfiles(steamIds: string[]): Promise<Map<string, SteamProfile>> {
