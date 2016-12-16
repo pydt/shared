@@ -19,6 +19,9 @@ export interface GamePlayer {
   steamId: string;
   civType: string;
   hasSurrendered?: boolean;
+  turnsPlayed: number;
+  turnsSkipped: number;
+  timeTaken: number;
 }
 
 export interface Game {
@@ -50,6 +53,9 @@ export interface User {
   emailAddress: string;
   activeGameIds: string[];
   inactiveGameIds: string[];
+  turnsPlayed: Number;
+  turnsSkipped: Number;
+  timeTaken: Number;
 }
 
 export interface StartTurnSubmitResponse {
