@@ -6,6 +6,12 @@ import 'rxjs/add/operator/toPromise';
 export let API_URL_PROVIDER_TOKEN = new OpaqueToken('ApiUrlProvider');
 export let API_CREDENTIALS_PROVIDER_TOKEN = new OpaqueToken('ApiCredentialsProvider');
 
+export interface Entity {
+  createdAt: string;
+  updatedAt: string;
+  version: number;
+}
+
 export interface SteamProfile {
     steamid: string;
     personaname: string;
@@ -22,9 +28,11 @@ export interface GamePlayer {
   turnsPlayed: number;
   turnsSkipped: number;
   timeTaken: number;
+  fastTurns: number;
+  slowTurns: number;
 }
 
-export interface Game {
+export interface Game extends Entity {
   gameId: string;
   createdBySteamId: string;
   inProgress: boolean;
@@ -38,7 +46,7 @@ export interface Game {
   discourseTopicId: number;
   currentPlayerSteamId: string;
   turnTimerMinutes: number;
-  gameTurnInGame: number;
+  round: number;
   gameTurnRangeKey: number;
 }
 
@@ -47,15 +55,17 @@ export interface UserGames {
   pollUrl: string;
 }
 
-export interface User {
+export interface User extends Entity {
   steamId: string;
   displayName: string;
   emailAddress: string;
   activeGameIds: string[];
   inactiveGameIds: string[];
-  turnsPlayed: Number;
-  turnsSkipped: Number;
-  timeTaken: Number;
+  turnsPlayed: number;
+  turnsSkipped: number;
+  timeTaken: number;
+  fastTurns: number;
+  slowTurns: number;
 }
 
 export interface StartTurnSubmitResponse {
