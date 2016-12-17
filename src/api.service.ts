@@ -215,6 +215,10 @@ export class ApiService {
     return this.get(this.aup.url + '/user');
   }
 
+  getUserById(userId: string): Promise<User> {
+    return this.get(this.aup.url + '/user/' + userId);
+  }
+
   setNotificationEmailAddress(emailAddress: string): Promise<User> {
     return this.post(this.aup.url + '/user/setNotificationEmail', {'emailAddress': emailAddress});
   }
