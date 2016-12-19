@@ -132,7 +132,7 @@ export class ApiService {
   setToken(token: string): Promise<void> {
     return this.credentials.store(token, null)
       .then(() => {
-        return this.get(this.aup.url + '/user/steamProfile');
+        return this.get(this.aup.url + '/user/steamProfile') as Promise<SteamProfile>;
       })
       .then(profile => {
         return this.credentials.store(token, profile);
