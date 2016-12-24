@@ -179,6 +179,12 @@ export class ApiService {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/revert', {});
   }
 
+  kickUser(gameId: string, userId:string): Promise<Game> {
+    return this.post(this.aup.url + '/game/' + gameId + '/surrender', {
+      kickUserId: userId
+    });
+  }
+
   surrender(gameId: string): Promise<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/surrender', {});
   }
