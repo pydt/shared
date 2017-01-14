@@ -39,6 +39,7 @@ export interface Game extends Entity {
   displayName: string;
   description: string;
   dlc: string[];
+  allowMods: boolean;
   hashedPassword: string;
   slots: number;
   humans: number;
@@ -87,6 +88,7 @@ export interface GameRequestBody {
   description: string;
   password: string;
   dlc: string[];
+  allowMods: boolean;
   slots: number;
   humans: number;
 }
