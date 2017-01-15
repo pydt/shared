@@ -50,8 +50,11 @@ export class Civ6LeaderArray extends Array<CivDef> {
   }
 }
 
+export const RandomCiv = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Random Leader');
+
 export const Civ6Leaders = new Civ6LeaderArray();
 Civ6Leaders.push(
+  RandomCiv,
   new CivDef('CIVILIZATION_FRANCE', 'LEADER_CATHERINE_DE_MEDICI'),
   new CivDef('CIVILIZATION_EGYPT', 'LEADER_CLEOPATRA'),
   new CivDef('CIVILIZATION_GERMANY', 'LEADER_BARBAROSSA', 'Frederick Barbarossa'),
