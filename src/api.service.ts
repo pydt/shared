@@ -32,17 +32,23 @@ export interface GamePlayer {
   slowTurns: number;
 }
 
-export interface Game extends Entity {
-  gameId: string;
-  createdBySteamId: string;
-  inProgress: boolean;
+export interface BaseGame {
   displayName: string;
   description: string;
   dlc: string[];
   allowMods: boolean;
-  hashedPassword: string;
   slots: number;
   humans: number;
+  gameSpeed: string;
+  mapFile: string;
+  mapSize: string;
+}
+
+export interface Game extends Entity, BaseGame {
+  gameId: string;
+  createdBySteamId: string;
+  inProgress: boolean;
+  hashedPassword: string;
   players: GamePlayer[];
   discourseTopicId: number;
   currentPlayerSteamId: string;
@@ -83,14 +89,8 @@ export interface ApiCredentialsProvider {
     getSteamProfile(): Promise<SteamProfile>;
 }
 
-export interface GameRequestBody {
-  displayName: string;
-  description: string;
+export interface GameRequestBody extends BaseGame {
   password: string;
-  dlc: string[];
-  allowMods: boolean;
-  slots: number;
-  humans: number;
 }
 
 export interface EditGameRequestBody extends GameRequestBody {

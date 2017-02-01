@@ -77,3 +77,47 @@ Civ6Leaders.push(
   new CivDef('CIVILIZATION_ROME', 'LEADER_TRAJAN'),
   new CivDef('CIVILIZATION_ENGLAND', 'LEADER_VICTORIA')
 );
+
+export class GameSpeed {
+  constructor(public key: string, public displayName: string) {
+  }
+}
+
+export const Civ6GameSpeeds = new Array<GameSpeed>(
+  new GameSpeed('GAMESPEED_ONLINE', 'Online'),
+  new GameSpeed('GAMESPEED_QUICK', 'Quick'),
+  new GameSpeed('GAMESPEED_STANDARD', 'Standard'),
+  new GameSpeed('GAMESPEED_EPIC', 'Epic'),
+  new GameSpeed('GAMESPEED_MARATHON', 'Marathon')
+);
+
+export class MapSize {
+  constructor(public key: string, public displayName: string, public players: number) {
+  }
+}
+
+export const Civ6MapSizes = new Array<MapSize>(
+  new MapSize('MAPSIZE_DUEL', 'Duel', 2),
+  new MapSize('MAPSIZE_TINY', 'Tiny', 4),
+  new MapSize('MAPSIZE_SMALL', 'Small', 6),
+  new MapSize('MAPSIZE_STANDARD', 'Standard', 8),
+  new MapSize('MAPSIZE_LARGE', 'Large', 10),
+  new MapSize('MAPSIZE_HUGE', 'Huge', 12)
+);
+
+export class Map {
+  constructor(public file:string, public displayName: string, public mapSize?: MapSize) {
+  }
+}
+
+export const Civ6Maps = new Array<Map>(
+  new Map('Continents.lua', 'Continents'),
+  new Map('Fractal.lua', 'Fractal'),
+  new Map('InlandSea.lua', 'Inland Sea'),
+  new Map('Island_Plates.lua', 'Island Plates'),
+  new Map('Pangea.lua', 'Pangea'),
+  new Map('Shuffle.lua', 'Shuffle'),
+  new Map('Balanced4.Civ6Map', '4-Leaf Clover', Civ6MapSizes[1]),
+  new Map('Balanced6.Civ6Map', '6-Armed Snowflake', Civ6MapSizes[2]),
+  new Map('EarthStandard.Civ6Map', 'Earth Map', Civ6MapSizes[3])
+);
