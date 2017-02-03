@@ -62,6 +62,11 @@ export interface UserGames {
   pollUrl: string;
 }
 
+export interface OpenGamesResponse {
+  notStarted: Game[];
+  openSlots: Game[];
+}
+
 export interface User extends Entity {
   steamId: string;
   displayName: string;
@@ -203,7 +208,7 @@ export class ApiService {
     return this.get(this.aup.url + '/user/games');
   }
 
-  listOpenGames(): Promise<Game[]> {
+  listOpenGames(): Promise<OpenGamesResponse> {
     return this.get(this.aup.url + '/game/listOpen', true);
   }
 
