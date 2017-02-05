@@ -22,7 +22,7 @@ export class ProfileCacheService {
   }
 
   getProfilesForGame(game: Game) {
-    return this.getProfiles(_.map(game.players, _.property('steamId')) as string[]);
+    return this.getProfilesForGames([game]);
   }
 
   getProfiles(steamIds: string[]): Promise<Map<string, SteamProfile>> {
@@ -31,10 +31,12 @@ export class ProfileCacheService {
       let toDownload: string[] = [];
 
       for (let steamId of steamIds) {
-        if (this.cache[steamId]) {
-          result[steamId] = this.cache[steamId];
-        } else {
-          toDownload.push(steamId);
+        if (steamId) {
+          if (this.cache[steamId]) {
+            result[steamId] = this.cache[steamId];
+          } else {
+            toDownload.push(steamId);
+          }
         }
       }
 
