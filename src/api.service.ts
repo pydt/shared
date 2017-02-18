@@ -36,12 +36,12 @@ export interface BaseGame {
   displayName: string;
   description: string;
   dlc: string[];
-  allowMods: boolean;
   slots: number;
   humans: number;
   gameSpeed: string;
   mapFile: string;
   mapSize: string;
+  allowJoinAfterStart: boolean;
 }
 
 export interface Game extends Entity, BaseGame {
