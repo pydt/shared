@@ -70,6 +70,9 @@ export interface OpenGamesResponse {
 export interface User extends Entity {
   steamId: string;
   displayName: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarFull: string;
   emailAddress: string;
   activeGameIds: string[];
   inactiveGameIds: string[];
