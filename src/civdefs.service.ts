@@ -115,7 +115,7 @@ export const Civ6Maps = new Array<Map>(
   new Map('Fractal.lua', 'Fractal'),
   new Map('InlandSea.lua', 'Inland Sea'),
   new Map('Island_Plates.lua', 'Island Plates'),
-  new Map('Pangea.lua', 'Pangea'),
+  new Map('Pangaea.lua', 'Pangaea'),
   new Map('Shuffle.lua', 'Shuffle'),
   new Map('Balanced4.Civ6Map', '4-Leaf Clover', Civ6MapSizes[1]),
   new Map('Balanced6.Civ6Map', '6-Armed Snowflake', Civ6MapSizes[2]),
