@@ -32,7 +32,8 @@ export class DLC {
 export const Civ6DLCs: DLC[] = [
   new DLC('02A8BDDE-67EA-4D38-9540-26E685E3156E', 'Aztec Civilization Pack'),
   new DLC('3809975F-263F-40A2-A747-8BFB171D821A', 'Poland Civilization & Scenario Pack'),
-  new DLC('2F6E858A-28EF-46B3-BEAC-B985E52E9BC1', 'Vikings Scenario Pack')
+  new DLC('2F6E858A-28EF-46B3-BEAC-B985E52E9BC1', 'Vikings Scenario Pack'),
+  new DLC('E3F53C61-371C-440B-96CE-077D318B36C0', 'Australia Civilization & Scenario Pack')
 ];
 
 export class Civ6LeaderArray extends Array<CivDef> {
@@ -64,6 +65,7 @@ Civ6Leaders.push(
   new CivDef('CIVILIZATION_NORWAY', 'LEADER_HARDRADA', 'Harald Hardrada'),
   new CivDef('CIVILIZATION_JAPAN', 'LEADER_HOJO', 'Hojo Tokimune'),
   new CivDef('CIVILIZATION_POLAND', 'LEADER_JADWIGA', null, '3809975F-263F-40A2-A747-8BFB171D821A'),
+  new CivDef('CIVILIZATION_AUSTRALIA', 'LEADER_JOHN_CURTIN', null, 'E3F53C61-371C-440B-96CE-077D318B36C0'),
   new CivDef('CIVILIZATION_AZTEC', 'LEADER_MONTEZUMA', null, '02A8BDDE-67EA-4D38-9540-26E685E3156E'),
   new CivDef('CIVILIZATION_KONGO', 'LEADER_MVEMBA', 'Mvemba a Nzinga'),
   new CivDef('CIVILIZATION_BRAZIL', 'LEADER_PEDRO', 'Pedro II'),
