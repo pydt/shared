@@ -33,7 +33,8 @@ export const Civ6DLCs: DLC[] = [
   new DLC('02A8BDDE-67EA-4D38-9540-26E685E3156E', 'Aztec Civilization Pack'),
   new DLC('3809975F-263F-40A2-A747-8BFB171D821A', 'Poland Civilization & Scenario Pack'),
   new DLC('2F6E858A-28EF-46B3-BEAC-B985E52E9BC1', 'Vikings Scenario Pack'),
-  new DLC('E3F53C61-371C-440B-96CE-077D318B36C0', 'Australia Civilization & Scenario Pack')
+  new DLC('E3F53C61-371C-440B-96CE-077D318B36C0', 'Australia Civilization & Scenario Pack'),
+  new DLC('E2749E9A-8056-45CD-901B-C368C8E83DEB', 'Persia and Macedon Civilization & Scenario Pack')
 ];
 
 export class Civ6LeaderArray extends Array<CivDef> {
@@ -56,8 +57,10 @@ export const RandomCiv = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Ran
 export const Civ6Leaders = new Civ6LeaderArray();
 Civ6Leaders.push(
   RandomCiv,
+  new CivDef('CIVILIZATION_MACEDON', 'LEADER_ALEXANDER', null, 'E2749E9A-8056-45CD-901B-C368C8E83DEB'),
   new CivDef('CIVILIZATION_FRANCE', 'LEADER_CATHERINE_DE_MEDICI'),
   new CivDef('CIVILIZATION_EGYPT', 'LEADER_CLEOPATRA'),
+  new CivDef('CIVILIZATION_PERSIA', 'LEADER_CYRUS', null, 'E2749E9A-8056-45CD-901B-C368C8E83DEB'),
   new CivDef('CIVILIZATION_GERMANY', 'LEADER_BARBAROSSA', 'Frederick Barbarossa'),
   new CivDef('CIVILIZATION_INDIA', 'LEADER_GANDHI'),
   new CivDef('CIVILIZATION_SUMERIA', 'LEADER_GILGAMESH'),
