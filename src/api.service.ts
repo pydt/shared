@@ -228,7 +228,7 @@ export class ApiService {
   }
 
   getUser(): Promise<User> {
-    return this.get(this.aup.url + '/user');
+    return this.get(this.aup.url + '/user/getCurrent');
   }
 
   getUsers(): Promise<User[]> {
