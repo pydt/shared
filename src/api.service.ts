@@ -179,8 +179,14 @@ export class ApiService {
     return this.post(this.aup.url + '/game/' + id + '/start', {});
   }
 
-  getTurnUrl(gameId: string): Promise<string> {
-    return this.get(this.aup.url + '/game/' + gameId + '/turn').then(data => {
+  getTurnUrl(gameId: string, compressed = false): Promise<string> {
+    let url = this.aup.url + '/game/' + gameId + '/turn';
+
+    if (compressed) {
+      url += "?compressed=true";
+    }
+
+    return this.get(url).then(data => {
       return data.downloadUrl;
     });
   }
