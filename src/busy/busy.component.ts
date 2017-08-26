@@ -1,34 +1,52 @@
-/**
- * @file Component: Busy
- * @author yumao<yuzhang.lille@gmail.com>
- */
-
-import { Component } from '@angular/core';
-import { PromiseTrackerService } from './promise-tracker.service';
-
-export interface IBusyContext {
-    message: string;
-};
+import { ChangeDetectorRef, Component, trigger, state, style, transition, animate } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { BusyService } from "./busy.service";
 
 @Component({
-    selector: 'pydt-busy',
-    template: `
-        <div [class]="wrapperClass" *ngIf="isActive()">
-            <div class="pydt-spinner"></div>
-        </div>
-    `
+  selector: "pydt-busy",
+  animations: [
+    trigger("visibilityChanged", [
+      state("shown", style({ opacity: 1 })),
+      state("hidden", style({ opacity: 0 })),
+      transition("* => *", animate(".2s"))
+    ])
+  ],
+  template: `
+  <div
+    [hidden]="busyHidden"
+    [@visibilityChanged]="busyValue ? 'shown' : 'hidden'"
+    (@visibilityChanged.start)="animationStarted($event)"
+    (@visibilityChanged.done)="animationDone($event)" class="pydt-busy">
+    <div class="backdrop"></div>
+    <div class="spinner"></div>
+  </div>`
 })
 export class BusyComponent {
-    message: string;
-    wrapperClass: string;
-    context: IBusyContext = {
-        message: null
-    };
+    public busyHidden = true;
+    public busyValue = false;
 
-    constructor(private tracker: PromiseTrackerService) {
+    constructor(private cdRef: ChangeDetectorRef, private busyService: BusyService) {
     }
 
-    isActive() {
-        return this.tracker.isActive();
+    public ngOnInit() {
+        this.busyService.subscribeBusy(isBusy => {
+            this.busyValue = isBusy;
+        });
+    }
+
+    public animationStarted(event) {
+        if (event.toState === "shown") {
+            this.busyHidden = false;
+        }
+
+        this.cdRef.detectChanges();
+    }
+
+    public animationDone(event) {
+        if (event.toState === "hidden") {
+            this.busyHidden = true;
+        }
+
+        this.cdRef.detectChanges();
     }
 }

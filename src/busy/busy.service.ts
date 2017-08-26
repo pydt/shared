@@ -1,17 +1,17 @@
-/**
- * @file Service: Busy
- * @author yumao<yuzhang.lille@gmail.com>
- */
-
-import {Injectable, Optional} from '@angular/core';
-
-import {BusyConfig} from './busy-config';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class BusyService {
-    config: BusyConfig;
+    private busyLevel = 0;
+    private busyStream = new Subject<boolean>();
 
-    constructor(@Optional() config: BusyConfig) {
-        this.config = config || new BusyConfig();
+    public incrementBusy(isMoBizzay: boolean) {
+        this.busyLevel += isMoBizzay ? 1 : -1;
+        this.busyStream.next(this.busyLevel > 0);
+    }
+
+    public subscribeBusy(callback: (value: boolean) => void) {
+        return this.busyStream.subscribe(callback);
     }
 }
