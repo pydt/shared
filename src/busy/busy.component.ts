@@ -34,7 +34,7 @@ export class BusyComponent {
         });
     }
 
-    public animationStarted(event) {
+    public animationStarted(event: any) {
         if (event.toState === "shown") {
             this.busyHidden = false;
         }
@@ -42,7 +42,7 @@ export class BusyComponent {
         this.cdRef.detectChanges();
     }
 
-    public animationDone(event) {
+    public animationDone(event: any) {
         if (event.toState === "hidden") {
             this.busyHidden = true;
         }

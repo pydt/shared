@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService, Game, SteamProfile } from './api.service';
+import { ApiService } from './api.service';
+import { SteamProfile, Game } from "./entity";
 import * as _ from 'lodash';
 
 @Injectable()
