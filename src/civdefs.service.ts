@@ -38,25 +38,22 @@ export const Civ6DLCs: DLC[] = [
   new DLC('643EA320-8E1A-4CF1-A01C-00D88DDD131A', 'Nubia Civilization & Scenario Pack')
 ];
 
-export class Civ6LeaderArray extends Array<CivDef> {
-  filterByDlc(dlcIds: string[]) {
-    const result = new Civ6LeaderArray();
-    dlcIds = dlcIds || [];
+export function filterCivsByDlc(leaders: CivDef[], dlcIds: string[]) {
+  const result: CivDef[] = [];
+  dlcIds = dlcIds || [];
 
-    for (let leader of this) {
-      if (!leader.dlcId || dlcIds.indexOf(leader.dlcId) >= 0) {
-        result.push(leader);
-      }
+  for (const leader of leaders) {
+    if (!leader.dlcId || dlcIds.indexOf(leader.dlcId) >= 0) {
+      result.push(leader);
     }
-
-    return result;
   }
+
+  return result;
 }
 
 export const RandomCiv = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Random Leader');
 
-export const Civ6Leaders = new Civ6LeaderArray();
-Civ6Leaders.push(
+export const Civ6Leaders = [
   RandomCiv,
   new CivDef('CIVILIZATION_MACEDON', 'LEADER_ALEXANDER', null, 'E2749E9A-8056-45CD-901B-C368C8E83DEB'),
   new CivDef('CIVILIZATION_NUBIA', 'LEADER_AMANITORE', null, '643EA320-8E1A-4CF1-A01C-00D88DDD131A'),
@@ -83,7 +80,7 @@ Civ6Leaders.push(
   new CivDef('CIVILIZATION_SCYTHIA', 'LEADER_TOMYRIS'),
   new CivDef('CIVILIZATION_ROME', 'LEADER_TRAJAN'),
   new CivDef('CIVILIZATION_ENGLAND', 'LEADER_VICTORIA')
-);
+];
 
 export class GameSpeed {
   constructor(public key: string, public displayName: string) {
