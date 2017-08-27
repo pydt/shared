@@ -16,9 +16,8 @@ import { BusyService } from "./busy.service";
     [hidden]="busyHidden"
     [@visibilityChanged]="busyValue ? 'shown' : 'hidden'"
     (@visibilityChanged.start)="animationStarted($event)"
-    (@visibilityChanged.done)="animationDone($event)" class="pydt-busy">
-    <div class="backdrop"></div>
-    <div class="spinner"></div>
+    (@visibilityChanged.done)="animationDone($event)" class="pydt-busy backdrop">
+    <div class="pydt-busy spinner"></div>
   </div>`
 })
 export class BusyComponent {
