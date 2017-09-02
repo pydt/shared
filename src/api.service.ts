@@ -1,8 +1,13 @@
 import { Inject, Injectable, OpaqueToken } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { ApiUrlProvider, ApiCredentialsProvider, SteamProfile, Game, JoinGameRequestBody, ChangeCivRequestBody, StartTurnSubmitResponse, UserGames, OpenGamesResponse, CreateGameRequestBody, EditGameRequestBody, User } from "./entity";
+import {
+  ApiUrlProvider, ApiCredentialsProvider, SteamProfile, Game, JoinGameRequestBody, ChangeCivRequestBody,
+  StartTurnSubmitResponse, UserGames, OpenGamesResponse, CreateGameRequestBody, EditGameRequestBody, User
+} from './entity';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/fromPromise';
 
 export let API_URL_PROVIDER_TOKEN = new OpaqueToken('ApiUrlProvider');
 export let API_CREDENTIALS_PROVIDER_TOKEN = new OpaqueToken('ApiCredentialsProvider');
@@ -15,150 +20,150 @@ export class ApiService {
     @Inject(API_CREDENTIALS_PROVIDER_TOKEN) private credentials: ApiCredentialsProvider
   ) {}
 
-  getPublicJson(url: string): Promise<any> {
+  getPublicJson(url: string): Observable<any> {
     return this.http.get(url)
       .map(res => {
         return res.json();
-      }).toPromise();
+      });
   }
 
-  getLoginUrl(): Promise<string> {
-    return this.get(this.aup.url + '/auth/steam', true).then(data => {
+  getLoginUrl(): Observable<string> {
+    return this.get(this.aup.url + '/auth/steam', true).map(data => {
       return data.redirectURL;
     });
   }
 
-  setToken(token: string): Promise<void> {
-    return this.credentials.store(token, null)
-      .then(() => {
-        return this.get(this.aup.url + '/user/steamProfile') as Promise<SteamProfile>;
+  setToken(token: string): Observable<void> {
+    return Observable.fromPromise(this.credentials.store(token, null))
+      .mergeMap(() => {
+        return this.get(this.aup.url + '/user/steamProfile') as Observable<SteamProfile>;
       })
-      .then(profile => {
-        return this.credentials.store(token, profile);
+      .mergeMap(profile => {
+        return Observable.fromPromise(this.credentials.store(token, profile));
       });
   }
 
-  validateSteamCredentials(queryString: string): Promise<void> {
-    return this.get(this.aup.url + '/auth/steam/validate' + queryString, true).then(data => {
+  validateSteamCredentials(queryString: string): Observable<void> {
+    return this.get(this.aup.url + '/auth/steam/validate' + queryString, true).flatMap(data => {
       if (data.token) {
-        return this.credentials.store(data.token, data.steamProfile);
+        return Observable.fromPromise(this.credentials.store(data.token, data.steamProfile));
       }
 
       throw data;
     });
   }
 
-  getGame(id: string): Promise<Game> {
+  getGame(id: string): Observable<Game> {
     return this.get(this.aup.url + '/game/' + id, true);
   }
 
-  joinGame(data: JoinGameRequestBody): Promise<Game> {
+  joinGame(data: JoinGameRequestBody): Observable<Game> {
     return this.post(this.aup.url + '/game/' + data.gameId + '/join', data);
   }
 
-  leaveGame(gameId: string): Promise<Game> {
+  leaveGame(gameId: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/leave', {});
   }
 
-  changeCiv(data: ChangeCivRequestBody): Promise<Game> {
+  changeCiv(data: ChangeCivRequestBody): Observable<Game> {
     return this.post(this.aup.url + '/game/' + data.gameId + '/changeCiv', data);
   }
 
-  startGame(id: string): Promise<Game> {
+  startGame(id: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + id + '/start', {});
   }
 
-  getTurnUrl(gameId: string, compressed = false): Promise<string> {
+  getTurnUrl(gameId: string, compressed = false): Observable<string> {
     let url = this.aup.url + '/game/' + gameId + '/turn';
 
     if (compressed) {
-      url += "?compressed=true";
+      url += '?compressed=true';
     }
 
-    return this.get(url).then(data => {
+    return this.get(url).map(data => {
       return data.downloadUrl;
     });
   }
 
-  revertTurn(gameId: string): Promise<Game> {
+  revertTurn(gameId: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/revert', {});
   }
 
-  kickUser(gameId: string, userId:string): Promise<Game> {
+  kickUser(gameId: string, userId: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/surrender', {
       kickUserId: userId
     });
   }
 
-  surrender(gameId: string): Promise<Game> {
+  surrender(gameId: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/surrender', {});
   }
 
-  startTurnSubmit(gameId: string): Promise<StartTurnSubmitResponse> {
+  startTurnSubmit(gameId: string): Observable<StartTurnSubmitResponse> {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/startSubmit', {});
   }
 
-  finishTurnSubmit(gameId: string): Promise<Game> {
+  finishTurnSubmit(gameId: string): Observable<Game> {
     return this.post(this.aup.url + '/game/' + gameId + '/turn/finishSubmit', {});
   }
 
-  getUserGames(): Promise<UserGames> {
+  getUserGames(): Observable<UserGames> {
     return this.get(this.aup.url + '/user/games');
   }
 
-  listOpenGames(): Promise<OpenGamesResponse> {
+  listOpenGames(): Observable<OpenGamesResponse> {
     return this.get(this.aup.url + '/game/listOpen', true);
   }
 
-  createGame(data: CreateGameRequestBody): Promise<Game> {
+  createGame(data: CreateGameRequestBody): Observable<Game> {
     return this.post(this.aup.url + '/game/create', data);
   }
 
-  deleteGame(gameId: string): Promise<void> {
+  deleteGame(gameId: string): Observable<void> {
     return this.post(this.aup.url + '/game/' + gameId + '/delete', {});
   }
 
-  editGame(data: EditGameRequestBody): Promise<Game> {
+  editGame(data: EditGameRequestBody): Observable<Game> {
     return this.post(this.aup.url + '/game/' + data.gameId + '/edit', data);
   }
 
-  getUser(): Promise<User> {
+  getUser(): Observable<User> {
     return this.get(this.aup.url + '/user/getCurrent');
   }
 
-  getUsers(): Promise<User[]> {
+  getUsers(): Observable<User[]> {
     return this.get(this.aup.url + '/users', true);
   }
 
-  getUserById(userId: string): Promise<User> {
+  getUserById(userId: string): Observable<User> {
     return this.get(this.aup.url + '/user/' + userId, true);
   }
 
-  setNotificationEmailAddress(emailAddress: string): Promise<User> {
+  setNotificationEmailAddress(emailAddress: string): Observable<User> {
     return this.post(this.aup.url + '/user/setNotificationEmail', {'emailAddress': emailAddress});
   }
 
-  getSteamProfiles(steamIds: string[]): Promise<SteamProfile[]> {
+  getSteamProfiles(steamIds: string[]): Observable<SteamProfile[]> {
     return this.get(this.aup.url + '/user/steamProfiles?steamIds=' + steamIds.join(), true);
   }
 
-  getSteamProfile(): Promise<SteamProfile> {
-    return this.credentials.getSteamProfile();
+  getSteamProfile(): Observable<SteamProfile> {
+    return Observable.fromPromise(this.credentials.getSteamProfile());
   }
 
-  isLoggedIn(): Promise<boolean> {
-    return this.credentials.getToken().then(token => {
-        return !!token;
+  isLoggedIn(): Observable<boolean> {
+    return this.getToken().map(token => {
+      return !!token;
     });
   }
 
-  getToken(): Promise<string> {
-    return this.credentials.getToken();
+  getToken(): Observable<string> {
+    return Observable.fromPromise(this.credentials.getToken());
   }
 
-  private getAuthHeaders(disableAuth?: boolean): Promise<Headers> {
-    return this.credentials.getToken().then(token => {
-      let headers = new Headers();
+  private getAuthHeaders(disableAuth?: boolean): Observable<Headers> {
+    return this.getToken().map(token => {
+      const headers = new Headers();
 
       if (!disableAuth) {
           if (!token) {
@@ -172,23 +177,23 @@ export class ApiService {
     });
   }
 
-  private get(url: string, disableAuth?: boolean): Promise<any> {
-    return this.getAuthHeaders(disableAuth).then(headers => {
+  private get(url: string, disableAuth?: boolean): Observable<any> {
+    return this.getAuthHeaders(disableAuth).flatMap(headers => {
       return this.http.get(url, {
         headers: headers
-      }).map(res => {
-        return res.json();
-      }).toPromise();
+      });
+    }).map(res => {
+      return res.json();
     });
   }
 
-  private post(url: string, data: any): Promise<any> {
-    return this.getAuthHeaders().then(headers => {
+  private post(url: string, data: any): Observable<any> {
+    return this.getAuthHeaders().flatMap(headers => {
       return this.http.post(url, data, {
         headers: headers
-      }).map(res => {
-        return res.json();
-      }).toPromise();
+      });
+    }).map(res => {
+      return res.json();
     });
   }
 }

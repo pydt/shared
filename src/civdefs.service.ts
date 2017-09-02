@@ -29,7 +29,7 @@ export class DLC {
   }
 }
 
-export const Civ6DLCs: DLC[] = [
+export const CIV6_DLCS: DLC[] = [
   new DLC('02A8BDDE-67EA-4D38-9540-26E685E3156E', 'Aztec Civilization Pack'),
   new DLC('3809975F-263F-40A2-A747-8BFB171D821A', 'Poland Civilization & Scenario Pack'),
   new DLC('2F6E858A-28EF-46B3-BEAC-B985E52E9BC1', 'Vikings Scenario Pack'),
@@ -51,10 +51,10 @@ export function filterCivsByDlc(leaders: CivDef[], dlcIds: string[]) {
   return result;
 }
 
-export const RandomCiv = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Random Leader');
+export const RANDOM_CIV = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Random Leader');
 
-export const Civ6Leaders = [
-  RandomCiv,
+export const CIV6_LEADERS = [
+  RANDOM_CIV,
   new CivDef('CIVILIZATION_MACEDON', 'LEADER_ALEXANDER', null, 'E2749E9A-8056-45CD-901B-C368C8E83DEB'),
   new CivDef('CIVILIZATION_NUBIA', 'LEADER_AMANITORE', null, '643EA320-8E1A-4CF1-A01C-00D88DDD131A'),
   new CivDef('CIVILIZATION_FRANCE', 'LEADER_CATHERINE_DE_MEDICI'),
@@ -87,7 +87,7 @@ export class GameSpeed {
   }
 }
 
-export const Civ6GameSpeeds = new Array<GameSpeed>(
+export const CIV6_GAME_SPEEDS = new Array<GameSpeed>(
   new GameSpeed('GAMESPEED_ONLINE', 'Online'),
   new GameSpeed('GAMESPEED_QUICK', 'Quick'),
   new GameSpeed('GAMESPEED_STANDARD', 'Standard'),
@@ -100,7 +100,7 @@ export class MapSize {
   }
 }
 
-export const Civ6MapSizes = new Array<MapSize>(
+export const CIV6_MAP_SIZES = new Array<MapSize>(
   new MapSize('MAPSIZE_DUEL', 'Duel', 2),
   new MapSize('MAPSIZE_TINY', 'Tiny', 4),
   new MapSize('MAPSIZE_SMALL', 'Small', 6),
@@ -110,18 +110,18 @@ export const Civ6MapSizes = new Array<MapSize>(
 );
 
 export class Map {
-  constructor(public file:string, public displayName: string, public mapSize?: MapSize) {
+  constructor(public file: string, public displayName: string, public mapSize?: MapSize) {
   }
 }
 
-export const Civ6Maps = new Array<Map>(
+export const CIV6_MAPS = new Array<Map>(
   new Map('Continents.lua', 'Continents'),
   new Map('Fractal.lua', 'Fractal'),
   new Map('InlandSea.lua', 'Inland Sea'),
   new Map('Island_Plates.lua', 'Island Plates'),
   new Map('Pangaea.lua', 'Pangaea'),
   new Map('Shuffle.lua', 'Shuffle'),
-  new Map('Balanced4.Civ6Map', '4-Leaf Clover', Civ6MapSizes[1]),
-  new Map('Balanced6.Civ6Map', '6-Armed Snowflake', Civ6MapSizes[2]),
-  new Map('EarthStandard.Civ6Map', 'Earth Map', Civ6MapSizes[3])
+  new Map('Balanced4.Civ6Map', '4-Leaf Clover', CIV6_MAP_SIZES[1]),
+  new Map('Balanced6.Civ6Map', '6-Armed Snowflake', CIV6_MAP_SIZES[2]),
+  new Map('EarthStandard.Civ6Map', 'Earth Map', CIV6_MAP_SIZES[3])
 );

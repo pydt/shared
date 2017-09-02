@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Civ6GameSpeeds, Civ6Maps, Civ6MapSizes } from './civdefs.service';
+import { CIV6_GAME_SPEEDS, CIV6_MAPS, CIV6_MAP_SIZES } from './civdefs.service';
 
 @Pipe({name: 'civ6gamespeed'})
 export class Civ6GameSpeedPipe implements PipeTransform {
   transform(value: string): string {
-    for (let gs of Civ6GameSpeeds) {
+    for (const gs of CIV6_GAME_SPEEDS) {
       if (gs.key === value) {
         return gs.displayName;
       }
@@ -17,7 +17,7 @@ export class Civ6GameSpeedPipe implements PipeTransform {
 @Pipe({name: 'civ6map'})
 export class Civ6MapPipe implements PipeTransform {
   transform(value: string): string {
-    for (let map of Civ6Maps) {
+    for (const map of CIV6_MAPS) {
       if (map.file === value) {
         return map.displayName;
       }
@@ -30,7 +30,7 @@ export class Civ6MapPipe implements PipeTransform {
 @Pipe({name: 'civ6mapsize'})
 export class Civ6MapSizePipe implements PipeTransform {
   transform(value: string): string {
-    for (let ms of Civ6MapSizes) {
+    for (const ms of CIV6_MAP_SIZES) {
       if (ms.key === value) {
         return ms.displayName;
       }

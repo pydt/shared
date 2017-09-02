@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { SteamProfile, Game } from "./entity";
+import { SteamProfile, Game } from './entity';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as _ from 'lodash';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class ProfileCacheService {
   private cache = new Map<string, SteamProfile>();
-  private lastRequest = Promise.resolve(new Map<string, SteamProfile>());
+  private lastRequest: Observable<Map<string, SteamProfile>> = new BehaviorSubject(new Map<string, SteamProfile>());
 
   constructor (private api: ApiService) {
   }
@@ -26,12 +29,12 @@ export class ProfileCacheService {
     return this.getProfilesForGames([game]);
   }
 
-  getProfiles(steamIds: string[]): Promise<Map<string, SteamProfile>> {
-    return this.lastRequest = this.lastRequest.then(() => {
-      let result = new Map<string, SteamProfile>();
-      let toDownload: string[] = [];
+  getProfiles(steamIds: string[]): Observable<Map<string, SteamProfile>> {
+    return this.lastRequest = this.lastRequest.flatMap(() => {
+      const result = new Map<string, SteamProfile>();
+      const toDownload: string[] = [];
 
-      for (let steamId of steamIds) {
+      for (const steamId of steamIds) {
         if (steamId) {
           if (this.cache[steamId]) {
             result[steamId] = this.cache[steamId];
@@ -42,8 +45,8 @@ export class ProfileCacheService {
       }
 
       if (toDownload.length) {
-        return this.api.getSteamProfiles(toDownload).then(profiles => {
-          for (let profile of profiles) {
+        return this.api.getSteamProfiles(toDownload).map(profiles => {
+          for (const profile of profiles) {
             this.cache[profile.steamid] = profile;
             result[profile.steamid] = profile;
           }
@@ -52,7 +55,7 @@ export class ProfileCacheService {
         });
       }
 
-      return Promise.resolve(result);
+      return Observable.of(result);
     });
   }
 }
