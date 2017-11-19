@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { SteamProfile, Game } from "./entity";
+import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ProfileCacheService {
-  private cache = new Map<string, SteamProfile>();
-  private lastRequest = Promise.resolve(new Map<string, SteamProfile>());
+  private cache: PcsProfileMap = {};
+  private lastRequest: Promise<PcsProfileMap> = Promise.resolve({});
 
-  constructor (private api: ApiService) {
+  constructor (private api: PcsApi) {
   }
 
-  getProfilesForGames(games: Game[]) {
+  getProfilesForGames(games: PcsGame[]) {
     const steamIds = _.chain(games)
       .map('players')
       .flatten()
@@ -22,16 +22,16 @@ export class ProfileCacheService {
     return this.getProfiles(steamIds);
   }
 
-  getProfilesForGame(game: Game) {
+  getProfilesForGame(game: PcsGame) {
     return this.getProfilesForGames([game]);
   }
 
-  getProfiles(steamIds: string[]): Promise<Map<string, SteamProfile>> {
+  getProfiles(steamIds: string[]): Promise<PcsProfileMap> {
     return this.lastRequest = this.lastRequest.then(() => {
-      let result = new Map<string, SteamProfile>();
-      let toDownload: string[] = [];
+      const result: PcsProfileMap = {};
+      const toDownload: string[] = [];
 
-      for (let steamId of steamIds) {
+      for (const steamId of steamIds) {
         if (steamId) {
           if (this.cache[steamId]) {
             result[steamId] = this.cache[steamId];
@@ -42,8 +42,8 @@ export class ProfileCacheService {
       }
 
       if (toDownload.length) {
-        return this.api.getSteamProfiles(toDownload).then(profiles => {
-          for (let profile of profiles) {
+        return this.api.userSteamProfiles(toDownload.join(',')).toPromise().then(profiles => {
+          for (const profile of profiles) {
             this.cache[profile.steamid] = profile;
             result[profile.steamid] = profile;
           }
@@ -55,4 +55,27 @@ export class ProfileCacheService {
       return Promise.resolve(result);
     });
   }
+}
+
+export interface PcsGame {
+  players: {
+    steamId: string;
+  }[];
+}
+
+export interface PcsSteamProfile {
+  steamid: string;
+  personaname: string;
+  profileurl: string;
+  avatar: string;
+  avatarmedium: string;
+  avatarfull: string;
+}
+
+export interface PcsProfileMap {
+  [index: string]: PcsSteamProfile;
+};
+
+export interface PcsApi {
+  userSteamProfiles(steamIds: string): Observable<PcsSteamProfile[]>;
 }

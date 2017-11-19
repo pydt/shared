@@ -1,14 +1,13 @@
-import { ChangeDetectorRef, Component, trigger, state, style, transition, animate } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { BusyService } from "./busy.service";
+import { ChangeDetectorRef, Component, trigger, state, style, transition, animate } from '@angular/core';
+import { BusyService } from './busy.service';
 
 @Component({
-  selector: "pydt-busy",
+  selector: 'pydt-busy',
   animations: [
-    trigger("visibilityChanged", [
-      state("shown", style({ opacity: 1 })),
-      state("hidden", style({ opacity: 0 })),
-      transition("* => *", animate(".2s"))
+    trigger('visibilityChanged', [
+      state('shown', style({ opacity: 1 })),
+      state('hidden', style({ opacity: 0 })),
+      transition('* => *', animate('.2s'))
     ])
   ],
   template: `
@@ -34,7 +33,7 @@ export class BusyComponent {
     }
 
     public animationStarted(event: any) {
-        if (event.toState === "shown") {
+        if (event.toState === 'shown') {
             this.busyHidden = false;
         }
 
@@ -42,7 +41,7 @@ export class BusyComponent {
     }
 
     public animationDone(event: any) {
-        if (event.toState === "hidden") {
+        if (event.toState === 'hidden') {
             this.busyHidden = true;
         }
 
