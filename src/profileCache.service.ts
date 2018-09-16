@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -12,14 +11,12 @@ export class ProfileCacheService {
   }
 
   getProfilesForGames(games: PcsGame[]) {
-    const steamIds = _.chain(games)
-      .map('players')
-      .flatten()
-      .map('steamId')
-      .uniq()
-      .value() as string[];
+    const steamIds = games
+      .map(x => x.players)
+      .reduce((a, b) => a.concat(b), [])
+      .map(x => x.steamId);
 
-    return this.getProfiles(steamIds);
+    return this.getProfiles([...new Set(steamIds)]);
   }
 
   getProfilesForGame(game: PcsGame) {

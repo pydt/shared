@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable()
 export class BusyService {
@@ -12,7 +11,7 @@ export class BusyService {
         this.busyStream.next(this.busyLevel > 0);
     }
 
-    public subscribeBusy(callback: (value: boolean) => void) {
+    public subscribeBusy(callback: (value: boolean) => void): Subscription {
         return this.busyStream.subscribe(callback);
     }
 }

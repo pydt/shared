@@ -1,27 +1,27 @@
 {
   "name": "pydt-shared",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
-  "types" : "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tslint --type-check --project tsconfig.json ./src/**/*.ts",
+    "lint": "tslint --project tsconfig.json ./src/**/*.ts",
     "prepublish": "npm run clean && npm run lint && tsc",
     "clean": "rm -rf dist"
   },
   "author": "",
   "devDependencies": {
-    "@angular/common": "^4.3.6",
-    "@angular/core": "^4.3.6",
-    "@angular/http": "^4.3.6",
-    "@angular/platform-browser": "^4.3.6",
-    "@types/core-js": "^0.9.34",
-    "@types/lodash": "^4.14.42",
-    "lodash": "^4.17.2",
-    "rxjs": "^5.0.0-rc.4",
+    "@angular/animations": "^6.1.7",
+    "@angular/common": "^6.1.7",
+    "@angular/core": "^6.1.7",
+    "@angular/http": "^6.1.7",
+    "@angular/platform-browser": "^6.1.7",
+    "@types/core-js": "^2.5.0",
+    "rxjs": "^6.3.2",
     "tslint": "^5.11.0",
-    "typescript": "^2.0.9",
-    "zone.js": "^0.8.17"
-  }
+    "typescript": "2.9.2",
+    "zone.js": "^0.8.26"
+  },
+  "dependencies": {}
 }
