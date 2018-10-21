@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BusyComponent } from './busy/busy.component';
 import { BusyService } from './busy/busy.service';
-import { Civ6GameSpeedPipe, Civ6MapPipe, Civ6MapSizePipe } from './pipes';
+import { GameSpeedPipe, MapPipe, MapSizePipe } from './pipes';
 
 @NgModule({
   imports: [
   ],
   declarations: [
     BusyComponent,
-    Civ6GameSpeedPipe,
-    Civ6MapPipe,
-    Civ6MapSizePipe
+    GameSpeedPipe,
+    MapPipe,
+    MapSizePipe
   ],
   providers: [
     BusyService
   ],
   exports: [
     BusyComponent,
-    Civ6GameSpeedPipe,
-    Civ6MapPipe,
-    Civ6MapSizePipe
+    GameSpeedPipe,
+    MapPipe,
+    MapSizePipe
   ]
 })
 export class PydtSharedModule { }

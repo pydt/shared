@@ -1,41 +1,31 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CIV6_GAME_SPEEDS, CIV6_MAPS, CIV6_MAP_SIZES } from './civdefs.service';
+import { GAMES } from './games';
+import { SharedGame } from './models';
 
-@Pipe({name: 'civ6gamespeed'})
-export class Civ6GameSpeedPipe implements PipeTransform {
-  transform(value: string): string {
-    for (const gs of CIV6_GAME_SPEEDS) {
-      if (gs.key === value) {
-        return gs.displayName;
-      }
-    }
+function getGameDef(game: SharedGame) {
+  return GAMES.find(g => g.id === game.gameType);
+}
 
-    return '';
+@Pipe({name: 'gamespeed'})
+export class GameSpeedPipe implements PipeTransform {
+  transform(game: SharedGame): string {
+    const speed = getGameDef(game).gameSpeeds.find(s => s.key === game.gameSpeed);
+    return speed ? speed.displayName : '';
   }
 }
 
-@Pipe({name: 'civ6map'})
-export class Civ6MapPipe implements PipeTransform {
-  transform(value: string): string {
-    for (const map of CIV6_MAPS) {
-      if (map.file === value) {
-        return map.displayName;
-      }
-    }
-
-    return '';
+@Pipe({name: 'map'})
+export class MapPipe implements PipeTransform {
+  transform(game: SharedGame): string {
+    const map = getGameDef(game).maps.find(m => m.file === game.mapFile);
+    return map ? map.displayName : '';
   }
 }
 
-@Pipe({name: 'civ6mapsize'})
-export class Civ6MapSizePipe implements PipeTransform {
-  transform(value: string): string {
-    for (const ms of CIV6_MAP_SIZES) {
-      if (ms.key === value) {
-        return ms.displayName;
-      }
-    }
-
-    return '';
+@Pipe({name: 'mapsize'})
+export class MapSizePipe implements PipeTransform {
+  transform(game: SharedGame): string {
+    const size = getGameDef(game).mapSizes.find(s => s.key === game.mapSize);
+    return size ? size.displayName : '';
   }
 }
