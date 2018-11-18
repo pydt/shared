@@ -86,7 +86,7 @@ export const CIV5_MAPS = new Array<Map>(
 
 export const CIV5_GAME: CivGame = {
     id: 'CIV5',
-    displayName: 'Civ 5',
+    displayName: 'Civilization 5',
     turnTimerSupported: true,
     assetPrefix: 'CIV5_',
     dlcs: CIV5_DLCS,

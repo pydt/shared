@@ -82,7 +82,7 @@ export const CIV6_MAPS = new Array<Map>(
 
 export const CIV6_GAME: CivGame = {
     id: 'CIV6',
-    displayName: 'Civ 6',
+    displayName: 'Civilization 6',
     turnTimerSupported: false,
     assetPrefix: '',
     dlcs: CIV6_DLCS,
