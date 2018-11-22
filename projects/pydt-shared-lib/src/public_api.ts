@@ -4,6 +4,7 @@
 
 export * from './lib/busy/busy.component';
 export * from './lib/busy/busy.service';
+export * from './lib/beyondearthdefs';
 export * from './lib/civ5defs';
 export * from './lib/civ6defs';
 export * from './lib/civdefs';
