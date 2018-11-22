@@ -8,9 +8,27 @@ export interface CivGame {
   gameSpeeds: GameSpeed[];
   mapSizes: MapSize[];
   maps: Map[];
+  saveLocations: { [key in Platform]: PlatformSaveLocation };
   saveDirectory: string;
   saveExtension: string;
   steamRunUrl: string;
+}
+
+export enum Platform {
+  Windows,
+  OSX,
+  Linux
+}
+
+export enum BasePath {
+  APP_DATA = 'appData',
+  HOME = 'home',
+  DOCUMENTS = 'documents'
+}
+
+export class PlatformSaveLocation {
+  basePath: BasePath;
+  prefix: string;
 }
 
 export class CivDef {
