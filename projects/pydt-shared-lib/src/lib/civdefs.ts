@@ -15,9 +15,9 @@ export interface CivGame {
 }
 
 export enum Platform {
-  Windows,
-  OSX,
-  Linux
+  Windows = 'win32',
+  OSX = 'darwin',
+  Linux = 'linux'
 }
 
 export enum BasePath {
@@ -35,9 +35,9 @@ export class CivDef {
   public civDisplayName: string;
   public leaderDisplayName: string;
 
-  constructor(public civKey: string, public leaderKey: string, leaderDisplayName?: string, public dlcId?: string) {
+  constructor(public civKey: string, public leaderKey: string, public options: CivDefOptions = {}) {
     this.civDisplayName = this.defaultDisplayName(civKey);
-    this.leaderDisplayName = leaderDisplayName || this.defaultDisplayName(leaderKey);
+    this.leaderDisplayName = options.leaderDisplayName || this.defaultDisplayName(leaderKey);
   }
 
   getImageFileName() {
@@ -45,7 +45,13 @@ export class CivDef {
   }
 
   getFullDisplayName() {
-    return `${this.leaderDisplayName} (${this.civDisplayName})`;
+    let result = this.leaderDisplayName;
+
+    if (!this.options.justShowLeaderName) {
+      result += ` (${this.civDisplayName})`;
+    }
+    
+    return result;
   }
 
   private defaultDisplayName(str: string) {
@@ -55,6 +61,12 @@ export class CivDef {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
+}
+
+export interface CivDefOptions {
+  leaderDisplayName?: string;
+  dlcId?: string;
+  justShowLeaderName?: boolean;
 }
 
 export class DLC {
@@ -67,7 +79,7 @@ export function filterCivsByDlc(leaders: CivDef[], dlcIds: string[]) {
   dlcIds = dlcIds || [];
 
   for (const leader of leaders) {
-    if (!leader.dlcId || dlcIds.indexOf(leader.dlcId) >= 0) {
+    if (!leader.options.dlcId || dlcIds.indexOf(leader.options.dlcId) >= 0) {
       result.push(leader);
     }
   }
@@ -75,7 +87,7 @@ export function filterCivsByDlc(leaders: CivDef[], dlcIds: string[]) {
   return result;
 }
 
-export const RANDOM_CIV = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', 'Random Leader');
+export const RANDOM_CIV = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', { leaderDisplayName: 'Random Leader', justShowLeaderName: true });
 
 export class GameSpeed {
   constructor(public key: string, public displayName: string) {

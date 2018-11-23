@@ -13,18 +13,18 @@ export const BEYOND_EARTH_DLCS: DLC[] = [
 
 export const BEYOND_EARTH_LEADERS = [
     RANDOM_CIV,
-    new BeyondEarthDef('CIVILIZATION_ARC', 'LEADER_ARC', 'American Reclamation Corporation'),
-    new BeyondEarthDef('CIVILIZATION_AFRICAN_UNION', 'LEADER_AFRICAN_UNION', 'People\'s African Union'),
-    new BeyondEarthDef('CIVILIZATION_BRASILIA', 'LEADER_BRASILIA'),
-    new BeyondEarthDef('CIVILIZATION_PAN_ASIA', 'LEADER_PAN_ASIA', 'Pan-Asian Cooperative'),
-    new BeyondEarthDef('CIVILIZATION_FRANCO_IBERIA', 'LEADER_FRANCO_IBERIA', 'Franco-Iberia'),
-    new BeyondEarthDef('CIVILIZATION_KAVITHAN', 'LEADER_INDIA', 'Kavithan Protectorate'),
-    new BeyondEarthDef('CIVILIZATION_POLYSTRALIA', 'LEADER_POLYSTRALIA'),
-    new BeyondEarthDef('CIVILIZATION_RUSSIA', 'LEADER_RUSSIA', 'Slavic Federation'),
-    new BeyondEarthDef('CIVILIZATION_AL_FALAH', 'LEADER_AL_FALAH', null, '57b2d25491c545408f17a69f033166c7'),
-    new BeyondEarthDef('CIVILIZATION_NORTH_SEA_ALLIANCE', 'LEADER_NORTH_SEA_ALLIANCE', null, '57b2d25491c545408f17a69f033166c7'),
-    new BeyondEarthDef('CIVILIZATION_INTEGR', 'LEADER_INTEGR', 'INTEGR', '57b2d25491c545408f17a69f033166c7'),
-    new BeyondEarthDef('CIVILIZATION_CHUNGSU', 'LEADER_CHUNGSU', null, '57b2d25491c545408f17a69f033166c7')
+    new BeyondEarthDef('CIVILIZATION_ARC', 'LEADER_ARC', { leaderDisplayName: 'American Reclamation Corporation', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_AFRICAN_UNION', 'LEADER_AFRICAN_UNION', { leaderDisplayName: 'People\'s African Union', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_BRASILIA', 'LEADER_BRASILIA', { justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_PAN_ASIA', 'LEADER_PAN_ASIA', { leaderDisplayName: 'Pan-Asian Cooperative', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_FRANCO_IBERIA', 'LEADER_FRANCO_IBERIA', { leaderDisplayName: 'Franco-Iberia', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_KAVITHAN', 'LEADER_INDIA', { leaderDisplayName: 'Kavithan Protectorate', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_POLYSTRALIA', 'LEADER_POLYSTRALIA', { justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_RUSSIA', 'LEADER_RUSSIA', { leaderDisplayName: 'Slavic Federation', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_AL_FALAH', 'LEADER_AL_FALAH', { dlcId: '57b2d25491c545408f17a69f033166c7', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_NORTH_SEA_ALLIANCE', 'LEADER_NORTH_SEA_ALLIANCE', { dlcId: '57b2d25491c545408f17a69f033166c7', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_INTEGR', 'LEADER_INTEGR', { leaderDisplayName: 'INTEGR', dlcId: '57b2d25491c545408f17a69f033166c7', justShowLeaderName: true }),
+    new BeyondEarthDef('CIVILIZATION_CHUNGSU', 'LEADER_CHUNGSU', { dlcId: '57b2d25491c545408f17a69f033166c7', justShowLeaderName: true })
 ];
 
 export const BEYOND_EARTH_GAME_SPEEDS = new Array<GameSpeed>(
@@ -63,5 +63,5 @@ export const BEYOND_EARTH_GAME: CivGame = {
     },
     saveDirectory: '/Sid Meier\'s Civilization Beyond Earth/Saves/hotseat/',
     saveExtension: 'CivBESave',
-    steamRunUrl: 'steam://run/65980//\\dx11'
+    steamRunUrl: 'steam://run/65980/\\dx11'
 };
