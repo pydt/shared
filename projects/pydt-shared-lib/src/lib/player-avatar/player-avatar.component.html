@@ -1,0 +1,10 @@
+<ng-template #tooltipTemplate><span [innerHtml]="tooltipHtml"></span></ng-template>
+<div container="body" [tooltip]="tooltipTemplate" #tooltip="bs-tooltip">
+  <a href="javascript:void(0)" [style.cursor]="hasClickListener ? 'pointer': 'default'" [style.margin-bottom]="thumbnailMarginBottom" (click)="click.emit(player)" *ngIf="player" class="thumbnail" [class.currentTurn]="game.currentPlayerSteamId === player.steamId">
+    <img [src]="imgSrc" [style.height]="avatarSize" (mouseover)="iconMouseOver()" (mouseout)="iconMouseOut()">
+    <div *ngIf="playerIsOnVacation(player)" class="vacation">ON<br />VACATION</div>
+  </a>
+  <a href="javascript:void(0)" *ngIf="!player" class="thumbnail">
+    <img [src]="imgSrc" [style.height]="avatarSize">
+  </a>
+</div>

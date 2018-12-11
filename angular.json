@@ -154,7 +154,8 @@
               "projects/pydt-shared-lib/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+              "**/node_modules/**",
+              "**/_gen/**"
             ]
           }
         }

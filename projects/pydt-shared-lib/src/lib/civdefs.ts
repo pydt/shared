@@ -50,7 +50,7 @@ export class CivDef {
     if (!this.options.justShowLeaderName) {
       result += ` (${this.civDisplayName})`;
     }
-    
+
     return result;
   }
 
@@ -87,7 +87,10 @@ export function filterCivsByDlc(leaders: CivDef[], dlcIds: string[]) {
   return result;
 }
 
-export const RANDOM_CIV = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', { leaderDisplayName: 'Random Leader', justShowLeaderName: true });
+export const RANDOM_CIV = new CivDef('CIVILIZATION_RANDOM', 'LEADER_RANDOM', {
+  leaderDisplayName: 'Random Leader',
+  justShowLeaderName: true
+});
 
 export class GameSpeed {
   constructor(public key: string, public displayName: string) {

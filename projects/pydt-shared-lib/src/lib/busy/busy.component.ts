@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BusyService } from './busy.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { BusyService } from './busy.service';
     <div class="pydt-busy spinner"></div>
   </div>`
 })
-export class BusyComponent {
+export class BusyComponent implements OnInit {
     public busyValue = false;
 
     constructor(private busyService: BusyService) {
