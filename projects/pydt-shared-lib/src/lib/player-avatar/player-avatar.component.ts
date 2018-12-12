@@ -40,12 +40,14 @@ export class PlayerAvatarComponent implements OnDestroy {
 
       let result = `${playerName} /<br />${civDesc}`;
 
-      if (profile.timezone) {
-        result += `<br />${profile.timezone}`;
-      }
+      if (profile) {
+        if (profile.timezone) {
+          result += `<br />${profile.timezone}`;
+        }
 
-      if (profile.comments) {
-        result += `<br />${profile.comments}`;
+        if (profile.comments) {
+          result += `<br />${profile.comments}`;
+        }
       }
 
       return result;
