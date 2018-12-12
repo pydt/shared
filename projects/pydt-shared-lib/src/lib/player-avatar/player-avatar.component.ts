@@ -13,8 +13,8 @@ export class PlayerAvatarComponent implements OnDestroy {
   @Input() player: GamePlayer;
   @Input() gamePlayerProfiles: SteamProfileMap;
   @Input() civDef: CivDef;
-  @Input() avatarSize = '32px';
-  @Input() thumbnailMarginBottom: string = null;
+  @Input() size: 'BIG' | 'SMALL' = 'SMALL';
+  @Input() thumbnailOnly = false;
   @Output() click = new EventEmitter<GamePlayer>();
   @ViewChild('tooltip') tooltip: any;
   isMouseOver = false;
@@ -52,6 +52,18 @@ export class PlayerAvatarComponent implements OnDestroy {
     } else {
       return 'AI';
     }
+  }
+
+  get avatarSize() {
+    return this.size === 'BIG' ? '64px' : '32px';
+  }
+
+  get vacationTop() {
+    return this.size === 'BIG' ? '22px' : '5px';
+  }
+
+  get thumbnailMarginBottom() {
+    return this.size === 'BIG' ? null : '0px';
   }
 
   playerIsOnVacation(player: GamePlayer) {
