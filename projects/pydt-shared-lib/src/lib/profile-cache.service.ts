@@ -34,31 +34,38 @@ export class ProfileCacheService {
   getProfiles(steamIds: string[]): Promise<SteamProfileMap> {
     return this.lastRequest = this.lastRequest.then(async () => {
       const result: SteamProfileMap = {};
-      const toDownload: string[] = [];
 
-      for (const steamId of steamIds) {
-        if (steamId) {
-          const cachedVal = <SteamProfileWithInvalidDate>this.cache[steamId];
+      try {
+        const toDownload: string[] = [];
 
-          if (cachedVal && new Date() < cachedVal.invalidDate) {
-            result[steamId] = this.cache[steamId];
-          } else {
-            toDownload.push(steamId);
+        for (const steamId of steamIds) {
+          if (steamId) {
+            const cachedVal = <SteamProfileWithInvalidDate>this.cache[steamId];
+
+            if (cachedVal) {
+              result[steamId] = this.cache[steamId];
+            }
+
+            if (!cachedVal || new Date() > cachedVal.invalidDate) {
+              toDownload.push(steamId);
+            }
           }
         }
-      }
 
-      if (toDownload.length) {
-        const profiles = await this.api.steamProfiles(toDownload.join(',')).toPromise();
+        if (toDownload.length) {
+          const profiles = await this.api.steamProfiles(toDownload.join(',')).toPromise();
 
-        for (const profile of profiles) {
-          (<SteamProfileWithInvalidDate>profile).invalidDate = new Date(
-            new Date().getTime() +
-            this.cacheInvalidationMinutes * 60 * 1000
-          );
-          this.cache[profile.steamid] = profile;
-          result[profile.steamid] = profile;
+          for (const profile of profiles) {
+            (<SteamProfileWithInvalidDate>profile).invalidDate = new Date(
+              new Date().getTime() +
+              this.cacheInvalidationMinutes * 60 * 1000
+            );
+            result[profile.steamid] = this.cache[profile.steamid] = profile;
+          }
         }
+      } catch (e) {
+        // This promise should NEVER throw, otherwise the lastRequest chain aborts and can never recover!
+        console.error(e);
       }
 
       return result;
