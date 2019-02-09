@@ -9,26 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GameTypeTurnData } from './gameTypeTurnData';
 
 
-export interface User {
-    steamId: string;
+export interface GameTypeTurnData {
     turnsPlayed: number;
     turnsSkipped: number;
     timeTaken: number;
     fastTurns: number;
     slowTurns: number;
-    displayName: string;
-    avatarSmall: string;
-    avatarMedium: string;
-    avatarFull: string;
-    steamProfileUrl: string;
-    emailAddress: string;
-    vacationMode?: boolean;
-    timezone?: string;
-    comments?: string;
-    activeGameIds: Array<string>;
-    inactiveGameIds: Array<string>;
-    statsByGameType: Array<GameTypeTurnData>;
+    gameType: string;
 }
