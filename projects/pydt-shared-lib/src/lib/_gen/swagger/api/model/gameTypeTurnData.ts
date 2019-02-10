@@ -18,4 +18,7 @@ export interface GameTypeTurnData {
     fastTurns: number;
     slowTurns: number;
     gameType: string;
+    lastTurnEndDate?: Date;
+    activeGames: number;
+    totalGames: number;
 }
