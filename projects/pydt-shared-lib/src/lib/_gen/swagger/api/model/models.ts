@@ -15,6 +15,7 @@ export * from './openGamesResponse';
 export * from './replacePlayerRequestBody';
 export * from './setNotificationEmailBody';
 export * from './setUserInformationBody';
+export * from './setWebhookUrlBody';
 export * from './startTurnSubmitResponse';
 export * from './steamProfile';
 export * from './surrenderBody';

@@ -22,6 +22,7 @@ import { ErrorResponse } from '../model/errorResponse';
 import { GamesByUserResponse } from '../model/gamesByUserResponse';
 import { SetNotificationEmailBody } from '../model/setNotificationEmailBody';
 import { SetUserInformationBody } from '../model/setUserInformationBody';
+import { SetWebhookUrlBody } from '../model/setWebhookUrlBody';
 import { SteamProfile } from '../model/steamProfile';
 import { User } from '../model/user';
 
@@ -315,6 +316,57 @@ export class UserService {
         }
 
         return this.httpClient.post<User>(`${this.basePath}/user/setUserInformation`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling setWebhookUrl.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<User>(`${this.basePath}/user/setWebhookUrl`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

@@ -22,6 +22,7 @@ export interface Game {
     gameType: string;
     displayName: string;
     description?: string;
+    webhookUrl?: string;
     dlc: Array<string>;
     slots: number;
     humans: number;

@@ -14,6 +14,7 @@ import { GameTypeTurnData } from './gameTypeTurnData';
 
 export interface User {
     steamId: string;
+    lastTurnEndDate?: Date;
     turnsPlayed: number;
     turnsSkipped: number;
     timeTaken: number;
@@ -31,4 +32,5 @@ export interface User {
     activeGameIds: Array<string>;
     inactiveGameIds: Array<string>;
     statsByGameType: Array<GameTypeTurnData>;
+    webhookUrl?: string;
 }
