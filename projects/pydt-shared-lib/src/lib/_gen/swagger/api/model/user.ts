@@ -33,4 +33,5 @@ export interface User {
     inactiveGameIds: Array<string>;
     statsByGameType: Array<GameTypeTurnData>;
     webhookUrl?: string;
+    willSubstituteForGameTypes: Array<string>;
 }

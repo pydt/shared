@@ -21,6 +21,7 @@ import { Observable }                                        from 'rxjs/Observab
 import { ErrorResponse } from '../model/errorResponse';
 import { GamesByUserResponse } from '../model/gamesByUserResponse';
 import { SetNotificationEmailBody } from '../model/setNotificationEmailBody';
+import { SetSubstitutionPrefsBody } from '../model/setSubstitutionPrefsBody';
 import { SetUserInformationBody } from '../model/setUserInformationBody';
 import { SetWebhookUrlBody } from '../model/setWebhookUrlBody';
 import { SteamProfile } from '../model/steamProfile';
@@ -227,6 +228,58 @@ export class UserService {
     /**
      * 
      * 
+     * @param gameType 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSubstituteUsers(gameType: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public getSubstituteUsers(gameType: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public getSubstituteUsers(gameType: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public getSubstituteUsers(gameType: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (gameType === null || gameType === undefined) {
+            throw new Error('Required parameter gameType was null or undefined when calling getSubstituteUsers.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (gameType !== undefined) {
+            queryParameters = queryParameters.set('gameType', <any>gameType);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/user/getSubstituteUsers`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -265,6 +318,57 @@ export class UserService {
         }
 
         return this.httpClient.post<User>(`${this.basePath}/user/setNotificationEmail`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setSubstitutionPrefs(body: SetSubstitutionPrefsBody, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public setSubstitutionPrefs(body: SetSubstitutionPrefsBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public setSubstitutionPrefs(body: SetSubstitutionPrefsBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public setSubstitutionPrefs(body: SetSubstitutionPrefsBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling setSubstitutionPrefs.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<User>(`${this.basePath}/user/setSubstitutionPrefs`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

@@ -14,6 +14,7 @@ export * from './newDiscordPostBody';
 export * from './openGamesResponse';
 export * from './replacePlayerRequestBody';
 export * from './setNotificationEmailBody';
+export * from './setSubstitutionPrefsBody';
 export * from './setUserInformationBody';
 export * from './setWebhookUrlBody';
 export * from './startTurnSubmitResponse';
