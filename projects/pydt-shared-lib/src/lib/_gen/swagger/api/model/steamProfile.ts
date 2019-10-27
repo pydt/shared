@@ -11,7 +11,7 @@
  */
 
 
-export interface SteamProfile {
+export interface SteamProfile { 
     steamid: string;
     personaname: string;
     profileurl: string;

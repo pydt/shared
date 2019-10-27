@@ -11,7 +11,7 @@
  */
 
 
-export interface GamePlayer {
+export interface GamePlayer { 
     steamId: string;
     civType: string;
     hasSurrendered?: boolean;

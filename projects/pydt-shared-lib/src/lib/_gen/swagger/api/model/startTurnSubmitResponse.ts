@@ -11,6 +11,6 @@
  */
 
 
-export interface StartTurnSubmitResponse {
+export interface StartTurnSubmitResponse { 
     putUrl: string;
 }

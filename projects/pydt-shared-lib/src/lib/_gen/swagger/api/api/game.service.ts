@@ -16,7 +16,7 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs';
 
 import { ChangeCivRequestBody } from '../model/changeCivRequestBody';
 import { CreateGameRequestBody } from '../model/createGameRequestBody';
@@ -59,7 +59,7 @@ export class GameService {
      */
     private canConsumeForm(consumes: string[]): boolean {
         const form = 'multipart/form-data';
-        for (let consume of consumes) {
+        for (const consume of consumes) {
             if (form === consume) {
                 return true;
             }
@@ -79,6 +79,7 @@ export class GameService {
     public _delete(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
     public _delete(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public _delete(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling _delete.');
         }
@@ -94,13 +95,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -127,9 +128,11 @@ export class GameService {
     public changeCiv(gameId: string, body: ChangeCivRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public changeCiv(gameId: string, body: ChangeCivRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public changeCiv(gameId: string, body: ChangeCivRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling changeCiv.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling changeCiv.');
         }
@@ -145,18 +148,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/changeCiv`,
@@ -181,6 +184,7 @@ export class GameService {
     public create(body: CreateGameRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public create(body: CreateGameRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public create(body: CreateGameRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling create.');
         }
@@ -196,18 +200,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/create`,
@@ -233,9 +237,11 @@ export class GameService {
     public edit(gameId: string, body: GameRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public edit(gameId: string, body: GameRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public edit(gameId: string, body: GameRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling edit.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling edit.');
         }
@@ -251,18 +257,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/edit`,
@@ -287,6 +293,7 @@ export class GameService {
     public finishSubmit(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public finishSubmit(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public finishSubmit(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling finishSubmit.');
         }
@@ -302,13 +309,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -334,6 +341,7 @@ export class GameService {
     public get(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public get(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public get(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling get.');
         }
@@ -344,13 +352,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -376,12 +384,14 @@ export class GameService {
     public getTurn(gameId: string, compressed?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GameTurnResponse>>;
     public getTurn(gameId: string, compressed?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GameTurnResponse>>;
     public getTurn(gameId: string, compressed?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling getTurn.');
         }
 
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (compressed !== undefined) {
+        if (compressed !== undefined && compressed !== null) {
             queryParameters = queryParameters.set('compressed', <any>compressed);
         }
 
@@ -396,13 +406,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -430,12 +440,15 @@ export class GameService {
     public getTurns(gameId: string, startTurn: number, endTurn: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<GameTurn>>>;
     public getTurns(gameId: string, startTurn: number, endTurn: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<GameTurn>>>;
     public getTurns(gameId: string, startTurn: number, endTurn: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling getTurns.');
         }
+
         if (startTurn === null || startTurn === undefined) {
             throw new Error('Required parameter startTurn was null or undefined when calling getTurns.');
         }
+
         if (endTurn === null || endTurn === undefined) {
             throw new Error('Required parameter endTurn was null or undefined when calling getTurns.');
         }
@@ -446,13 +459,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -478,9 +491,11 @@ export class GameService {
     public join(gameId: string, body: JoinGameRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public join(gameId: string, body: JoinGameRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public join(gameId: string, body: JoinGameRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling join.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling join.');
         }
@@ -496,18 +511,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/join`,
@@ -532,6 +547,7 @@ export class GameService {
     public leave(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public leave(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public leave(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling leave.');
         }
@@ -547,13 +563,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -585,13 +601,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -617,9 +633,11 @@ export class GameService {
     public replacePlayer(gameId: string, body: ReplacePlayerRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public replacePlayer(gameId: string, body: ReplacePlayerRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public replacePlayer(gameId: string, body: ReplacePlayerRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling replacePlayer.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling replacePlayer.');
         }
@@ -635,18 +653,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/turn/replacePlayer`,
@@ -671,6 +689,7 @@ export class GameService {
     public revert(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public revert(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public revert(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling revert.');
         }
@@ -686,13 +705,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -718,6 +737,7 @@ export class GameService {
     public start(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public start(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public start(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling start.');
         }
@@ -733,13 +753,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -765,6 +785,7 @@ export class GameService {
     public startSubmit(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<StartTurnSubmitResponse>>;
     public startSubmit(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<StartTurnSubmitResponse>>;
     public startSubmit(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling startSubmit.');
         }
@@ -780,13 +801,13 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
 
@@ -813,9 +834,11 @@ export class GameService {
     public surrender(gameId: string, body: SurrenderBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public surrender(gameId: string, body: SurrenderBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public surrender(gameId: string, body: SurrenderBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling surrender.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling surrender.');
         }
@@ -831,18 +854,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/surrender`,
@@ -868,9 +891,11 @@ export class GameService {
     public updateTurnOrder(gameId: string, body: UpdateTurnOrderRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
     public updateTurnOrder(gameId: string, body: UpdateTurnOrderRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
     public updateTurnOrder(gameId: string, body: UpdateTurnOrderRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling updateTurnOrder.');
         }
+
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateTurnOrder.');
         }
@@ -886,18 +911,18 @@ export class GameService {
         let httpHeaderAccepts: string[] = [
             'application/json'
         ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
-        let consumes: string[] = [
+        const consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+            headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/updateTurnOrder`,

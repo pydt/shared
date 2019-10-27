@@ -11,6 +11,6 @@
  */
 
 
-export interface UpdateTurnOrderRequestBody {
+export interface UpdateTurnOrderRequestBody { 
     steamIds: Array<string>;
 }

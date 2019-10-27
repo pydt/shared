@@ -12,7 +12,7 @@
 import { Game } from './game';
 
 
-export interface GamesByUserResponse {
+export interface GamesByUserResponse { 
     data: Array<Game>;
     pollUrl: string;
 }

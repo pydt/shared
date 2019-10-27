@@ -11,6 +11,7 @@ export * from './gameTypeTurnData';
 export * from './gamesByUserResponse';
 export * from './joinGameRequestBody';
 export * from './newDiscordPostBody';
+export * from './newDiscordPostBodyPost';
 export * from './openGamesResponse';
 export * from './replacePlayerRequestBody';
 export * from './setNotificationEmailBody';

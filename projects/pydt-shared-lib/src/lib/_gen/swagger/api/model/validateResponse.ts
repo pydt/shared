@@ -12,7 +12,7 @@
 import { SteamProfile } from './steamProfile';
 
 
-export interface ValidateResponse {
+export interface ValidateResponse { 
     token: string;
     steamProfile: SteamProfile;
 }

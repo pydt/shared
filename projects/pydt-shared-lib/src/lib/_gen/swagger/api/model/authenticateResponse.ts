@@ -11,6 +11,6 @@
  */
 
 
-export interface AuthenticateResponse {
+export interface AuthenticateResponse { 
     redirectURL: string;
 }

@@ -9,8 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { NewDiscordPostBodyPost } from './newDiscordPostBodyPost';
 
 
-export interface NewDiscordPostBody {
-    post: any;
+export interface NewDiscordPostBody { 
+    post: NewDiscordPostBodyPost;
 }

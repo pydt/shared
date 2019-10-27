@@ -11,6 +11,6 @@
  */
 
 
-export interface SetWebhookUrlBody {
+export interface SetWebhookUrlBody { 
     webhookUrl: string;
 }

@@ -12,7 +12,7 @@
 import { Game } from './game';
 
 
-export interface OpenGamesResponse {
+export interface OpenGamesResponse { 
     notStarted: Array<Game>;
     openSlots: Array<Game>;
 }

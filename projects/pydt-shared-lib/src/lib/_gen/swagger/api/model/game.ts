@@ -12,7 +12,7 @@
 import { GamePlayer } from './gamePlayer';
 
 
-export interface Game {
+export interface Game { 
     createdAt?: Date;
     updatedAt?: Date;
     version?: number;

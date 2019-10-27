@@ -11,6 +11,6 @@
  */
 
 
-export interface ChangeCivRequestBody {
+export interface ChangeCivRequestBody { 
     playerCiv: string;
 }

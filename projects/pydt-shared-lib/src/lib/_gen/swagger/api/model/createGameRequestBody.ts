@@ -11,7 +11,7 @@
  */
 
 
-export interface CreateGameRequestBody {
+export interface CreateGameRequestBody { 
     gameSpeed: string;
     mapFile?: string;
     mapSize: string;

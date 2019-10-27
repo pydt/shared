@@ -11,7 +11,7 @@
  */
 
 
-export interface JoinGameRequestBody {
+export interface JoinGameRequestBody { 
     playerCiv: string;
     password?: string;
 }

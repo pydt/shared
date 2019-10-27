@@ -11,6 +11,6 @@
  */
 
 
-export interface SetSubstitutionPrefsBody {
+export interface SetSubstitutionPrefsBody { 
     willSubstituteForGameTypes: Array<string>;
 }

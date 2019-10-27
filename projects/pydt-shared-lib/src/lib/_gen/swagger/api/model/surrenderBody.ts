@@ -11,6 +11,6 @@
  */
 
 
-export interface SurrenderBody {
+export interface SurrenderBody { 
     kickUserId?: string;
 }

@@ -11,6 +11,6 @@
  */
 
 
-export interface ErrorResponse {
+export interface ErrorResponse { 
     errorMessage: string;
 }

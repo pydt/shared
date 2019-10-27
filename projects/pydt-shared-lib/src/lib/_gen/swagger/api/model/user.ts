@@ -12,7 +12,7 @@
 import { GameTypeTurnData } from './gameTypeTurnData';
 
 
-export interface User {
+export interface User { 
     steamId: string;
     lastTurnEndDate?: Date;
     turnsPlayed: number;

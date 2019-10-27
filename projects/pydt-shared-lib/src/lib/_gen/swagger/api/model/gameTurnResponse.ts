@@ -11,6 +11,6 @@
  */
 
 
-export interface GameTurnResponse {
+export interface GameTurnResponse { 
     downloadUrl: string;
 }

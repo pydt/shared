@@ -11,7 +11,7 @@
  */
 
 
-export interface SetUserInformationBody {
+export interface SetUserInformationBody { 
     vacationMode?: boolean;
     timezone?: string;
     comments?: string;

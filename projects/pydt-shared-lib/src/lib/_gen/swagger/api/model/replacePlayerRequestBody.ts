@@ -11,7 +11,7 @@
  */
 
 
-export interface ReplacePlayerRequestBody {
+export interface ReplacePlayerRequestBody { 
     oldSteamId: string;
     newSteamId: string;
 }

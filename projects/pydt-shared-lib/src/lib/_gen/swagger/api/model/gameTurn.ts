@@ -11,7 +11,7 @@
  */
 
 
-export interface GameTurn {
+export interface GameTurn { 
     gameId: string;
     turn: number;
     round: number;

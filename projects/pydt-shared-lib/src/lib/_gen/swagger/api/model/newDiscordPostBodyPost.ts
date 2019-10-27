@@ -11,14 +11,8 @@
  */
 
 
-export interface GameTypeTurnData { 
-    lastTurnEndDate?: Date;
-    turnsPlayed: number;
-    turnsSkipped: number;
-    timeTaken: number;
-    fastTurns: number;
-    slowTurns: number;
-    gameType: string;
-    activeGames: number;
-    totalGames: number;
+export interface NewDiscordPostBodyPost { 
+    id: number;
+    post_number: number;
+    topic_id: number;
 }

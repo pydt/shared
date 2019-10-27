@@ -11,6 +11,6 @@
  */
 
 
-export interface SetNotificationEmailBody {
+export interface SetNotificationEmailBody { 
     emailAddress: string;
 }
