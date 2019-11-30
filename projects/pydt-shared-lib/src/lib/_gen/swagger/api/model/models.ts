@@ -14,6 +14,7 @@ export * from './newDiscordPostBody';
 export * from './newDiscordPostBodyPost';
 export * from './openGamesResponse';
 export * from './replacePlayerRequestBody';
+export * from './setForumUsernameBody';
 export * from './setNotificationEmailBody';
 export * from './setSubstitutionPrefsBody';
 export * from './setUserInformationBody';

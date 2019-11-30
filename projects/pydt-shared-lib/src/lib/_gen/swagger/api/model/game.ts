@@ -40,5 +40,6 @@ export interface Game {
     gameTurnRangeKey?: number;
     completed?: boolean;
     latestDiscoursePostNumber?: number;
+    latestDiscoursePostUser?: string;
     lastTurnEndDate?: Date;
 }

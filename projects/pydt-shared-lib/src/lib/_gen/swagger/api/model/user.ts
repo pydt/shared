@@ -32,6 +32,7 @@ export interface User {
     activeGameIds: Array<string>;
     inactiveGameIds: Array<string>;
     statsByGameType: Array<GameTypeTurnData>;
+    forumUsername?: string;
     webhookUrl?: string;
     willSubstituteForGameTypes: Array<string>;
 }

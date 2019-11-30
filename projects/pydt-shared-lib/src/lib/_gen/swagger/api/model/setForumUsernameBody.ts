@@ -11,9 +11,6 @@
  */
 
 
-export interface NewDiscordPostBodyPost { 
-    id: number;
-    post_number: number;
-    topic_id: number;
-    display_username: string;
+export interface SetForumUsernameBody { 
+    forumUsername: string;
 }
