@@ -162,7 +162,7 @@ export const CIV5_GAME: CivGame = {
     mapSizes: CIV5_MAP_SIZES,
     saveLocations: {
         [Platform.Windows]: { basePath: BasePath.DOCUMENTS, prefix: '/My Games' },
-        [Platform.OSX]: { basePath: BasePath.DOCUMENTS, prefix: '/Aspyr' },
+        [Platform.OSX]: { basePath: BasePath.APP_DATA, prefix: '' },
         [Platform.Linux]: { basePath: BasePath.HOME, prefix: '/.local/share/Aspyr' }
     },
     saveDirectory: '/Sid Meier\'s Civilization 5/Saves/hotseat/',
