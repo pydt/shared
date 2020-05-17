@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { CivDef } from '../civdefs';
+import { CivDef } from '../../model/civdefs';
 import { SteamProfileMap } from '../profile-cache.service';
 import { Game, GamePlayer, SteamProfile } from '../_gen/swagger/api';
 

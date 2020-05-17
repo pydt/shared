@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GAMES } from './games';
-import { SharedGame } from './models';
+import { GAMES } from '../model/games';
+import { SharedGame } from '../model/shared-game';
 
 function getGameDef(game: SharedGame) {
   return GAMES.find(g => g.id === game.gameType);
