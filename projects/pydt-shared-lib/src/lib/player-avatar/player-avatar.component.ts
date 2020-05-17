@@ -68,9 +68,13 @@ export class PlayerAvatarComponent implements OnDestroy {
     return this.size === 'BIG' ? null : '0px';
   }
 
+  get isHuman() {
+    return this.player && this.player.steamId && !this.player.hasSurrendered;
+  }
+
   playerIsOnVacation(player: GamePlayer) {
     const profile = this.gamePlayerProfiles[player.steamId];
-    return profile ? !!profile.vacationMode : false;
+    return this.isHuman && profile ? !!profile.vacationMode : false;
   }
 
   get imgSrc() {
@@ -79,7 +83,7 @@ export class PlayerAvatarComponent implements OnDestroy {
       return `https://playyourdamnturn.com/img/civs/${image}`;
     }
 
-    if (this.player && this.player.steamId && !this.player.hasSurrendered) {
+    if (this.isHuman) {
       return (this.gamePlayerProfiles[this.player.steamId] || {} as SteamProfile).avatarmedium;
     }
 
