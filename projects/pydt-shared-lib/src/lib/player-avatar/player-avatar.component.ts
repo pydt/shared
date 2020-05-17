@@ -16,7 +16,7 @@ export class PlayerAvatarComponent implements OnDestroy {
   @Input() size: 'BIG' | 'SMALL' = 'SMALL';
   @Input() thumbnailOnly = false;
   @Output() click = new EventEmitter<GamePlayer>();
-  @ViewChild('tooltip', { static: false }) tooltip: any;
+  @ViewChild('tooltip') tooltip: any;
   isMouseOver = false;
 
   get hasClickListener() {
