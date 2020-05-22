@@ -8,8 +8,9 @@ export const CIV6_DLCS: DLC[] = [
     new DLC('E2749E9A-8056-45CD-901B-C368C8E83DEB', 'Persia and Macedon Civilization & Scenario Pack'),
     new DLC('643EA320-8E1A-4CF1-A01C-00D88DDD131A', 'Nubia Civilization & Scenario Pack'),
     new DLC('1F367231-A040-4793-BDBB-088816853683', 'Khmer and Indonesia Civilization & Scenario Pack'),
+    new DLC('9DE86512-DE1A-400D-8C0A-AB46EBBF76B9', 'Maya and Gran Colombia Pack'),
     new DLC('1B28771A-C749-434B-9053-D1380C553DE9', 'Rise and Fall Expansion', true),
-    new DLC('4873eb62-8ccc-4574-b784-dda455e74e68', 'Gathering Storm Expansion', true)
+    new DLC('4873eb62-8ccc-4574-b784-dda455e74e68', 'Gathering Storm Expansion', true),
 ];
 
 export const CIV6_LEADERS = [
@@ -72,6 +73,9 @@ export const CIV6_LEADERS = [
     new CivDef('CIVILIZATION_MAORI', 'LEADER_KUPE', {
         dlcId: '4873eb62-8ccc-4574-b784-dda455e74e68'
     }),
+    new CivDef('CIVILIZATION_MAYA', 'LEADER_LADY_SIX_SKY', {
+        dlcId: '9DE86512-DE1A-400D-8C0A-AB46EBBF76B9'
+    }),
     new CivDef('CIVILIZATION_MAPUCHE', 'LEADER_LAUTARO', {
         dlcId: '1B28771A-C749-434B-9053-D1380C553DE9'
     }),
@@ -115,6 +119,9 @@ export const CIV6_LEADERS = [
     }),
     new CivDef('CIVILIZATION_ZULU', 'LEADER_SHAKA', {
         dlcId: '1B28771A-C749-434B-9053-D1380C553DE9'
+    }),
+    new CivDef('CIVILIZATION_GRAN_COLOMBIA', 'LEADER_SIMON_BOLIVAR', {
+        dlcId: '9DE86512-DE1A-400D-8C0A-AB46EBBF76B9'
     }),
     new CivDef('CIVILIZATION_OTTOMAN', 'LEADER_SULEIMAN', {
         dlcId: '4873eb62-8ccc-4574-b784-dda455e74e68'
