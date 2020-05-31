@@ -1,4 +1,4 @@
-import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV } from './civdefs';
+import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV, GameStore } from './civdefs';
 
 export const CIV6_DLCS: DLC[] = [
     new DLC('02A8BDDE-67EA-4D38-9540-26E685E3156E', 'Aztec Civilization Pack'),
@@ -188,7 +188,14 @@ export const CIV6_GAME: CivGame = {
         [Platform.OSX]: { basePath: BasePath.APP_DATA, prefix: '' },
         [Platform.Linux]: { basePath: BasePath.HOME, prefix: '/.local/share/aspyr-media' }
     },
-    saveDirectory: '/Sid Meier\'s Civilization VI/Saves/Hotseat/',
+    dataPaths: {
+        [GameStore.Steam]: '/Sid Meier\'s Civilization VI',
+        [GameStore.Epic]: '/Sid Meier\'s Civilization VI (Epic)'
+    },
+    savePath: '/Saves/Hotseat/',
     saveExtension: 'Civ6Save',
-    steamRunUrl: 'steam://run/289070/\\dx11'
+    runUrls: {
+        [GameStore.Steam]: 'steam://run/289070/\\dx11',
+        [GameStore.Epic]: 'com.epicgames.launcher://apps/Kinglet?action=launch&silent=true'
+    }
 };

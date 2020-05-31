@@ -1,4 +1,4 @@
-import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV } from './civdefs';
+import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV, GameStore } from './civdefs';
 
 class BeyondEarthDef extends CivDef {
     getImageFileName() {
@@ -97,7 +97,12 @@ export const BEYOND_EARTH_GAME: CivGame = {
         [Platform.OSX]: { basePath: BasePath.APP_DATA, prefix: '' },
         [Platform.Linux]: { basePath: BasePath.HOME, prefix: '/.local/share/aspyr-media' }
     },
-    saveDirectory: '/Sid Meier\'s Civilization Beyond Earth/Saves/hotseat/',
+    dataPaths: {
+        [GameStore.Steam]: '/Sid Meier\'s Civilization Beyond Earth'
+    },
+    savePath: '/Saves/hotseat/',
     saveExtension: 'CivBESave',
-    steamRunUrl: 'steam://run/65980/\\dx11'
+    runUrls: {
+        [GameStore.Steam]: 'steam://run/65980/\\dx11'
+    }
 };

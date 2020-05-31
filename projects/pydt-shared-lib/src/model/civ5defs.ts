@@ -1,4 +1,4 @@
-import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV } from './civdefs';
+import { BasePath, CivDef, CivGame, DLC, GameSpeed, Map, MapSize, Platform, RANDOM_CIV, GameStore } from './civdefs';
 
 class Civ5Def extends CivDef {
     getImageFileName() {
@@ -165,7 +165,12 @@ export const CIV5_GAME: CivGame = {
         [Platform.OSX]: { basePath: BasePath.APP_DATA, prefix: '' },
         [Platform.Linux]: { basePath: BasePath.HOME, prefix: '/.local/share/Aspyr' }
     },
-    saveDirectory: '/Sid Meier\'s Civilization 5/Saves/hotseat/',
+    dataPaths: {
+        [GameStore.Steam]: '/Sid Meier\'s Civilization 5'
+    },
+    savePath: '/Saves/hotseat/',
     saveExtension: 'Civ5Save',
-    steamRunUrl: 'steam://run/8930/\\dx11'
+    runUrls: {
+        [GameStore.Steam]: 'steam://run/8930/\\dx11'
+    }
 };
