@@ -188,6 +188,11 @@ export const CIV6_GAME: CivGame = {
         [Platform.OSX]: { basePath: BasePath.APP_DATA, prefix: '' },
         [Platform.Linux]: { basePath: BasePath.HOME, prefix: '/.local/share/aspyr-media' }
     },
+    gamePaths: {
+        [GameStore.Epic]: '/Sid Meier\'s Civilization VI (Epic)/',
+        [GameStore.Steam]: '/Sid Meier\'s Civilization VI/'
+    },
+    savePath: '/Saves/Hotseat/',
     saveDirectory: '/Sid Meier\'s Civilization VI/Saves/Hotseat/',
     saveExtension: 'Civ6Save',
     steamRunUrl: 'steam://run/289070/\\dx11'

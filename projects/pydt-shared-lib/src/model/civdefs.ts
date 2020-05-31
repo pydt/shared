@@ -9,6 +9,8 @@ export interface CivGame {
   mapSizes: MapSize[];
   maps: Map[];
   saveLocations: { [key in Platform]: PlatformSaveLocation };
+  gamePaths: { [key in GameStore]: string };
+  savePath: string;
   saveDirectory: string;
   saveExtension: string;
   steamRunUrl: string;
@@ -18,6 +20,11 @@ export enum Platform {
   Windows = 'win32',
   OSX = 'darwin',
   Linux = 'linux'
+}
+
+export enum GameStore {
+  Epic = 'epic',
+  Steam = 'steam'
 }
 
 export enum BasePath {
