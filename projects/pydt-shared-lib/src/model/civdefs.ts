@@ -109,6 +109,6 @@ export class MapSize {
 }
 
 export class Map {
-  constructor(public file: string, public displayName: string, public mapSize?: MapSize) {
+  constructor(public file: string, public displayName: string, public mapSize?: MapSize, public regex?: RegExp) {
   }
 }

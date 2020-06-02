@@ -170,7 +170,7 @@ export const CIV6_MAPS = new Array<Map>(
     new Map('Shuffle.lua', 'Shuffle'),
     new Map('Balanced4.Civ6Map', '4-Leaf Clover', CIV6_MAP_SIZES[1]),
     new Map('Balanced6.Civ6Map', '6-Armed Snowflake', CIV6_MAP_SIZES[2]),
-    new Map('EarthStandard.Civ6Map', 'Earth Map', CIV6_MAP_SIZES[3])
+    new Map('EarthStandard.Civ6Map', 'Earth Map', CIV6_MAP_SIZES[3], /EarthStandard.*\.Civ6Map$/)
 );
 
 export const CIV6_GAME: CivGame = {
