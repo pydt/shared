@@ -171,8 +171,5 @@
       }
     }
   },
-  "defaultProject": "pydt-shared-app",
-  "cli": {
-    "packageManager": "yarn"
-  }
+  "defaultProject": "pydt-shared-app"
 }

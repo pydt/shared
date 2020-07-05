@@ -9,11 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { PrivateUserData } from './privateUserData';
+import { User } from './user';
 
 
-export interface NewDiscordPostBodyPost { 
-    username: string;
-    topic_id: number;
-    post_number: number;
-    id: number;
+export interface CurrentUserDataWithPud { 
+    user: User;
+    pud: PrivateUserData;
 }

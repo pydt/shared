@@ -25,7 +25,6 @@ export interface User {
     avatarMedium: string;
     avatarFull: string;
     steamProfileUrl: string;
-    emailAddress: string;
     vacationMode?: boolean;
     timezone?: string;
     comments?: string;
@@ -33,6 +32,7 @@ export interface User {
     inactiveGameIds: Array<string>;
     statsByGameType: Array<GameTypeTurnData>;
     forumUsername?: string;
-    webhookUrl?: string;
     willSubstituteForGameTypes: Array<string>;
+    banned?: boolean;
+    dataVersion?: number;
 }

@@ -11,9 +11,9 @@
  */
 
 
-export interface NewDiscordPostBodyPost { 
-    username: string;
-    topic_id: number;
-    post_number: number;
-    id: number;
+export interface PrivateUserData { 
+    steamId: string;
+    websocketConnectionIds?: Array<string>;
+    emailAddress: string;
+    webhookUrl?: string;
 }

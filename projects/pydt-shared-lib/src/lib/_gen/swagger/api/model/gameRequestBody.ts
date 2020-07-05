@@ -12,9 +12,9 @@
 
 
 export interface GameRequestBody { 
-    gameSpeed: string;
+    gameSpeed?: string;
     mapFile?: string;
-    mapSize: string;
+    mapSize?: string;
     gameType: string;
     displayName: string;
     description?: string;

@@ -18,8 +18,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { CurrentUserDataWithPud } from '../model/currentUserDataWithPud';
 import { ErrorResponse } from '../model/errorResponse';
 import { GamesByUserResponse } from '../model/gamesByUserResponse';
+import { PrivateUserData } from '../model/privateUserData';
 import { SetForumUsernameBody } from '../model/setForumUsernameBody';
 import { SetNotificationEmailBody } from '../model/setNotificationEmailBody';
 import { SetSubstitutionPrefsBody } from '../model/setSubstitutionPrefsBody';
@@ -230,6 +232,48 @@ export class UserService {
     /**
      * 
      * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCurrentWithPud(observe?: 'body', reportProgress?: boolean): Observable<CurrentUserDataWithPud>;
+    public getCurrentWithPud(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CurrentUserDataWithPud>>;
+    public getCurrentWithPud(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CurrentUserDataWithPud>>;
+    public getCurrentWithPud(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<CurrentUserDataWithPud>(`${this.basePath}/user/getCurrentWithPud`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param gameType 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -334,9 +378,9 @@ export class UserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'body', reportProgress?: boolean): Observable<PrivateUserData>;
+    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivateUserData>>;
+    public setNotificationEmail(body: SetNotificationEmailBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivateUserData>>;
     public setNotificationEmail(body: SetNotificationEmailBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -368,7 +412,7 @@ export class UserService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<User>(`${this.basePath}/user/setNotificationEmail`,
+        return this.httpClient.post<PrivateUserData>(`${this.basePath}/user/setNotificationEmail`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -490,9 +534,9 @@ export class UserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'body', reportProgress?: boolean): Observable<PrivateUserData>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivateUserData>>;
+    public setWebhookUrl(body: SetWebhookUrlBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivateUserData>>;
     public setWebhookUrl(body: SetWebhookUrlBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -524,7 +568,7 @@ export class UserService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<User>(`${this.basePath}/user/setWebhookUrl`,
+        return this.httpClient.post<PrivateUserData>(`${this.basePath}/user/setWebhookUrl`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

@@ -1,6 +1,7 @@
 export * from './authenticateResponse';
 export * from './changeCivRequestBody';
 export * from './createGameRequestBody';
+export * from './currentUserDataWithPud';
 export * from './errorResponse';
 export * from './game';
 export * from './gamePlayer';
@@ -13,6 +14,7 @@ export * from './joinGameRequestBody';
 export * from './newDiscordPostBody';
 export * from './newDiscordPostBodyPost';
 export * from './openGamesResponse';
+export * from './privateUserData';
 export * from './replacePlayerRequestBody';
 export * from './setForumUsernameBody';
 export * from './setNotificationEmailBody';
