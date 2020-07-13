@@ -11,9 +11,8 @@
  */
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
+export interface MapSize { 
+    key: string;
+    displayName: string;
+    players: number;
 }

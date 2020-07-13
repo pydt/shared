@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { CivDef } from '../../model/civdefs';
 import { SteamProfileMap } from '../profile-cache.service';
-import { Game, GamePlayer, SteamProfile } from '../_gen/swagger/api';
+import { CivDef, Game, GamePlayer, SteamProfile } from '../_gen/swagger/api';
 
 @Component({
   selector: 'pydt-player-avatar',
@@ -35,7 +34,7 @@ export class PlayerAvatarComponent implements OnDestroy {
       let civDesc = 'Unknown Civ';
 
       if (this.civDef) {
-        civDesc = this.civDef.getFullDisplayName();
+        civDesc = this.civDef.fullDisplayName;
       }
 
       let result = `${playerName} /<br />${civDesc}`;
@@ -79,7 +78,7 @@ export class PlayerAvatarComponent implements OnDestroy {
 
   get imgSrc() {
     if (this.isMouseOver) {
-      const image = this.civDef ? this.civDef.getImageFileName() : 'RANDOM_RANDOM.png';
+      const image = this.civDef ? this.civDef.imageFileName : 'RANDOM_RANDOM.png';
       return `https://playyourdamnturn.com/img/civs/${image}`;
     }
 

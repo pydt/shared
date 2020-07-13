@@ -11,9 +11,7 @@
  */
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
+export interface GameSpeed { 
+    key: string;
+    displayName: string;
 }

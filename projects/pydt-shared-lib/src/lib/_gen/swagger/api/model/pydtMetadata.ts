@@ -9,11 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CivDef } from './civDef';
+import { CivGame } from './civGame';
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
+export interface PydtMetadata { 
+    civGames: Array<CivGame>;
+    randomCiv: CivDef;
 }

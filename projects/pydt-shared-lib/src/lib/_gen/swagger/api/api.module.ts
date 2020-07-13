@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthService } from './api/auth.service';
 import { GameService } from './api/game.service';
+import { MetadataService } from './api/metadata.service';
 import { UserService } from './api/user.service';
 import { WebhookService } from './api/webhook.service';
 
@@ -15,6 +16,7 @@ import { WebhookService } from './api/webhook.service';
   providers: [
     AuthService,
     GameService,
+    MetadataService,
     UserService,
     WebhookService ]
 })

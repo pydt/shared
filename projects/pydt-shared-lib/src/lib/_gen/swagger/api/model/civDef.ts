@@ -9,11 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CivDefOptions } from './civDefOptions';
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
+export interface CivDef { 
+    civKey: string;
+    leaderKey: string;
+    imageFileName: string;
+    fullDisplayName: string;
+    civDisplayName: string;
+    leaderDisplayName: string;
+    options: CivDefOptions;
 }

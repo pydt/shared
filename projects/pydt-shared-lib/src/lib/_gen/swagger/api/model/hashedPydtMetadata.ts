@@ -9,11 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { PydtMetadata } from './pydtMetadata';
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
+export interface HashedPydtMetadata { 
+    metadata: PydtMetadata;
+    hash: string;
 }

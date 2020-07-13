@@ -11,9 +11,10 @@
  */
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    webhookUrl?: string;
-}
+export type BasePath = 'appData' | 'home' | 'documents';
+
+export const BasePath = {
+    AppData: 'appData' as BasePath,
+    Home: 'home' as BasePath,
+    Documents: 'documents' as BasePath
+};

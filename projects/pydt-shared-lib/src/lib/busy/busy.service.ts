@@ -1,8 +1,10 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
-export class BusyService {
+export class BusyService implements HttpInterceptor {
     private busyLevel = 0;
     private busyStream = new Subject<boolean>();
 
@@ -13,5 +15,13 @@ export class BusyService {
 
     public subscribeBusy(callback: (value: boolean) => void): Subscription {
         return this.busyStream.subscribe(callback);
+    }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.incrementBusy(true);
+
+        return next.handle(req).pipe(finalize(() => {
+            this.incrementBusy(false);
+        }));
     }
 }
