@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BusyComponent } from './busy/busy.component';
 import { BusyService } from './busy/busy.service';
+import { MetadataCacheService } from './metadata-cache.service';
 import { GameSpeedPipe, MapPipe, MapSizePipe } from './pipes';
 import { PlayerAvatarComponent } from './player-avatar/player-avatar.component';
 
@@ -19,7 +20,8 @@ import { PlayerAvatarComponent } from './player-avatar/player-avatar.component';
     MapSizePipe
   ],
   providers: [
-    BusyService
+    BusyService,
+    MetadataCacheService
   ],
   exports: [
     BusyComponent,

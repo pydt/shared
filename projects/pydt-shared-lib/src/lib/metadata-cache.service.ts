@@ -9,6 +9,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class MetadataCacheService implements HttpInterceptor {
   private cachedData: HashedPydtMetadata;
+  private dataPromise: Promise<HashedPydtMetadata>;
 
   constructor (
     private api: MetadataService,
@@ -19,7 +20,12 @@ export class MetadataCacheService implements HttpInterceptor {
 
   async getCivGameMetadata() {
     if (!this.cachedData) {
-      this.cachedData = await this.api.metadata().toPromise();
+      if (!this.dataPromise) {
+        this.dataPromise = this.api.metadata().toPromise();
+      }
+
+      this.cachedData = await this.dataPromise;
+      this.dataPromise = null;
     }
 
     return this.cachedData.metadata;
