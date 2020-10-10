@@ -39,13 +39,15 @@ export class PlayerAvatarComponent implements OnDestroy {
 
       let result = `${playerName} /<br />${civDesc}`;
 
-      if (profile) {
-        if (profile.timezone) {
-          result += `<br />${profile.timezone}`;
-        }
+      if (!this.player.hasSurrendered) {
+        if (profile) {
+          if (profile.timezone) {
+            result += `<br />${profile.timezone}`;
+          }
 
-        if (profile.comments) {
-          result += `<br />${profile.comments}`;
+          if (profile.comments) {
+            result += `<br />${profile.comments}`;
+          }
         }
       }
 
@@ -73,7 +75,7 @@ export class PlayerAvatarComponent implements OnDestroy {
 
   playerIsOnVacation(player: GamePlayer) {
     const profile = this.gamePlayerProfiles[player.steamId];
-    return this.isHuman && profile ? !!profile.vacationMode : false;
+    return (this.isHuman && profile) ? !!profile.vacationMode : false;
   }
 
   get imgSrc() {
