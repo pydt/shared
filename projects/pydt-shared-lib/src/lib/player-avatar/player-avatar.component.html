@@ -8,6 +8,6 @@
     <img [src]="imgSrc" [style.height]="avatarSize">
   </a>
 </div>
-<div *ngIf="thumbnailOnly" class="thumbnail" [style.margin-bottom]="thumbnailMarginBottom" [tooltip]="tooltipTemplate" #tooltip="bs-tooltip">
+<div *ngIf="thumbnailOnly" class="thumbnail" [style.margin-bottom]="thumbnailMarginBottom" [tooltip]="tooltipTemplate" #tooltip="bs-tooltip" [class.dragMode]="thumbnailOnlyDragMode">
   <img #profileImg [src]="imgSrc" [style.height]="avatarSize">
 </div>

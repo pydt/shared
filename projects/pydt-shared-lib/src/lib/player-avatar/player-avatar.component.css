@@ -2,6 +2,11 @@
   background-color: #ccffcc;
 }
 
+.dragMode {
+  background-color: #aaaaff;
+  cursor: pointer;
+}
+
 .vacation {
   position: absolute;
   left: 0;
