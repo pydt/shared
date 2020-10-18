@@ -13,4 +13,5 @@
 
 export interface SetNotificationEmailBody { 
     emailAddress: string;
+    newTurnEmails: boolean;
 }

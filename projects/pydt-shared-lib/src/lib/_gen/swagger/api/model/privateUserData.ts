@@ -15,5 +15,6 @@ export interface PrivateUserData {
     steamId: string;
     websocketConnectionIds?: Array<string>;
     emailAddress?: string;
+    newTurnEmails?: boolean;
     webhookUrl?: string;
 }
