@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { CurrentUserDataWithPud } from '../model/currentUserDataWithPud';
+import { DeleteWebPushBody } from '../model/deleteWebPushBody';
 import { ErrorResponse } from '../model/errorResponse';
 import { Game } from '../model/game';
 import { GamesByUserResponse } from '../model/gamesByUserResponse';
@@ -30,6 +31,7 @@ import { SetUserInformationBody } from '../model/setUserInformationBody';
 import { SetWebhookUrlBody } from '../model/setWebhookUrlBody';
 import { SteamProfile } from '../model/steamProfile';
 import { User } from '../model/user';
+import { WebPushSubscription } from '../model/webPushSubscription';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -179,6 +181,58 @@ export class UserService {
         ];
 
         return this.httpClient.get<Array<Game>>(`${this.basePath}/user/completedGames`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteWebPush(body: DeleteWebPushBody, observe?: 'body', reportProgress?: boolean): Observable<PrivateUserData>;
+    public deleteWebPush(body: DeleteWebPushBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivateUserData>>;
+    public deleteWebPush(body: DeleteWebPushBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivateUserData>>;
+    public deleteWebPush(body: DeleteWebPushBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling deleteWebPush.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<PrivateUserData>(`${this.basePath}/user/deleteWebPush`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -354,6 +408,58 @@ export class UserService {
         return this.httpClient.get<Array<User>>(`${this.basePath}/user/getSubstituteUsers`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public registerWebPush(body: WebPushSubscription, observe?: 'body', reportProgress?: boolean): Observable<PrivateUserData>;
+    public registerWebPush(body: WebPushSubscription, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivateUserData>>;
+    public registerWebPush(body: WebPushSubscription, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivateUserData>>;
+    public registerWebPush(body: WebPushSubscription, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling registerWebPush.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<PrivateUserData>(`${this.basePath}/user/registerWebPush`,
+            body,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

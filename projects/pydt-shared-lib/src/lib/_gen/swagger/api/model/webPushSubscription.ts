@@ -9,14 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { WebPushSubscription } from './webPushSubscription';
+import { WebPushSubscriptionKeys } from './webPushSubscriptionKeys';
 
 
-export interface PrivateUserData { 
-    steamId: string;
-    websocketConnectionIds?: Array<string>;
-    emailAddress?: string;
-    newTurnEmails?: boolean;
-    webhookUrl?: string;
-    webPushSubscriptions?: Array<WebPushSubscription>;
+export interface WebPushSubscription { 
+    endpoint: string;
+    keys: WebPushSubscriptionKeys;
 }
