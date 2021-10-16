@@ -42,4 +42,5 @@ export interface Game {
     latestDiscoursePostNumber?: number;
     latestDiscoursePostUser?: string;
     lastTurnEndDate?: Date;
+    resetGameStateOnNextUpload?: boolean;
 }

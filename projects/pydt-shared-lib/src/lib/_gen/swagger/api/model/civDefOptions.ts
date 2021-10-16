@@ -12,6 +12,7 @@
 
 
 export interface CivDefOptions { 
+    civDisplayName?: string;
     leaderDisplayName?: string;
     dlcId?: string;
     justShowLeaderName?: boolean;
