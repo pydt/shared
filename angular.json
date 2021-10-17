@@ -93,14 +93,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         }
@@ -123,11 +120,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "e2e//**/*.ts",
+              "e2e//**/*.html"
             ]
           }
         }
@@ -148,7 +145,7 @@
           "configurations": {
             "production": {
               "tsConfig": "projects/pydt-shared-lib/tsconfig.lib.prod.json"
-}
+            }
           }
         },
         "test": {
@@ -160,20 +157,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/pydt-shared-lib/tsconfig.lib.json",
-              "projects/pydt-shared-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "**/_gen/**"
+            "lintFilePatterns": [
+              "projects/pydt-shared-lib/**/*.ts",
+              "projects/pydt-shared-lib/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "pydt-shared-app"
+  "defaultProject": "pydt-shared-app",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

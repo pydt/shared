@@ -8,7 +8,7 @@ export class ProfileCacheService {
   private cache: SteamProfileMap = {};
   private lastRequest: Promise<SteamProfileMap> = Promise.resolve({});
 
-  constructor (private api: UserService, @Optional() @Inject(CACHE_INVALIDATION_MINUTES_TOKEN) private cacheInvalidationMinutes: number) {
+  constructor(private api: UserService, @Optional() @Inject(CACHE_INVALIDATION_MINUTES_TOKEN) private cacheInvalidationMinutes: number) {
     this.cacheInvalidationMinutes = this.cacheInvalidationMinutes || 60;
   }
 
@@ -40,7 +40,7 @@ export class ProfileCacheService {
 
         for (const steamId of steamIds) {
           if (steamId) {
-            const cachedVal = <SteamProfileWithInvalidDate>this.cache[steamId];
+            const cachedVal = this.cache[steamId] as SteamProfileWithInvalidDate;
 
             if (cachedVal) {
               result[steamId] = this.cache[steamId];
@@ -56,7 +56,7 @@ export class ProfileCacheService {
           const profiles = await this.api.steamProfiles(toDownload.join(',')).toPromise();
 
           for (const profile of profiles) {
-            (<SteamProfileWithInvalidDate>profile).invalidDate = new Date(
+            (profile as SteamProfileWithInvalidDate).invalidDate = new Date(
               new Date().getTime() +
               this.cacheInvalidationMinutes * 60 * 1000
             );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export enum Platform {
   Windows = 'win32',
   OSX = 'darwin',

@@ -162,7 +162,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -209,7 +209,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -256,7 +256,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -298,7 +298,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -340,7 +340,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -435,7 +435,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -487,7 +487,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -539,7 +539,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -591,7 +591,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -643,7 +643,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -695,7 +695,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 
@@ -742,7 +742,7 @@ export class UserService {
         let headers = this.defaultHeaders;
 
         // authentication (api_key) required
-        if (this.configuration.apiKeys["Authorization"]) {
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
             headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
         }
 

@@ -2,9 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { SharedGame } from '../model/shared-game';
 import { CivGame } from './_gen/swagger/api';
 
-function getGameDef(game: SharedGame, games: CivGame[]) {
-  return games.find(g => g.id === game.gameType);
-}
+const getGameDef = (game: SharedGame, games: CivGame[]) => games.find(g => g.id === game.gameType);
 
 @Pipe({name: 'gamespeed'})
 export class GameSpeedPipe implements PipeTransform {

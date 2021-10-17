@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "swagger-codegen": "bash -c \"mkdir -p .tmp && cp ../api/api/_gen/swagger/swagger.json .tmp/swagger.json && MSYS_NO_PATHCONV=1 docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli:2.4.9 generate -i /local/.tmp/swagger.json -l typescript-angular --additional-properties ngVersion=8 -o /local/projects/pydt-shared-lib/src/lib/_gen/swagger/api -DmodelPropertyNaming=original\""
+    "swagger-codegen": "bash -c \"mkdir -p .tmp && cp ../api/api/_gen/swagger/swagger.json .tmp/swagger.json && MSYS_NO_PATHCONV=1 docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli:2.4.23 generate -i /local/.tmp/swagger.json -l typescript-angular --additional-properties ngVersion=12 -o /local/projects/pydt-shared-lib/src/lib/_gen/swagger/api -DmodelPropertyNaming=original\""
   },
   "private": true,
   "dependencies": {
@@ -22,20 +22,30 @@
     "@angular/platform-browser-dynamic": "^12.2.10",
     "@angular/router": "^12.2.10",
     "core-js": "^3.3.4",
-    "ngx-bootstrap": "5.6.1",
+    "ngx-bootstrap": "^7.1.0",
     "rxjs": "~6.5.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.10",
+    "@angular-eslint/builder": "12.5.0",
+    "@angular-eslint/eslint-plugin": "12.5.0",
+    "@angular-eslint/eslint-plugin-template": "12.5.0",
+    "@angular-eslint/schematics": "12.5.0",
+    "@angular-eslint/template-parser": "12.5.0",
     "@angular/cli": "~12.2.10",
     "@angular/compiler-cli": "^12.2.10",
     "@angular/language-service": "^12.2.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "4.28.2",
+    "@typescript-eslint/parser": "4.28.2",
+    "eslint": "^7.26.0",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsdoc": "latest",
+    "eslint-plugin-prefer-arrow": "latest",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.4",
@@ -46,7 +56,6 @@
     "ng-packagr": "^12.2.3",
     "protractor": "~7.0.0",
     "ts-node": "~8.4.1",
-    "tslint": "~6.1.0",
     "typescript": "4.3.5"
   }
 }

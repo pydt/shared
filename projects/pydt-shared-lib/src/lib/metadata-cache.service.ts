@@ -11,7 +11,7 @@ export class MetadataCacheService implements HttpInterceptor {
   private cachedData: HashedPydtMetadata;
   private dataPromise: Promise<HashedPydtMetadata>;
 
-  constructor (
+  constructor(
     private api: MetadataService,
     @Optional() @Inject(CACHE_INVALIDATION_MINUTES_TOKEN) private cacheInvalidationMinutes: number
   ) {

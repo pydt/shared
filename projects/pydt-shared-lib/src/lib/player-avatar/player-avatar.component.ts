@@ -16,6 +16,7 @@ export class PlayerAvatarComponent implements OnDestroy {
   @Input() size: 'BIG' | 'SMALL' = 'SMALL';
   @Input() thumbnailOnly = false;
   @Input() thumbnailOnlyDragMode = false;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() click = new EventEmitter<GamePlayer>();
   @ViewChild('tooltip') tooltip: any;
   isMouseOver = false;
