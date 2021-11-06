@@ -92,11 +92,6 @@ export class PlayerAvatarComponent implements OnDestroy {
     return !this.player && this.game && !this.game.inProgress && this.index < this.game.humans;
   }
 
-  playerIsOnVacation(player: GamePlayer) {
-    const profile = this.gamePlayerProfiles[player.steamId];
-    return (this.isHuman && profile) ? !!profile.vacationMode : false;
-  }
-
   get imgSrc() {
     if (this.isMouseOver) {
       const image = this.civDef ? this.civDef.imageFileName : 'RANDOM_RANDOM.png';
@@ -112,6 +107,11 @@ export class PlayerAvatarComponent implements OnDestroy {
     }
 
     return 'https://playyourdamnturn.com/img/android.png';
+  }
+
+  playerIsOnVacation(player: GamePlayer) {
+    const profile = this.gamePlayerProfiles[player.steamId];
+    return (this.isHuman && profile) ? !!profile.vacationMode : false;
   }
 
   iconMouseOver() {
