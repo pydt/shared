@@ -1,179 +1,177 @@
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable no-bitwise */
-/*global window module */
+/* global window module */
 /**
  * @license countdown.js v2.6.1 http://countdownjs.org
  * Copyright (c)2006-2014 Stephen M. McKamey.
  * Licensed under The MIT License.
  */
-/*jshint bitwise:false */
+/* jshint bitwise:false */
 
 /**
  * API entry
- *
  * @public
  * @param {function(Object)|Date|number} start the starting date
  * @param {function(Object)|Date|number} end the ending date
  * @param {number} units the units to populate
- * @return {Object|number}
+ * @returns {Object|number}
  */
- export default (
+export default (
 
   function() {
-    /*jshint smarttabs:true */
+    /* jshint smarttabs:true */
 
-    'use strict';
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MILLISECONDS	= 0x001;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const SECONDS			= 0x002;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MINUTES			= 0x004;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const HOURS			= 0x008;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const DAYS			= 0x010;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const WEEKS			= 0x020;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MONTHS			= 0x040;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const YEARS			= 0x080;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const DECADES			= 0x100;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const CENTURIES		= 0x200;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MILLENNIA		= 0x400;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
-    const DEFAULTS		= YEARS|MONTHS|DAYS|HOURS|MINUTES|SECONDS;
+    const DEFAULTS		= YEARS | MONTHS | DAYS | HOURS | MINUTES | SECONDS;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MILLISECONDS_PER_SECOND = 1000;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const SECONDS_PER_MINUTE = 60;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MINUTES_PER_HOUR = 60;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const HOURS_PER_DAY = 24;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MILLISECONDS_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const DAYS_PER_WEEK = 7;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const MONTHS_PER_YEAR = 12;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const YEARS_PER_DECADE = 10;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const DECADES_PER_CENTURY = 10;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const CENTURIES_PER_MILLENNIUM = 10;
@@ -181,14 +179,14 @@
     /**
      * @private
      * @param {number} x number
-     * @return {number}
+     * @returns {number}
      */
     const ceil = Math.ceil;
 
     /**
      * @private
      * @param {number} x number
-     * @return {number}
+     * @returns {number}
      */
     const floor = Math.floor;
 
@@ -196,57 +194,58 @@
      * @private
      * @param ref reference date
      * @param shift number of months to shift
-     * @return number of days shifted
+     * @returns number of days shifted
      */
     function borrowMonths(ref, shift) {
       const prevTime = ref.getTime();
 
       // increment month by shift
-      ref.setMonth( ref.getMonth() + shift );
+      ref.setMonth(ref.getMonth() + shift);
 
       // this is the trickiest since months vary in length
-      return Math.round( (ref.getTime() - prevTime) / MILLISECONDS_PER_DAY );
+      return Math.round((ref.getTime() - prevTime) / MILLISECONDS_PER_DAY);
     }
 
     /**
      * @private
      * @param ref reference date
-     * @return number of days
+     * @returns number of days
      */
     function daysPerMonth(ref) {
       const a = ref.getTime();
 
       // increment month by 1
       const b = new Date(a);
-      b.setMonth( ref.getMonth() + 1 );
+
+      b.setMonth(ref.getMonth() + 1);
 
       // this is the trickiest since months vary in length
-      return Math.round( (b.getTime() - a) / MILLISECONDS_PER_DAY );
+      return Math.round((b.getTime() - a) / MILLISECONDS_PER_DAY);
     }
 
     /**
      * @private
      * @param ref reference date
-     * @return number of days
+     * @returns number of days
      */
     function daysPerYear(ref) {
       const a = ref.getTime();
 
       // increment year by 1
       const b = new Date(a);
-      b.setFullYear( ref.getFullYear() + 1 );
+
+      b.setFullYear(ref.getFullYear() + 1);
 
       // this is the trickiest since years (periodically) vary in length
-      return Math.round( (b.getTime() - a) / MILLISECONDS_PER_DAY );
+      return Math.round((b.getTime() - a) / MILLISECONDS_PER_DAY);
     }
 
     /**
      * Applies the Timespan to the given date.
-     *
      * @private
      * @param ts
      * @param date
-     * @return
+     * @returns
      */
     function addToDate(ts, date) {
       date = (date instanceof Date) || ((date !== null) && isFinite(date)) ? new Date(+date) : new Date();
@@ -256,6 +255,7 @@
 
       // if there is a value field, use it directly
       let value = +ts.value || 0;
+
       if (value) {
         date.setTime(date.getTime() + value);
         return date;
@@ -321,77 +321,77 @@
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_MILLISECONDS	= 0;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_SECONDS		= 1;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_MINUTES		= 2;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_HOURS			= 3;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_DAYS			= 4;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_WEEKS			= 5;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_MONTHS		= 6;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_YEARS			= 7;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_DECADES		= 8;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_CENTURIES		= 9;
 
     /**
      * @private
-     * @const
+     * @constant
      * @type {number}
      */
     const LABEL_MILLENNIA		= 10;
@@ -428,19 +428,17 @@
 
     /**
      * Formats a number & unit as a string
-     *
      * @param {number} value
      * @param {number} unit
-     * @return {string}
+     * @returns {string}
      */
     let formatter;
 
     /**
      * Formats a number as a string
-     *
      * @private
      * @param {number} value
-     * @return {string}
+     * @returns {string}
      */
     let formatNumber;
 
@@ -448,15 +446,14 @@
      * @private
      * @param value
      * @param unit unit index into label list
-     * @return
+     * @returns
      */
     function plurality(value, unit) {
-      return formatNumber(value)+((value === 1) ? LABELS_SINGLUAR[unit] : LABELS_PLURAL[unit]);
+      return formatNumber(value) + ((value === 1) ? LABELS_SINGLUAR[unit] : LABELS_PLURAL[unit]);
     }
 
     /**
      * Timespan representation of a duration of time
-     *
      * @private
      * @this {Timespan}
      * @constructor
@@ -466,58 +463,59 @@
 
     /**
      * Formats the Timespan as a sentence
-     *
      * @param emptyLabel the string to use when no values returned
-     * @return
+     * @returns
      */
     Timespan.prototype.toString = function(emptyLabel) {
       const label = formatList(this);
 
       const count = label.length;
+
       if (!count) {
-        return emptyLabel ? ''+emptyLabel : LABEL_NOW;
+        return emptyLabel ? `${emptyLabel}` : LABEL_NOW;
       }
       if (count === 1) {
         return label[0];
       }
 
-      const last = LABEL_LAST+label.pop();
-      return label.join(LABEL_DELIM)+last;
+      const last = LABEL_LAST + label.pop();
+
+      return label.join(LABEL_DELIM) + last;
     };
 
     /**
      * Formats the Timespan as a sentence in HTML
-     *
      * @param tag HTML tag name to wrap each value
      * @param emptyLabel the string to use when no values returned
-     * @return
+     * @returns
      */
     Timespan.prototype.toHTML = function(tag, emptyLabel) {
-      tag = tag || 'span';
+      tag = tag || "span";
       const label = formatList(this);
 
       const count = label.length;
+
       if (!count) {
         emptyLabel = emptyLabel || LABEL_NOW;
-        return emptyLabel ? '<'+tag+'>'+emptyLabel+'</'+tag+'>' : emptyLabel;
+        return emptyLabel ? `<${tag}>${emptyLabel}</${tag}>` : emptyLabel;
       }
-      for (let i=0; i<count; i++) {
+      for (let i = 0; i < count; i++) {
         // wrap each unit in tag
-        label[i] = '<'+tag+'>'+label[i]+'</'+tag+'>';
+        label[i] = `<${tag}>${label[i]}</${tag}>`;
       }
       if (count === 1) {
         return label[0];
       }
 
-      const last = LABEL_LAST+label.pop();
-      return label.join(LABEL_DELIM)+last;
+      const last = LABEL_LAST + label.pop();
+
+      return label.join(LABEL_DELIM) + last;
     };
 
     /**
      * Applies the Timespan to the given date
-     *
      * @param date the date to which the timespan is added.
-     * @return
+     * @returns
      */
     Timespan.prototype.addTo = function(date) {
       return addToDate(this, date);
@@ -525,15 +523,15 @@
 
     /**
      * Formats the entries as English labels
-     *
      * @private
      * @param ts
-     * @return
+     * @returns
      */
     const formatList = function(ts) {
       const list = [];
 
       let value = ts.millennia;
+
       if (value) {
         list.push(formatter(value, LABEL_MILLENNIA));
       }
@@ -593,14 +591,13 @@
 
     /**
      * Borrow any underflow units, carry any overflow units
-     *
      * @private
      * @param ts
      * @param toUnit
      */
     function rippleRounded(ts, toUnit) {
       switch (toUnit) {
-        case 'seconds':
+        case "seconds":
           if (ts.seconds !== SECONDS_PER_MINUTE || isNaN(ts.minutes)) {
             return;
           }
@@ -609,7 +606,7 @@
           ts.seconds = 0;
 
           /* falls through */
-        case 'minutes':
+        case "minutes":
           if (ts.minutes !== MINUTES_PER_HOUR || isNaN(ts.hours)) {
             return;
           }
@@ -618,7 +615,7 @@
           ts.minutes = 0;
 
           /* falls through */
-        case 'hours':
+        case "hours":
           if (ts.hours !== HOURS_PER_DAY || isNaN(ts.days)) {
             return;
           }
@@ -627,7 +624,7 @@
           ts.hours = 0;
 
           /* falls through */
-        case 'days':
+        case "days":
           if (ts.days !== DAYS_PER_WEEK || isNaN(ts.weeks)) {
             return;
           }
@@ -636,8 +633,8 @@
           ts.days = 0;
 
           /* falls through */
-        case 'weeks':
-          if (ts.weeks !== daysPerMonth(ts.refMonth)/DAYS_PER_WEEK || isNaN(ts.months)) {
+        case "weeks":
+          if (ts.weeks !== daysPerMonth(ts.refMonth) / DAYS_PER_WEEK || isNaN(ts.months)) {
             return;
           }
           // ripple weeks up to months
@@ -645,7 +642,7 @@
           ts.weeks = 0;
 
           /* falls through */
-        case 'months':
+        case "months":
           if (ts.months !== MONTHS_PER_YEAR || isNaN(ts.years)) {
             return;
           }
@@ -654,7 +651,7 @@
           ts.months = 0;
 
           /* falls through */
-        case 'years':
+        case "years":
           if (ts.years !== YEARS_PER_DECADE || isNaN(ts.decades)) {
             return;
           }
@@ -663,7 +660,7 @@
           ts.years = 0;
 
           /* falls through */
-        case 'decades':
+        case "decades":
           if (ts.decades !== DECADES_PER_CENTURY || isNaN(ts.centuries)) {
             return;
           }
@@ -672,7 +669,7 @@
           ts.decades = 0;
 
           /* falls through */
-        case 'centuries':
+        case "centuries":
           if (ts.centuries !== CENTURIES_PER_MILLENNIUM || isNaN(ts.millennia)) {
             return;
           }
@@ -680,12 +677,11 @@
           ts.millennia++;
           ts.centuries = 0;
           /* falls through */
-        }
+      }
     }
 
     /**
      * Ripple up partial units one place
-     *
      * @private
      * @param ts timespan
      * @param frac accumulated fractional value
@@ -693,7 +689,7 @@
      * @param toUnit target unit name
      * @param conversion multiplier between units
      * @param digits max number of decimal digits to output
-     * @return new fractional value
+     * @returns new fractional value
      */
     function fraction(ts, frac, fromUnit, toUnit, conversion, digits) {
       if (ts[fromUnit] >= 0) {
@@ -719,68 +715,67 @@
 
     /**
      * Ripple up partial units to next existing
-     *
      * @private
      * @param ts
      * @param digits max number of decimal digits to output
      */
     function fractional(ts, digits) {
-      let frac = fraction(ts, 0, 'milliseconds', 'seconds', MILLISECONDS_PER_SECOND, digits);
-      if (!frac) {
- return;
-}
+      let frac = fraction(ts, 0, "milliseconds", "seconds", MILLISECONDS_PER_SECOND, digits);
 
-      frac = fraction(ts, frac, 'seconds', 'minutes', SECONDS_PER_MINUTE, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'minutes', 'hours', MINUTES_PER_HOUR, digits);
+      frac = fraction(ts, frac, "seconds", "minutes", SECONDS_PER_MINUTE, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'hours', 'days', HOURS_PER_DAY, digits);
+      frac = fraction(ts, frac, "minutes", "hours", MINUTES_PER_HOUR, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'days', 'weeks', DAYS_PER_WEEK, digits);
+      frac = fraction(ts, frac, "hours", "days", HOURS_PER_DAY, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'weeks', 'months', daysPerMonth(ts.refMonth)/DAYS_PER_WEEK, digits);
+      frac = fraction(ts, frac, "days", "weeks", DAYS_PER_WEEK, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'months', 'years', daysPerYear(ts.refMonth)/daysPerMonth(ts.refMonth), digits);
+      frac = fraction(ts, frac, "weeks", "months", daysPerMonth(ts.refMonth) / DAYS_PER_WEEK, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'years', 'decades', YEARS_PER_DECADE, digits);
+      frac = fraction(ts, frac, "months", "years", daysPerYear(ts.refMonth) / daysPerMonth(ts.refMonth), digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'decades', 'centuries', DECADES_PER_CENTURY, digits);
+      frac = fraction(ts, frac, "years", "decades", YEARS_PER_DECADE, digits);
       if (!frac) {
- return;
-}
+        return;
+      }
 
-      frac = fraction(ts, frac, 'centuries', 'millennia', CENTURIES_PER_MILLENNIUM, digits);
+      frac = fraction(ts, frac, "decades", "centuries", DECADES_PER_CENTURY, digits);
+      if (!frac) {
+        return;
+      }
+
+      frac = fraction(ts, frac, "centuries", "millennia", CENTURIES_PER_MILLENNIUM, digits);
 
       // should never reach this with remaining fractional value
       if (frac) {
- throw new Error('Fractional unit overflow');
-}
+        throw new Error("Fractional unit overflow");
+      }
     }
 
     /**
      * Borrow any underflow units, carry any overflow units
-     *
      * @private
      * @param ts
      */
@@ -887,7 +882,6 @@
 
     /**
      * Remove any units not requested
-     *
      * @private
      * @param ts
      * @param units the units to populate
@@ -961,7 +955,7 @@
       }
 
       if (!(units & DAYS) || (count >= max)) {
-        //ripple days down to hours
+        // ripple days down to hours
         ts.hours += ts.days * HOURS_PER_DAY;
         delete ts.days;
 
@@ -1005,7 +999,6 @@
 
     /**
      * Populates the Timespan object
-     *
      * @private
      * @param ts
      * @param start the starting date
@@ -1025,6 +1018,7 @@
       if (ts.value < 0) {
         // swap if reversed
         const tmp = end;
+
         end = start;
         start = tmp;
       }
@@ -1057,20 +1051,19 @@
 
     /**
      * Determine an appropriate refresh rate based upon units
-     *
      * @private
      * @param units the units to populate
-     * @return milliseconds to delay
+     * @returns milliseconds to delay
      */
     function getDelay(units) {
       if (units & MILLISECONDS) {
         // refresh very quickly
-        return MILLISECONDS_PER_SECOND / 30; //30Hz
+        return MILLISECONDS_PER_SECOND / 30; // 30Hz
       }
 
       if (units & SECONDS) {
         // refresh every second
-        return MILLISECONDS_PER_SECOND; //1Hz
+        return MILLISECONDS_PER_SECOND; // 1Hz
       }
 
       if (units & MINUTES) {
@@ -1094,14 +1087,13 @@
 
     /**
      * API entry point
-     *
      * @public
      * @param start the starting date
      * @param end the ending date
      * @param units the units to populate
      * @param max number of labels to output
      * @param digits max number of decimal digits to output
-     * @return
+     * @returns
      */
     function countdown(start, end, units, max, digits) {
       let callback;
@@ -1115,7 +1107,8 @@
 
       // ensure start date
       let startTS = null;
-      if ('function' === typeof start) {
+
+      if (typeof start === "function") {
         callback = start;
         start = null;
 
@@ -1123,7 +1116,7 @@
         if ((start !== null) && isFinite(start)) {
           start = new Date(+start);
         } else {
-          if ('object' === typeof startTS) {
+          if (typeof startTS === "object") {
             startTS = /** @type{Timespan} */(start);
           }
           start = null;
@@ -1132,7 +1125,8 @@
 
       // ensure end date
       let endTS = null;
-      if ('function' === typeof end) {
+
+      if (typeof end === "function") {
         callback = end;
         end = null;
 
@@ -1140,7 +1134,7 @@
         if ((end !== null) && isFinite(end)) {
           end = new Date(+end);
         } else {
-          if ('object' === typeof end) {
+          if (typeof end === "object") {
             endTS = /** @type{Timespan} */(end);
           }
           end = null;
@@ -1167,14 +1161,14 @@
 
       // base delay off units
       const delay = getDelay(units);
-        let timerId;
-        const fn = function() {
-          callback(
-            // eslint-disable-next-line max-len
-            populate(new Timespan(), /** @type{Date} */(start), /** @type{Date} */(end), /** @type{number} */(units), /** @type{number} */(max), /** @type{number} */(digits)),
-            timerId
-          );
-        };
+      let timerId;
+      const fn = function() {
+        callback(
+          // eslint-disable-next-line max-len
+          populate(new Timespan(), /** @type{Date} */(start), /** @type{Date} */(end), /** @type{number} */(units), /** @type{number} */(max), /** @type{number} */(digits)),
+          timerId,
+        );
+      };
 
       fn();
       return (timerId = setInterval(fn, delay));
@@ -1182,160 +1176,159 @@
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.MILLISECONDS = MILLISECONDS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.SECONDS = SECONDS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.MINUTES = MINUTES;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.HOURS = HOURS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.DAYS = DAYS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.WEEKS = WEEKS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.MONTHS = MONTHS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.YEARS = YEARS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.DECADES = DECADES;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.CENTURIES = CENTURIES;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.MILLENNIA = MILLENNIA;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
     countdown.DEFAULTS = DEFAULTS;
 
     /**
      * @public
-     * @const
+     * @constant
      * @type {number}
      */
-    countdown.ALL = MILLENNIA|CENTURIES|DECADES|YEARS|MONTHS|WEEKS|DAYS|HOURS|MINUTES|SECONDS|MILLISECONDS;
+    countdown.ALL = MILLENNIA | CENTURIES | DECADES | YEARS | MONTHS | WEEKS | DAYS | HOURS | MINUTES | SECONDS | MILLISECONDS;
 
     /**
      * Customize the format settings.
-     *
      * @public
      * @param format settings object
      */
     const setFormat = countdown.setFormat = function(format) {
       if (!format) {
- return;
-}
+        return;
+      }
 
-      if ('singular' in format || 'plural' in format) {
+      if ("singular" in format || "plural" in format) {
         let singular = format.singular || [];
+
         if (singular.split) {
-          singular = singular.split('|');
+          singular = singular.split("|");
         }
         let plural = format.plural || [];
+
         if (plural.split) {
-          plural = plural.split('|');
+          plural = plural.split("|");
         }
 
-        for (let i=LABEL_MILLISECONDS; i<=LABEL_MILLENNIA; i++) {
+        for (let i = LABEL_MILLISECONDS; i <= LABEL_MILLENNIA; i++) {
           // override any specified units
           LABELS_SINGLUAR[i] = singular[i] || LABELS_SINGLUAR[i];
           LABELS_PLURAL[i] = plural[i] || LABELS_PLURAL[i];
         }
       }
 
-      if ('string' === typeof format.last) {
+      if (typeof format.last === "string") {
         LABEL_LAST = format.last;
       }
-      if ('string' === typeof format.delim) {
+      if (typeof format.delim === "string") {
         LABEL_DELIM = format.delim;
       }
-      if ('string' === typeof format.empty) {
+      if (typeof format.empty === "string") {
         LABEL_NOW = format.empty;
       }
-      if ('function' === typeof format.formatNumber) {
+      if (typeof format.formatNumber === "function") {
         formatNumber = format.formatNumber;
       }
-      if ('function' === typeof format.formatter) {
+      if (typeof format.formatter === "function") {
         formatter = format.formatter;
       }
     };
 
     /**
      * Revert to the default formatting.
-     *
      * @public
      */
     const resetFormat = countdown.resetFormat = function() {
-      LABELS_SINGLUAR = ' millisecond| second| minute| hour| day| week| month| year| decade| century| millennium'.split('|');
-      LABELS_PLURAL = ' milliseconds| seconds| minutes| hours| days| weeks| months| years| decades| centuries| millennia'.split('|');
-      LABEL_LAST = ' and ';
-      LABEL_DELIM = ', ';
-      LABEL_NOW = '';
+      LABELS_SINGLUAR = " millisecond| second| minute| hour| day| week| month| year| decade| century| millennium".split("|");
+      LABELS_PLURAL = " milliseconds| seconds| minutes| hours| days| weeks| months| years| decades| centuries| millennia".split("|");
+      LABEL_LAST = " and ";
+      LABEL_DELIM = ", ";
+      LABEL_NOW = "";
       formatNumber = function(value) {
- return value;
-};
+        return value;
+      };
       formatter = plurality;
     };
 
     /**
      * Override the unit labels.
-     *
      * @public
      * @param singular a pipe ('|') delimited list of singular unit name overrides
      * @param plural a pipe ('|') delimited list of plural unit name overrides
@@ -1343,6 +1336,8 @@
      * @param delim a delimiter to use between all other units (default: ', ')
      * @param empty a label to use when all units are zero (default: '')
      * @param formatNumber a function which formats numbers as a string
+     * @param formatNumber2
+     * @param formatter2
      * @param formatter a function which formats a number/unit pair as a string
      * @deprecated since version 2.6.0
      */
@@ -1354,13 +1349,12 @@
         delim,
         empty,
         formatNumber2,
-        formatter2
+        formatter2,
       });
     };
 
     /**
      * Revert to the default unit labels.
-     *
      * @public
      * @deprecated since version 2.6.0
      */
@@ -1370,4 +1364,4 @@
 
     return countdown;
 
-  })();
+  }());

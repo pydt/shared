@@ -1,7 +1,15 @@
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { Game, SteamProfile, UserService } from './_gen/swagger/api';
+import { Inject, Injectable, InjectionToken, Optional } from "@angular/core";
+import { Game, SteamProfile, UserService } from "./_gen/swagger/api";
 
-export const CACHE_INVALIDATION_MINUTES_TOKEN = new InjectionToken('CACHE_INVALIDATION_MINUTES_TOKEN');
+export const CACHE_INVALIDATION_MINUTES_TOKEN = new InjectionToken("CACHE_INVALIDATION_MINUTES_TOKEN");
+
+interface SteamProfileWithInvalidDate extends SteamProfile {
+  invalidDate?: Date;
+}
+
+export interface SteamProfileMap {
+  [index: string]: SteamProfile;
+}
 
 @Injectable()
 export class ProfileCacheService {
@@ -18,7 +26,7 @@ export class ProfileCacheService {
       .reduce((a, b) => a.concat(b), [])
       .map(x => x.steamId);
 
-    return this.getProfiles([...new Set(steamIds)]);
+    return this.getProfiles([...new Set(steamIds)] as string[]);
   }
 
   clearProfile(steamId: string) {
@@ -32,7 +40,7 @@ export class ProfileCacheService {
   }
 
   getProfiles(steamIds: string[]): Promise<SteamProfileMap> {
-    return this.lastRequest = this.lastRequest.then(async () => {
+    this.lastRequest = this.lastRequest.then(async () => {
       const result: SteamProfileMap = {};
 
       try {
@@ -53,30 +61,25 @@ export class ProfileCacheService {
         }
 
         if (toDownload.length) {
-          const profiles = await this.api.steamProfiles(toDownload.join(',')).toPromise();
+          const profiles = await this.api.steamProfiles(toDownload.join(",")).toPromise();
 
           for (const profile of profiles) {
             (profile as SteamProfileWithInvalidDate).invalidDate = new Date(
               new Date().getTime() +
-              this.cacheInvalidationMinutes * 60 * 1000
+              this.cacheInvalidationMinutes * 60 * 1000,
             );
             result[profile.steamid] = this.cache[profile.steamid] = profile;
           }
         }
       } catch (e) {
         // This promise should NEVER throw, otherwise the lastRequest chain aborts and can never recover!
+        // eslint-disable-next-line no-console
         console.error(e);
       }
 
       return result;
     });
+
+    return this.lastRequest;
   }
-}
-
-interface SteamProfileWithInvalidDate extends SteamProfile {
-  invalidDate?: Date;
-}
-
-export interface SteamProfileMap {
-  [index: string]: SteamProfile;
 }

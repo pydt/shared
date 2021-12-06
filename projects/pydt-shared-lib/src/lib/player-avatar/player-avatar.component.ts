@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { SteamProfileMap } from '../profile-cache.service';
-import { CivDef, Game, GamePlayer, SteamProfile } from '../_gen/swagger/api';
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from "@angular/core";
+import { TooltipDirective } from "ngx-bootstrap/tooltip";
+import { SteamProfileMap } from "../profile-cache.service";
+import { CivDef, Game, GamePlayer, SteamProfile } from "../_gen/swagger/api";
 
 @Component({
-  selector: 'pydt-player-avatar',
-  templateUrl: './player-avatar.component.html',
-  styleUrls: ['./player-avatar.component.css']
+  selector: "pydt-player-avatar",
+  templateUrl: "./player-avatar.component.html",
+  styleUrls: ["./player-avatar.component.css"],
 })
 export class PlayerAvatarComponent implements OnDestroy {
   @Input() game: Game;
@@ -13,12 +14,12 @@ export class PlayerAvatarComponent implements OnDestroy {
   @Input() players: GamePlayer[] = [];
   @Input() gamePlayerProfiles: SteamProfileMap;
   @Input() civDefs: CivDef[] = [];
-  @Input() size: 'BIG' | 'SMALL' = 'SMALL';
+  @Input() size: "BIG" | "SMALL" = "SMALL";
   @Input() thumbnailOnly = false;
   @Input() thumbnailOnlyDragMode = false;
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() click = new EventEmitter<GamePlayer>();
-  @ViewChild('tooltip') tooltip: any;
+  @ViewChild("tooltip") tooltip: TooltipDirective;
   isMouseOver = false;
 
   get hasClickListener() {
@@ -36,13 +37,13 @@ export class PlayerAvatarComponent implements OnDestroy {
   get tooltipHtml() {
     if (this.player) {
       const profile = this.gamePlayerProfiles[this.player.steamId];
-      let playerName = 'AI';
+      let playerName = "AI";
 
       if (profile && !this.player.hasSurrendered) {
         playerName = profile.personaname;
       }
 
-      let civDesc = 'Unknown Civ';
+      let civDesc = "Unknown Civ";
 
       if (this.civDef) {
         civDesc = this.civDef.fullDisplayName;
@@ -63,25 +64,25 @@ export class PlayerAvatarComponent implements OnDestroy {
       }
 
       return result;
-    } else {
-      if (this.isEmptyHumanSlot) {
-        return 'Empty Human Slot';
-      }
-
-      return 'AI';
     }
+    if (this.isEmptyHumanSlot) {
+      return "Empty Human Slot";
+    }
+
+    return "AI";
+
   }
 
   get avatarSize() {
-    return this.size === 'BIG' ? '64px' : '32px';
+    return this.size === "BIG" ? "64px" : "32px";
   }
 
   get vacationTop() {
-    return this.size === 'BIG' ? '22px' : '5px';
+    return this.size === "BIG" ? "22px" : "5px";
   }
 
   get thumbnailMarginBottom() {
-    return this.size === 'BIG' ? null : '0px';
+    return this.size === "BIG" ? null : "0px";
   }
 
   get isHuman() {
@@ -94,7 +95,8 @@ export class PlayerAvatarComponent implements OnDestroy {
 
   get imgSrc() {
     if (this.isMouseOver) {
-      const image = this.civDef ? this.civDef.imageFileName : 'RANDOM_RANDOM.png';
+      const image = this.civDef ? this.civDef.imageFileName : "RANDOM_RANDOM.png";
+
       return `https://playyourdamnturn.com/img/civs/${image}`;
     }
 
@@ -103,14 +105,15 @@ export class PlayerAvatarComponent implements OnDestroy {
     }
 
     if (this.isEmptyHumanSlot) {
-      return 'https://playyourdamnturn.com/img/emptyslot.svg';
+      return "https://playyourdamnturn.com/img/emptyslot.svg";
     }
 
-    return 'https://playyourdamnturn.com/img/android.png';
+    return "https://playyourdamnturn.com/img/android.png";
   }
 
   playerIsOnVacation(player: GamePlayer) {
     const profile = this.gamePlayerProfiles[player.steamId];
+
     return (this.isHuman && profile) ? !!profile.vacationMode : false;
   }
 

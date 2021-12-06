@@ -1,30 +1,30 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { BusyService } from './busy.service';
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { Component, OnInit } from "@angular/core";
+import { BusyService } from "./busy.service";
 
 @Component({
-  selector: 'pydt-busy',
+  selector: "pydt-busy",
   animations: [
-    trigger('visibilityChanged', [
-      state('shown', style({ opacity: 1, display: 'block' })),
-      state('hidden', style({ opacity: 0, display: 'none' })),
-      transition('* => *', animate('.2s'))
-    ])
+    trigger("visibilityChanged", [
+      state("shown", style({ opacity: 1, display: "block" })),
+      state("hidden", style({ opacity: 0, display: "none" })),
+      transition("* => *", animate(".2s")),
+    ]),
   ],
   template: `
   <div [@visibilityChanged]="busyValue ? 'shown' : 'hidden'" class="pydt-busy backdrop">
     <div class="pydt-busy spinner"></div>
-  </div>`
+  </div>`,
 })
 export class BusyComponent implements OnInit {
-    public busyValue = false;
+  public busyValue = false;
 
-    constructor(private busyService: BusyService) {
-    }
+  constructor(private busyService: BusyService) {
+  }
 
-    public ngOnInit() {
-        this.busyService.subscribeBusy(isBusy => {
-            this.busyValue = isBusy;
-        });
-    }
+  public ngOnInit() {
+    this.busyService.subscribeBusy(isBusy => {
+      this.busyValue = isBusy;
+    });
+  }
 }
