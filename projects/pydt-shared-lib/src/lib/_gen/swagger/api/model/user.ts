@@ -34,5 +34,6 @@ export interface User {
     forumUsername?: string;
     willSubstituteForGameTypes: Array<string>;
     banned?: boolean;
+    canCreateMultipleGames?: boolean;
     dataVersion?: number;
 }
