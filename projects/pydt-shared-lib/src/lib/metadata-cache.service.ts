@@ -25,8 +25,11 @@ export class MetadataCacheService implements HttpInterceptor {
         this.dataPromise = this.api.metadata().toPromise();
       }
 
-      this.cachedData = await this.dataPromise;
-      this.dataPromise = null;
+      try {
+        this.cachedData = await this.dataPromise;
+      } finally {
+        this.dataPromise = null;
+      }
     }
 
     return this.cachedData.metadata;
