@@ -2,7 +2,8 @@
 export enum Platform {
   Windows = "win32",
   OSX = "darwin",
-  Linux = "linux"
+  Linux = "linux",
+  LinuxProton = "linux-proton"
 }
 
 export enum GameStore {
