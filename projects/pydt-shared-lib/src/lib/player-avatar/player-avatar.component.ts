@@ -108,7 +108,7 @@ export class PlayerAvatarComponent implements OnDestroy {
       return "https://playyourdamnturn.com/img/emptyslot.svg";
     }
 
-    return "https://playyourdamnturn.com/img/android.png";
+    return "https://playyourdamnturn.com/img/robot.png";
   }
 
   playerIsOnVacation(player: GamePlayer) {
