@@ -15,4 +15,5 @@ export interface DLC {
     id: string;
     displayName: string;
     major: boolean;
+    extraInfo?: string;
 }
