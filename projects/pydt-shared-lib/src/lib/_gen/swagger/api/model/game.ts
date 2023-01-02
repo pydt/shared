@@ -35,6 +35,7 @@ export interface Game {
     hashedPassword?: string;
     players: Array<GamePlayer>;
     discourseTopicId?: number;
+    clonedFromGameId?: string;
     currentPlayerSteamId: string;
     round?: number;
     gameTurnRangeKey?: number;

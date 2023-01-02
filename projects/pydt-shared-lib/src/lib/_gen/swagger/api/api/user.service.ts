@@ -40,7 +40,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class UserService {
 
-    protected basePath = 'https://localhost:3000';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

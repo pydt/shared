@@ -39,7 +39,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class GameService {
 
-    protected basePath = 'https://localhost:3000';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -164,6 +164,54 @@ export class GameService {
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/changeCiv`,
             body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public clone(gameId: string, observe?: 'body', reportProgress?: boolean): Observable<Game>;
+    public clone(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
+    public clone(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
+    public clone(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling clone.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/clone`,
+            null,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -625,6 +673,54 @@ export class GameService {
      * 
      * 
      * @param gameId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public refreshSave(gameId: string, observe?: 'body', reportProgress?: boolean): Observable<Game>;
+    public refreshSave(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
+    public refreshSave(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
+    public refreshSave(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling refreshSave.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/turn/refreshState`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -716,6 +812,54 @@ export class GameService {
         ];
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/resetGameStateOnNextUpload`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public restart(gameId: string, observe?: 'body', reportProgress?: boolean): Observable<Game>;
+    public restart(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
+    public restart(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
+    public restart(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling restart.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/restart`,
             null,
             {
                 withCredentials: this.configuration.withCredentials,
