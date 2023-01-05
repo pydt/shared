@@ -70,7 +70,6 @@ export class PlayerAvatarComponent implements OnDestroy {
     }
 
     return "AI";
-
   }
 
   get avatarSize() {
@@ -101,7 +100,7 @@ export class PlayerAvatarComponent implements OnDestroy {
     }
 
     if (this.isHuman) {
-      return (this.gamePlayerProfiles[this.player.steamId] || {} as SteamProfile).avatarmedium;
+      return (this.gamePlayerProfiles[this.player.steamId] || ({} as SteamProfile)).avatarmedium;
     }
 
     if (this.isEmptyHumanSlot) {
@@ -114,7 +113,7 @@ export class PlayerAvatarComponent implements OnDestroy {
   playerIsOnVacation(player: GamePlayer) {
     const profile = this.gamePlayerProfiles[player.steamId];
 
-    return (this.isHuman && profile) ? !!profile.vacationMode : false;
+    return this.isHuman && profile ? !!profile.vacationMode : false;
   }
 
   iconMouseOver() {

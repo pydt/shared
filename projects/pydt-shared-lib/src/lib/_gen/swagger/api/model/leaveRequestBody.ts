@@ -11,7 +11,6 @@
  */
 
 
-export interface ChangeCivRequestBody { 
+export interface LeaveRequestBody { 
     steamId?: string;
-    playerCiv: string;
 }

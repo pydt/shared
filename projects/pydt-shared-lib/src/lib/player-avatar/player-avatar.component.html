@@ -1,13 +1,28 @@
 <ng-template #tooltipTemplate><span [innerHtml]="tooltipHtml"></span></ng-template>
 <div *ngIf="!thumbnailOnly" container="body" [tooltip]="tooltipTemplate" #tooltip="bs-tooltip">
-  <a href="javascript:void(0)" [style.cursor]="hasClickListener ? 'pointer': 'default'" [style.margin-bottom]="thumbnailMarginBottom" (click)="click.emit(player)" *ngIf="player" class="thumbnail" [class.currentTurn]="game.currentPlayerSteamId === player.steamId">
-    <img [src]="imgSrc" [style.height]="avatarSize" (mouseover)="iconMouseOver()" (mouseout)="iconMouseOut()">
+  <a
+    href="javascript:void(0)"
+    [style.cursor]="hasClickListener ? 'pointer' : 'default'"
+    [style.margin-bottom]="thumbnailMarginBottom"
+    (click)="click.emit(player)"
+    *ngIf="player"
+    class="thumbnail"
+    [class.currentTurn]="game.currentPlayerSteamId === player.steamId"
+  >
+    <img [src]="imgSrc" [style.height]="avatarSize" (mouseover)="iconMouseOver()" (mouseout)="iconMouseOut()" />
     <div *ngIf="playerIsOnVacation(player)" class="vacation" [style.top]="vacationTop">ON<br />VACATION</div>
   </a>
   <a href="javascript:void(0)" [style.margin-bottom]="thumbnailMarginBottom" *ngIf="!player" class="thumbnail">
-    <img [src]="imgSrc" [style.height]="avatarSize">
+    <img [src]="imgSrc" [style.height]="avatarSize" />
   </a>
 </div>
-<div *ngIf="thumbnailOnly" class="thumbnail" [style.margin-bottom]="thumbnailMarginBottom" [tooltip]="tooltipTemplate" #tooltip="bs-tooltip" [class.dragMode]="thumbnailOnlyDragMode">
-  <img #profileImg [src]="imgSrc" [style.height]="avatarSize">
+<div
+  *ngIf="thumbnailOnly"
+  class="thumbnail"
+  [style.margin-bottom]="thumbnailMarginBottom"
+  [tooltip]="tooltipTemplate"
+  #tooltip="bs-tooltip"
+  [class.dragMode]="thumbnailOnlyDragMode"
+>
+  <img #profileImg [src]="imgSrc" [style.height]="avatarSize" />
 </div>

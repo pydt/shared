@@ -36,13 +36,19 @@ export class MetadataCacheService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(req).pipe(tap(event => {
-      if (event instanceof HttpResponse) {
-        // Invalidate cached data if header changes
-        if (this.cachedData && event.headers.has("Metadata-Hash") && event.headers.get("Metadata-Hash") !== this.cachedData.hash) {
-          this.cachedData = null;
+    return next.handle(req).pipe(
+      tap(event => {
+        if (event instanceof HttpResponse) {
+          // Invalidate cached data if header changes
+          if (
+            this.cachedData &&
+            event.headers.has("Metadata-Hash") &&
+            event.headers.get("Metadata-Hash") !== this.cachedData.hash
+          ) {
+            this.cachedData = null;
+          }
         }
-      }
-    }));
+      }),
+    );
   }
 }

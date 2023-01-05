@@ -5,32 +5,13 @@ import { BusyComponent } from "./busy/busy.component";
 import { DateInterceptor } from "./date-interceptor.service";
 import { BusyService } from "./busy/busy.service";
 import { MetadataCacheService } from "./metadata-cache.service";
-import { GameSpeedPipe, MapPipe, MapSizePipe } from "./pipes";
+import { GameSpeedPipe, MapPipe, MapSizePipe, RandomOnlyPipe } from "./pipes";
 import { PlayerAvatarComponent } from "./player-avatar/player-avatar.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TooltipModule,
-  ],
-  declarations: [
-    BusyComponent,
-    PlayerAvatarComponent,
-    GameSpeedPipe,
-    MapPipe,
-    MapSizePipe,
-  ],
-  providers: [
-    BusyService,
-    DateInterceptor,
-    MetadataCacheService,
-  ],
-  exports: [
-    BusyComponent,
-    PlayerAvatarComponent,
-    GameSpeedPipe,
-    MapPipe,
-    MapSizePipe,
-  ],
+  imports: [CommonModule, TooltipModule],
+  declarations: [BusyComponent, PlayerAvatarComponent, GameSpeedPipe, MapPipe, MapSizePipe, RandomOnlyPipe],
+  providers: [BusyService, DateInterceptor, MetadataCacheService],
+  exports: [BusyComponent, PlayerAvatarComponent, GameSpeedPipe, MapPipe, MapSizePipe, RandomOnlyPipe],
 })
-export class PydtSharedModule { }
+export class PydtSharedModule {}

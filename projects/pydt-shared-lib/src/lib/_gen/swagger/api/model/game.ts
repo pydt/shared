@@ -26,7 +26,8 @@ export interface Game {
     dlc: Array<string>;
     slots: number;
     humans: number;
-    randomOnly?: boolean;
+    allowDuplicateLeaders?: boolean;
+    randomOnly?: Game.RandomOnlyEnum;
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     gameId: string;
@@ -44,4 +45,12 @@ export interface Game {
     latestDiscoursePostUser?: string;
     lastTurnEndDate?: Date;
     resetGameStateOnNextUpload?: boolean;
+}
+export namespace Game {
+    export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';
+    export const RandomOnlyEnum = {
+        EITHER: 'EITHER' as RandomOnlyEnum,
+        FORCERANDOM: 'FORCE_RANDOM' as RandomOnlyEnum,
+        FORCELEADER: 'FORCE_LEADER' as RandomOnlyEnum
+    };
 }

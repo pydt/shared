@@ -3,10 +3,10 @@ export enum Platform {
   Windows = "win32",
   OSX = "darwin",
   Linux = "linux",
-  LinuxProton = "linux-proton"
+  LinuxProton = "linux-proton",
 }
 
 export enum GameStore {
   Steam = "steam",
-  Epic = "epic"
+  Epic = "epic",
 }

@@ -12,6 +12,7 @@
 
 
 export interface JoinGameRequestBody { 
+    steamId?: string;
     playerCiv: string;
     password?: string;
 }

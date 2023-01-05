@@ -26,6 +26,7 @@ import { GameRequestBody } from '../model/gameRequestBody';
 import { GameTurn } from '../model/gameTurn';
 import { GameTurnResponse } from '../model/gameTurnResponse';
 import { JoinGameRequestBody } from '../model/joinGameRequestBody';
+import { LeaveRequestBody } from '../model/leaveRequestBody';
 import { OpenGamesResponse } from '../model/openGamesResponse';
 import { ReplacePlayerRequestBody } from '../model/replacePlayerRequestBody';
 import { StartTurnSubmitResponse } from '../model/startTurnSubmitResponse';
@@ -588,16 +589,21 @@ export class GameService {
      * 
      * 
      * @param gameId 
+     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public leave(gameId: string, observe?: 'body', reportProgress?: boolean): Observable<Game>;
-    public leave(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
-    public leave(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
-    public leave(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public leave(gameId: string, body: LeaveRequestBody, observe?: 'body', reportProgress?: boolean): Observable<Game>;
+    public leave(gameId: string, body: LeaveRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Game>>;
+    public leave(gameId: string, body: LeaveRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Game>>;
+    public leave(gameId: string, body: LeaveRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (gameId === null || gameId === undefined) {
             throw new Error('Required parameter gameId was null or undefined when calling leave.');
+        }
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling leave.');
         }
 
         let headers = this.defaultHeaders;
@@ -620,9 +626,13 @@ export class GameService {
         const consumes: string[] = [
             'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
         return this.httpClient.post<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/leave`,
-            null,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

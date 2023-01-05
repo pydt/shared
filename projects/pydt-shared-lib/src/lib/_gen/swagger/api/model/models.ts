@@ -19,6 +19,7 @@ export * from './gameTypeTurnData';
 export * from './gamesByUserResponse';
 export * from './hashedPydtMetadata';
 export * from './joinGameRequestBody';
+export * from './leaveRequestBody';
 export * from './mapSize';
 export * from './modelMap';
 export * from './newDiscordPostBody';

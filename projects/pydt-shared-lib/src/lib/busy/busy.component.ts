@@ -11,16 +11,14 @@ import { BusyService } from "./busy.service";
       transition("* => *", animate(".2s")),
     ]),
   ],
-  template: `
-  <div [@visibilityChanged]="busyValue ? 'shown' : 'hidden'" class="pydt-busy backdrop">
+  template: ` <div [@visibilityChanged]="busyValue ? 'shown' : 'hidden'" class="pydt-busy backdrop">
     <div class="pydt-busy spinner"></div>
   </div>`,
 })
 export class BusyComponent implements OnInit {
   public busyValue = false;
 
-  constructor(private busyService: BusyService) {
-  }
+  constructor(private busyService: BusyService) {}
 
   public ngOnInit() {
     this.busyService.subscribeBusy(isBusy => {

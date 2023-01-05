@@ -20,8 +20,10 @@ export class BusyService implements HttpInterceptor {
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.incrementBusy(true);
 
-    return next.handle(req).pipe(finalize(() => {
-      this.incrementBusy(false);
-    }));
+    return next.handle(req).pipe(
+      finalize(() => {
+        this.incrementBusy(false);
+      }),
+    );
   }
 }

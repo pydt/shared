@@ -22,9 +22,18 @@ export interface CreateGameRequestBody {
     dlc: Array<string>;
     slots: number;
     humans: number;
-    randomOnly?: boolean;
+    allowDuplicateLeaders?: boolean;
+    randomOnly?: CreateGameRequestBody.RandomOnlyEnum;
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     password?: string;
     player1Civ: string;
+}
+export namespace CreateGameRequestBody {
+    export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';
+    export const RandomOnlyEnum = {
+        EITHER: 'EITHER' as RandomOnlyEnum,
+        FORCERANDOM: 'FORCE_RANDOM' as RandomOnlyEnum,
+        FORCELEADER: 'FORCE_LEADER' as RandomOnlyEnum
+    };
 }

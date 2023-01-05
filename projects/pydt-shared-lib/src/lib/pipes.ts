@@ -1,12 +1,26 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { SharedGame } from "../model/shared-game";
-import { CivGame, ModelMap } from "./_gen/swagger/api";
+import { CivGame, Game, ModelMap } from "./_gen/swagger/api";
 
-const getGameDef = (game: SharedGame, games: CivGame[]) => games.find(g => g.id === game.gameType);
+const getGameDef = (game: Game, games: CivGame[]) => games.find(g => g.id === game.gameType);
+
+export const RANDOM_ONLY_OPTIONS = [
+  {
+    key: "EITHER",
+    label: "Any Leader or Random",
+  },
+  {
+    key: "FORCE_LEADER",
+    label: "A Leader must be selected",
+  },
+  {
+    key: "FORCE_RANDOM",
+    label: "Random Only",
+  },
+];
 
 @Pipe({ name: "gamespeed" })
 export class GameSpeedPipe implements PipeTransform {
-  transform(game: SharedGame, games: CivGame[]): string {
+  transform(game: Game, games: CivGame[]): string {
     if (!games) {
       return "";
     }
@@ -19,7 +33,7 @@ export class GameSpeedPipe implements PipeTransform {
 
 @Pipe({ name: "map" })
 export class MapPipe implements PipeTransform {
-  transform(game: SharedGame, games: CivGame[]): string {
+  transform(game: Game, games: CivGame[]): string {
     if (!games) {
       return "";
     }
@@ -32,7 +46,7 @@ export class MapPipe implements PipeTransform {
 
 @Pipe({ name: "mapsize" })
 export class MapSizePipe implements PipeTransform {
-  transform(game: SharedGame, games: CivGame[]): string {
+  transform(game: Game, games: CivGame[]): string {
     if (!games) {
       return "";
     }
@@ -40,5 +54,12 @@ export class MapSizePipe implements PipeTransform {
     const size = getGameDef(game, games).mapSizes.find(s => s.key === game.mapSize);
 
     return size ? size.displayName : "Other / Custom Size";
+  }
+}
+
+@Pipe({ name: "randomOnly" })
+export class RandomOnlyPipe implements PipeTransform {
+  transform(game: Game): string {
+    return RANDOM_ONLY_OPTIONS.find(x => x.key === game.randomOnly)?.label || RANDOM_ONLY_OPTIONS[0].label;
   }
 }
