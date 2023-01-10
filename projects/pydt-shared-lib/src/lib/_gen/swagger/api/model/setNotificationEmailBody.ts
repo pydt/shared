@@ -14,4 +14,8 @@
 export interface SetNotificationEmailBody { 
     emailAddress: string;
     newTurnEmails: boolean;
+    newGameEmails: boolean;
+    newGameEmailsWithPasswords: boolean;
+    newGameEmailTypes: Array<string>;
+    newGameEmailFilter: string;
 }

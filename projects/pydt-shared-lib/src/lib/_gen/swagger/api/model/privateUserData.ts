@@ -19,4 +19,8 @@ export interface PrivateUserData {
     newTurnEmails?: boolean;
     webhookUrl?: string;
     webPushSubscriptions?: Array<WebPushSubscription>;
+    newGameEmails?: boolean;
+    newGameEmailsWithPasswords?: boolean;
+    newGameEmailTypes?: Array<string>;
+    newGameEmailFilter?: string;
 }
