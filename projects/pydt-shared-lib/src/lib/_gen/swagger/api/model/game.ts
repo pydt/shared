@@ -45,6 +45,8 @@ export interface Game {
     latestDiscoursePostUser?: string;
     lastTurnEndDate?: Date;
     resetGameStateOnNextUpload?: boolean;
+    finalized?: boolean;
+    gameVideoUrl?: string;
 }
 export namespace Game {
     export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';

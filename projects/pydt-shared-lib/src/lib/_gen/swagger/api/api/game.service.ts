@@ -480,6 +480,58 @@ export class GameService {
      * 
      * 
      * @param gameId 
+     * @param turn 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getTurnById(gameId: string, turn: number, observe?: 'body', reportProgress?: boolean): Observable<GameTurnResponse>;
+    public getTurnById(gameId: string, turn: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GameTurnResponse>>;
+    public getTurnById(gameId: string, turn: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GameTurnResponse>>;
+    public getTurnById(gameId: string, turn: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling getTurnById.');
+        }
+
+        if (turn === null || turn === undefined) {
+            throw new Error('Required parameter turn was null or undefined when calling getTurnById.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<GameTurnResponse>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/turn/${encodeURIComponent(String(turn))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
      * @param startTurn 
      * @param endTurn 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

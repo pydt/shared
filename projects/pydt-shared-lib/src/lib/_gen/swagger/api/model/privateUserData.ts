@@ -23,4 +23,5 @@ export interface PrivateUserData {
     newGameEmailsWithPasswords?: boolean;
     newGameEmailTypes?: Array<string>;
     newGameEmailFilter?: string;
+    lastTurnIpAddress?: string;
 }
