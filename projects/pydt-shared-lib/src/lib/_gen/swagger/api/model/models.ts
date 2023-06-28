@@ -13,7 +13,7 @@ export * from './game';
 export * from './gamePlayer';
 export * from './gameRequestBody';
 export * from './gameSpeed';
-export * from './gameTurn';
+export * from './gameTurnListItem';
 export * from './gameTurnResponse';
 export * from './gameTypeTurnData';
 export * from './gamesByUserResponse';
