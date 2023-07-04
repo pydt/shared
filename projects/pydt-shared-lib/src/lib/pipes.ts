@@ -18,6 +18,21 @@ export const RANDOM_ONLY_OPTIONS = [
   },
 ];
 
+export const TURN_TIMER_VACATION_OPTIONS = [
+  {
+    key: "SKIP_AFTER_TIMER",
+    label: "Turn is skipped at end of timer",
+  },
+  {
+    key: "SKIP_IMMEDIATELY",
+    label: "Turn is skipped immediately",
+  },
+  {
+    key: "PAUSE",
+    label: "Game is paused while users are on vacation",
+  },
+];
+
 @Pipe({ name: "gamespeed" })
 export class GameSpeedPipe implements PipeTransform {
   transform(game: Game, games: CivGame[]): string {
@@ -61,5 +76,15 @@ export class MapSizePipe implements PipeTransform {
 export class RandomOnlyPipe implements PipeTransform {
   transform(game: Game): string {
     return RANDOM_ONLY_OPTIONS.find(x => x.key === game.randomOnly)?.label || RANDOM_ONLY_OPTIONS[0].label;
+  }
+}
+
+@Pipe({ name: "turnTimerVacation" })
+export class TurnTimerVacationPipe implements PipeTransform {
+  transform(game: Game): string {
+    return (
+      TURN_TIMER_VACATION_OPTIONS.find(x => x.key === game.turnTimerVacationHandling)?.label ||
+      TURN_TIMER_VACATION_OPTIONS[0].label
+    );
   }
 }

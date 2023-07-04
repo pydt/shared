@@ -26,6 +26,7 @@ export interface CreateGameRequestBody {
     randomOnly?: CreateGameRequestBody.RandomOnlyEnum;
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
+    turnTimerVacationHandling?: CreateGameRequestBody.TurnTimerVacationHandlingEnum;
     password?: string;
     player1Civ: string;
 }
@@ -35,5 +36,11 @@ export namespace CreateGameRequestBody {
         EITHER: 'EITHER' as RandomOnlyEnum,
         FORCERANDOM: 'FORCE_RANDOM' as RandomOnlyEnum,
         FORCELEADER: 'FORCE_LEADER' as RandomOnlyEnum
+    };
+    export type TurnTimerVacationHandlingEnum = 'PAUSE' | 'SKIP_AFTER_TIMER' | 'SKIP_IMMEDIATELY';
+    export const TurnTimerVacationHandlingEnum = {
+        PAUSE: 'PAUSE' as TurnTimerVacationHandlingEnum,
+        SKIPAFTERTIMER: 'SKIP_AFTER_TIMER' as TurnTimerVacationHandlingEnum,
+        SKIPIMMEDIATELY: 'SKIP_IMMEDIATELY' as TurnTimerVacationHandlingEnum
     };
 }
