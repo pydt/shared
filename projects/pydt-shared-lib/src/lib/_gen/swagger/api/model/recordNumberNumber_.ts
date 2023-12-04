@@ -11,12 +11,8 @@
  */
 
 
-export interface GameTurn { 
-    gameId: string;
-    turn: number;
-    round: number;
-    playerSteamId: string;
-    startDate?: Date;
-    endDate?: Date;
-    skipped?: boolean;
+/**
+ * Construct a type with a set of properties K of type T
+ */
+export interface RecordNumberNumber_ { 
 }

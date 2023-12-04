@@ -10,16 +10,22 @@
  * Do not edit the class manually.
  */
 import { GameTypeTurnData } from './gameTypeTurnData';
+import { RecordNumberNumber_ } from './recordNumberNumber_';
 
 
 export interface User { 
     steamId: string;
+    firstTurnEndDate?: Date;
     lastTurnEndDate?: Date;
     turnsPlayed: number;
     turnsSkipped: number;
     timeTaken: number;
     fastTurns: number;
     slowTurns: number;
+    hourOfDayQueue: string;
+    dayOfWeekQueue: string;
+    turnLengthBuckets: RecordNumberNumber_;
+    yearBuckets: RecordNumberNumber_;
     displayName: string;
     avatarSmall: string;
     avatarMedium: string;

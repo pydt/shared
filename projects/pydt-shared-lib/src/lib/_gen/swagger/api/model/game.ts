@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { GamePlayer } from './gamePlayer';
+import { RecordNumberNumber_ } from './recordNumberNumber_';
 
 
 export interface Game { 
@@ -31,6 +32,17 @@ export interface Game {
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     turnTimerVacationHandling?: Game.TurnTimerVacationHandlingEnum;
+    firstTurnEndDate?: Date;
+    lastTurnEndDate?: Date;
+    turnsPlayed?: number;
+    turnsSkipped?: number;
+    timeTaken?: number;
+    fastTurns?: number;
+    slowTurns?: number;
+    hourOfDayQueue?: string;
+    dayOfWeekQueue?: string;
+    turnLengthBuckets?: RecordNumberNumber_;
+    yearBuckets?: RecordNumberNumber_;
     gameId: string;
     createdBySteamId: string;
     inProgress?: boolean;
@@ -44,10 +56,10 @@ export interface Game {
     completed?: boolean;
     latestDiscoursePostNumber?: number;
     latestDiscoursePostUser?: string;
-    lastTurnEndDate?: Date;
     resetGameStateOnNextUpload?: boolean;
     finalized?: boolean;
     gameVideoUrl?: string;
+    dataVersion?: number;
 }
 export namespace Game {
     export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';

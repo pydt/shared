@@ -12,20 +12,21 @@
 import { RecordNumberNumber_ } from './recordNumberNumber_';
 
 
-export interface GamePlayer { 
+export interface UserTurnData { 
     firstTurnEndDate?: Date;
     lastTurnEndDate?: Date;
-    turnsPlayed?: number;
-    turnsSkipped?: number;
-    timeTaken?: number;
-    fastTurns?: number;
-    slowTurns?: number;
-    hourOfDayQueue?: string;
-    dayOfWeekQueue?: string;
-    turnLengthBuckets?: RecordNumberNumber_;
-    yearBuckets?: RecordNumberNumber_;
+    turnsPlayed: number;
+    turnsSkipped: number;
+    timeTaken: number;
+    fastTurns: number;
+    slowTurns: number;
+    hourOfDayQueue: string;
+    dayOfWeekQueue: string;
+    turnLengthBuckets: RecordNumberNumber_;
+    yearBuckets: RecordNumberNumber_;
+    activeGames: number;
+    totalGames: number;
     steamId: string;
-    civType: string;
-    hasSurrendered?: boolean;
-    surrenderDate?: Date;
+    avatarSmall: string;
+    displayName: string;
 }

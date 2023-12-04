@@ -9,23 +9,21 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { GameTypeTurnData } from './gameTypeTurnData';
 import { RecordNumberNumber_ } from './recordNumberNumber_';
 
 
-export interface GamePlayer { 
+export interface GlobalStatsData { 
     firstTurnEndDate?: Date;
     lastTurnEndDate?: Date;
-    turnsPlayed?: number;
-    turnsSkipped?: number;
-    timeTaken?: number;
-    fastTurns?: number;
-    slowTurns?: number;
-    hourOfDayQueue?: string;
-    dayOfWeekQueue?: string;
-    turnLengthBuckets?: RecordNumberNumber_;
-    yearBuckets?: RecordNumberNumber_;
-    steamId: string;
-    civType: string;
-    hasSurrendered?: boolean;
-    surrenderDate?: Date;
+    turnsPlayed: number;
+    turnsSkipped: number;
+    timeTaken: number;
+    fastTurns: number;
+    slowTurns: number;
+    hourOfDayQueue: string;
+    dayOfWeekQueue: string;
+    turnLengthBuckets: RecordNumberNumber_;
+    yearBuckets: RecordNumberNumber_;
+    statsByGameType: Array<GameTypeTurnData>;
 }
