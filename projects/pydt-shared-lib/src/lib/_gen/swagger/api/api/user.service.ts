@@ -114,6 +114,48 @@ export class UserService {
     /**
      * 
      * 
+     * @param steamIds 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public byIds(steamIds: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public byIds(steamIds: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public byIds(steamIds: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public byIds(steamIds: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (steamIds === null || steamIds === undefined) {
+            throw new Error('Required parameter steamIds was null or undefined when calling byIds.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/users/${encodeURIComponent(String(steamIds))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

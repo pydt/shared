@@ -28,4 +28,6 @@ export interface GamePlayer {
     civType: string;
     hasSurrendered?: boolean;
     surrenderDate?: Date;
+    substitutionRequested?: boolean;
+    isDead?: boolean;
 }

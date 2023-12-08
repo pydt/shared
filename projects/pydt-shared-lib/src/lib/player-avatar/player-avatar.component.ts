@@ -61,6 +61,10 @@ export class PlayerAvatarComponent implements OnDestroy {
             result += `<br />${profile.comments}`;
           }
         }
+
+        if (this.player.substitutionRequested) {
+          result += `<br />SUBSTITUTION REQUESTED`;
+        }
       }
 
       return result;

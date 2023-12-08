@@ -7,6 +7,7 @@ import { finalize } from "rxjs/operators";
 export class BusyService implements HttpInterceptor {
   private busyLevel = 0;
   private busyStream = new Subject<boolean>();
+  public ignoreNextIntercept = false;
 
   public incrementBusy(isMoBizzay: boolean) {
     this.busyLevel += isMoBizzay ? 1 : -1;
@@ -18,6 +19,11 @@ export class BusyService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if (this.ignoreNextIntercept) {
+      this.ignoreNextIntercept = false;
+      return next.handle(req);
+    }
+
     this.incrementBusy(true);
 
     return next.handle(req).pipe(

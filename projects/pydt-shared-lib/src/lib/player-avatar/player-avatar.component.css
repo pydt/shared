@@ -2,6 +2,10 @@
   background-color: #30875E;
 }
 
+.substitutionRequested {
+  background-color: rgb(155, 42, 42);
+}
+
 .dragMode {
   background-color: #aaaaff;
   cursor: pointer;
