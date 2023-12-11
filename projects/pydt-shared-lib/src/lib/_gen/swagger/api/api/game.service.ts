@@ -29,6 +29,7 @@ import { JoinGameRequestBody } from '../model/joinGameRequestBody';
 import { LeaveRequestBody } from '../model/leaveRequestBody';
 import { OpenGamesResponse } from '../model/openGamesResponse';
 import { OpenSlotsGame } from '../model/openSlotsGame';
+import { RawCiv6Mods } from '../model/rawCiv6Mods';
 import { ReplacePlayerRequestBody } from '../model/replacePlayerRequestBody';
 import { ReplaceRequestedSubstitutionPlayerRequestBody } from '../model/replaceRequestedSubstitutionPlayerRequestBody';
 import { RequestSubstitutionBody } from '../model/requestSubstitutionBody';
@@ -111,6 +112,63 @@ export class GameService {
 
         return this.httpClient.post<any>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/delete`,
             null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addCiv6Mod(gameId: string, body: RawCiv6Mods, observe?: 'body', reportProgress?: boolean): Observable<Array<RawCiv6Mods>>;
+    public addCiv6Mod(gameId: string, body: RawCiv6Mods, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<RawCiv6Mods>>>;
+    public addCiv6Mod(gameId: string, body: RawCiv6Mods, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<RawCiv6Mods>>>;
+    public addCiv6Mod(gameId: string, body: RawCiv6Mods, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling addCiv6Mod.');
+        }
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling addCiv6Mod.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Array<RawCiv6Mods>>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/civ6Mods`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -281,6 +339,58 @@ export class GameService {
      * 
      * 
      * @param gameId 
+     * @param modId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteCiv6Mod(gameId: string, modId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<RawCiv6Mods>>;
+    public deleteCiv6Mod(gameId: string, modId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<RawCiv6Mods>>>;
+    public deleteCiv6Mod(gameId: string, modId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<RawCiv6Mods>>>;
+    public deleteCiv6Mod(gameId: string, modId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling deleteCiv6Mod.');
+        }
+
+        if (modId === null || modId === undefined) {
+            throw new Error('Required parameter modId was null or undefined when calling deleteCiv6Mod.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.delete<Array<RawCiv6Mods>>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/civ6Mods/${encodeURIComponent(String(modId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -415,6 +525,53 @@ export class GameService {
         ];
 
         return this.httpClient.get<Game>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCiv6Mods(gameId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<RawCiv6Mods>>;
+    public getCiv6Mods(gameId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<RawCiv6Mods>>>;
+    public getCiv6Mods(gameId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<RawCiv6Mods>>>;
+    public getCiv6Mods(gameId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (gameId === null || gameId === undefined) {
+            throw new Error('Required parameter gameId was null or undefined when calling getCiv6Mods.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<RawCiv6Mods>>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/civ6Mods`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

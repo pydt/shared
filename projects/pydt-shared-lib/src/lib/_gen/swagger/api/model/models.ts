@@ -30,6 +30,7 @@ export * from './openSlotsGame';
 export * from './platformSaveLocation';
 export * from './privateUserData';
 export * from './pydtMetadata';
+export * from './rawCiv6Mods';
 export * from './recordNumberNumber_';
 export * from './replacePlayerRequestBody';
 export * from './replaceRequestedSubstitutionPlayerRequestBody';
