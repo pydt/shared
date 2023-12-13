@@ -15,4 +15,5 @@ import { BasePath } from './basePath';
 export interface PlatformSaveLocation { 
     basePath: BasePath;
     prefix: string;
+    dataPathOverrides?: { [key: string]: string; };
 }
