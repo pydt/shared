@@ -11,8 +11,8 @@
  */
 
 
-export interface GameTurnResponse { 
-    downloadUrl: string;
-    version?: string;
-    size?: number;
-}
+export type GAMEFLAG = 'CIV6_CONGRESS_TURN';
+
+export const GAMEFLAG = {
+    CIV6CONGRESSTURN: 'CIV6_CONGRESS_TURN' as GAMEFLAG
+};

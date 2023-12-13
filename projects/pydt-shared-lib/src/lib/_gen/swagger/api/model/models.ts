@@ -9,6 +9,7 @@ export * from './currentUserDataWithPud';
 export * from './dLC';
 export * from './deleteWebPushBody';
 export * from './errorResponse';
+export * from './gAMEFLAG';
 export * from './game';
 export * from './gamePlayer';
 export * from './gameRequestBody';

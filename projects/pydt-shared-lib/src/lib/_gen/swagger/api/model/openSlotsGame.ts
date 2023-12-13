@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { GAMEFLAG } from './gAMEFLAG';
 import { GamePlayer } from './gamePlayer';
 import { RecordNumberNumber_ } from './recordNumberNumber_';
 
@@ -60,6 +61,7 @@ export interface OpenSlotsGame {
     finalized?: boolean;
     gameVideoUrl?: string;
     dataVersion?: number;
+    flags?: Array<GAMEFLAG>;
     joinAfterStart: boolean;
     substitutionRequested: boolean;
 }
