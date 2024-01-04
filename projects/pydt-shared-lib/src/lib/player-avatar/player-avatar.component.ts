@@ -103,6 +103,10 @@ export class PlayerAvatarComponent implements OnDestroy {
       return `https://playyourdamnturn.com/img/civs/${image}`;
     }
 
+    if (this.player.isDead) {
+      return "https://playyourdamnturn.com/img/skull-and-crossbones.svg";
+    }
+
     if (this.isHuman) {
       return (this.gamePlayerProfiles[this.player.steamId] || ({} as SteamProfile)).avatarmedium;
     }
