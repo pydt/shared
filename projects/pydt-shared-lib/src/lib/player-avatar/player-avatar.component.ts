@@ -103,7 +103,7 @@ export class PlayerAvatarComponent implements OnDestroy {
       return `https://playyourdamnturn.com/img/civs/${image}`;
     }
 
-    if (this.player.isDead) {
+    if (this.player?.isDead) {
       return "https://playyourdamnturn.com/img/skull-and-crossbones.svg";
     }
 
