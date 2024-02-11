@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pydt-shared-app:build"
+            "buildTarget": "pydt-shared-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pydt-shared-app:build:production"
+              "buildTarget": "pydt-shared-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pydt-shared-app:build"
+            "buildTarget": "pydt-shared-app:build"
           }
         },
         "test": {
@@ -171,6 +171,7 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": false
   }
 }
