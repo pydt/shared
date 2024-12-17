@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AuthenticateResponse } from '../model/authenticateResponse';
+import { ErrorResponse } from '../model/errorResponse';
 import { ValidateResponse } from '../model/validateResponse';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -85,6 +86,48 @@ export class AuthService {
         ];
 
         return this.httpClient.get<AuthenticateResponse>(`${this.basePath}/auth/steam`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateTokenNonce(observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public updateTokenNonce(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public updateTokenNonce(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public updateTokenNonce(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<string>(`${this.basePath}/auth/auth/updateTokenNonce`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
