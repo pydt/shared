@@ -25,11 +25,11 @@ export const TURN_TIMER_VACATION_OPTIONS = [
   },
   {
     key: "SKIP_IMMEDIATELY",
-    label: "Turn is skipped immediately",
+    label: "Turn is skipped immediately while player is on vacation",
   },
   {
     key: "PAUSE",
-    label: "Game is paused while users are on vacation",
+    label: "Game is paused while players are on vacation",
   },
 ];
 
