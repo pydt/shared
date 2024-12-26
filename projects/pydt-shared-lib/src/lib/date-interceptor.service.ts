@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument, @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -18,7 +18,7 @@ export class DateInterceptor implements HttpInterceptor {
     );
   }
 
-  private convertDates(object: Object) {
+  private convertDates(object: object) {
     if (!object || !(object instanceof Object)) {
       return;
     }
