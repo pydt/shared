@@ -11,11 +11,7 @@
  */
 
 
-/**
- * Construct a type with a set of properties K of type T
- */
-export interface RecordNumberNumber_ { 
-  [key: string]: number;
-
-
+export interface CanCreateGameResponseBody { 
+    canCreate: boolean;
+    message?: string;
 }

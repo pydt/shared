@@ -18,6 +18,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { CanCreateGameRequestBody } from '../model/canCreateGameRequestBody';
+import { CanCreateGameResponseBody } from '../model/canCreateGameResponseBody';
 import { ChangeCivRequestBody } from '../model/changeCivRequestBody';
 import { CreateGameRequestBody } from '../model/createGameRequestBody';
 import { ErrorResponse } from '../model/errorResponse';
@@ -168,6 +170,58 @@ export class GameService {
         }
 
         return this.httpClient.post<Array<RawCiv6Mods>>(`${this.basePath}/game/${encodeURIComponent(String(gameId))}/civ6Mods`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public canCreate(body: CanCreateGameRequestBody, observe?: 'body', reportProgress?: boolean): Observable<CanCreateGameResponseBody>;
+    public canCreate(body: CanCreateGameRequestBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CanCreateGameResponseBody>>;
+    public canCreate(body: CanCreateGameRequestBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CanCreateGameResponseBody>>;
+    public canCreate(body: CanCreateGameRequestBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling canCreate.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<CanCreateGameResponseBody>(`${this.basePath}/game/canCreate`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

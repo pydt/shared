@@ -1,5 +1,7 @@
 export * from './authenticateResponse';
 export * from './basePath';
+export * from './canCreateGameRequestBody';
+export * from './canCreateGameResponseBody';
 export * from './changeCivRequestBody';
 export * from './civDef';
 export * from './civDefOptions';
