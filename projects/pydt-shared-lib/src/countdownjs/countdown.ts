@@ -528,7 +528,7 @@ export default (
      * @returns
      */
     const formatList = function(ts) {
-      const list = [];
+      const list: string[] = [];
 
       let value = ts.millennia;
 

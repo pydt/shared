@@ -1,5 +1,6 @@
 import { Inject, Injectable, InjectionToken, Optional } from "@angular/core";
 import { Game, SteamProfile, UserService } from "./_gen/swagger/api";
+import { firstValueFrom } from "rxjs";
 
 export const CACHE_INVALIDATION_MINUTES_TOKEN = new InjectionToken("CACHE_INVALIDATION_MINUTES_TOKEN");
 
@@ -57,16 +58,16 @@ export class ProfileCacheService {
               result[steamId] = this.cache[steamId];
             }
 
-            if (!cachedVal || new Date() > cachedVal.invalidDate) {
+            if (!cachedVal || (cachedVal.invalidDate && new Date() > cachedVal.invalidDate)) {
               toDownload.push(steamId);
             }
           }
         }
 
         if (toDownload.length) {
-          const profiles = await this.api.steamProfiles(toDownload.join(",")).toPromise();
+          const profiles = await firstValueFrom(this.api.steamProfiles(toDownload.join(",")));
 
-          for (const profile of profiles) {
+          for (const profile of profiles || []) {
             (profile as SteamProfileWithInvalidDate).invalidDate = new Date(
               new Date().getTime() + this.cacheInvalidationMinutes * 60 * 1000,
             );

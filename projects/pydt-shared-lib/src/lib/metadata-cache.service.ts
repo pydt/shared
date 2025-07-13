@@ -3,13 +3,13 @@ import { CACHE_INVALIDATION_MINUTES_TOKEN } from "./profile-cache.service";
 import { HashedPydtMetadata } from "./_gen/swagger/api";
 import { MetadataService } from "./_gen/swagger/api/api/metadata.service";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 @Injectable()
 export class MetadataCacheService implements HttpInterceptor {
-  private cachedData: HashedPydtMetadata;
-  private dataPromise: Promise<HashedPydtMetadata>;
+  private cachedData: HashedPydtMetadata | undefined;
+  private dataPromise: Promise<HashedPydtMetadata> | undefined;
 
   constructor(
     private api: MetadataService,
@@ -22,13 +22,13 @@ export class MetadataCacheService implements HttpInterceptor {
     if (!this.cachedData) {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       if (!this.dataPromise) {
-        this.dataPromise = this.api.metadata().toPromise();
+        this.dataPromise = firstValueFrom(this.api.metadata());
       }
 
       try {
         this.cachedData = await this.dataPromise;
       } finally {
-        this.dataPromise = null;
+        this.dataPromise = undefined;
       }
     }
 
@@ -45,7 +45,7 @@ export class MetadataCacheService implements HttpInterceptor {
             event.headers.has("Metadata-Hash") &&
             event.headers.get("Metadata-Hash") !== this.cachedData.hash
           ) {
-            this.cachedData = null;
+            this.cachedData = undefined;
           }
         }
       }),

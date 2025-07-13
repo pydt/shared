@@ -40,7 +40,7 @@ export class GameSpeedPipe implements PipeTransform {
       return "";
     }
 
-    const speed = getGameDef(game, games).gameSpeeds.find(s => s.key === game.gameSpeed);
+    const speed = getGameDef(game, games)?.gameSpeeds.find(s => s.key === game.gameSpeed);
 
     return speed ? speed.displayName : "Other / Custom Speed";
   }
@@ -53,7 +53,7 @@ export class MapPipe implements PipeTransform {
       return "";
     }
 
-    const map = getGameDef(game, games).maps.find((m: ModelMap) => m.file === game.mapFile) as ModelMap;
+    const map = getGameDef(game, games)?.maps.find((m: ModelMap) => m.file === game.mapFile) as ModelMap;
 
     return map ? map.displayName : "Other / Custom Map";
   }
@@ -66,7 +66,7 @@ export class MapSizePipe implements PipeTransform {
       return "";
     }
 
-    const size = getGameDef(game, games).mapSizes.find(s => s.key === game.mapSize);
+    const size = getGameDef(game, games)?.mapSizes.find(s => s.key === game.mapSize);
 
     return size ? size.displayName : "Other / Custom Size";
   }

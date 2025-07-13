@@ -50,6 +50,11 @@ export class CountdownUtility {
       map(() => {
         const now = new Date();
         const lastTurnDate = game.lastTurnEndDate || game.updatedAt;
+
+        if (!lastTurnDate || !game.turnTimerMinutes) {
+          return "";
+        }
+
         const expirationDate = new Date(lastTurnDate.getTime() + game.turnTimerMinutes * 60 * 1000);
 
         if (expirationDate.getTime() - now.getTime() < 0) {
