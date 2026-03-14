@@ -14,6 +14,7 @@ import { BusyService } from "./busy.service";
   template: ` <div [@visibilityChanged]="busyValue ? 'shown' : 'hidden'" class="pydt-busy backdrop">
     <div class="pydt-busy spinner"></div>
   </div>`,
+  standalone: false,
 })
 export class BusyComponent implements OnInit {
   public busyValue = false;

@@ -7,6 +7,7 @@ import { CivDef, Game, GamePlayer, SteamProfile } from "../_gen/swagger/api";
   selector: "pydt-player-avatar",
   templateUrl: "./player-avatar.component.html",
   styleUrls: ["./player-avatar.component.css"],
+  standalone: false,
 })
 export class PlayerAvatarComponent implements OnDestroy {
   @Input() game: Game;

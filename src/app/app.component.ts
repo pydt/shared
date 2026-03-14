@@ -4,6 +4,7 @@ import { Component } from "@angular/core";
   selector: "pydt-shared",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
+  standalone: false,
 })
 export class AppComponent {
   title = "pydt-shared";
