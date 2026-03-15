@@ -7,7 +7,7 @@
         [style.cursor]="hasClickListener ? 'pointer' : 'default'"
         [style.margin-bottom]="thumbnailMarginBottom"
         (click)="click.emit(player)"
-        class="thumbnail"
+        class="avatar-tile"
         [class.substitutionRequested]="player.substitutionRequested"
         [class.currentTurn]="game.currentPlayerSteamId === player.steamId"
       >
@@ -18,7 +18,7 @@
       </a>
     }
     @if (!player) {
-      <a href="javascript:void(0)" [style.margin-bottom]="thumbnailMarginBottom" class="thumbnail">
+      <a href="javascript:void(0)" [style.margin-bottom]="thumbnailMarginBottom" class="avatar-tile">
         <img [src]="imgSrc" [style.height]="avatarSize" />
       </a>
     }
@@ -26,7 +26,7 @@
 }
 @if (thumbnailOnly) {
   <div
-    class="thumbnail"
+    class="avatar-tile"
     [style.margin-bottom]="thumbnailMarginBottom"
     [tooltip]="tooltipTemplate"
     #tooltip="bs-tooltip"
