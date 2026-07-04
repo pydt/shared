@@ -14,5 +14,6 @@
 export interface JoinGameRequestBody { 
     steamId?: string;
     playerCiv: string;
+    playerCivilization?: string;
     password?: string;
 }

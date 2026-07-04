@@ -16,4 +16,5 @@ export interface CivDefOptions {
     leaderDisplayName?: string;
     dlcId?: string;
     justShowLeaderName?: boolean;
+    imageFileName?: string;
 }

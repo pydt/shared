@@ -10,8 +10,13 @@
         class="avatar-tile"
         [class.substitutionRequested]="player.substitutionRequested"
         [class.currentTurn]="game.currentPlayerSteamId === player.steamId"
+        (mouseenter)="iconMouseOver()"
+        (mouseleave)="iconMouseOut()"
       >
-        <img [src]="imgSrc" [style.height]="avatarSize" (mouseover)="iconMouseOver()" (mouseout)="iconMouseOut()" />
+        <img [src]="imgSrc" [style.height]="avatarSize" />
+        @if (civBadgeSrc) {
+          <img class="civ-badge" [src]="civBadgeSrc" [style.width]="civBadgeSize" [style.height]="civBadgeSize" />
+        }
         @if (playerIsOnVacation(player)) {
           <div class="vacation" [style.top]="vacationTop">ON<br />VACATION</div>
         }

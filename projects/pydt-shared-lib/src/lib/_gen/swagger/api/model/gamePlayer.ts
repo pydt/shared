@@ -26,6 +26,7 @@ export interface GamePlayer {
     yearBuckets?: RecordNumberNumber_;
     steamId: string;
     civType: string;
+    civilization?: string;
     hasSurrendered?: boolean;
     surrenderDate?: Date;
     substitutionRequested?: boolean;

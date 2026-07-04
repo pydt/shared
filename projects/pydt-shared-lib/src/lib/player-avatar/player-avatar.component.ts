@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from "@angular/core";
 import { TooltipDirective } from "ngx-bootstrap/tooltip";
 import { SteamProfileMap } from "../profile-cache.service";
-import { CivDef, Game, GamePlayer, SteamProfile } from "../_gen/swagger/api";
+import { CivDef, CivGame, Game, GamePlayer, SteamProfile } from "../_gen/swagger/api";
 
 @Component({
   selector: "pydt-player-avatar",
@@ -15,6 +15,7 @@ export class PlayerAvatarComponent implements OnDestroy {
   @Input() players: GamePlayer[] = [];
   @Input() gamePlayerProfiles: SteamProfileMap;
   @Input() civDefs: CivDef[] = [];
+  @Input() civGame: CivGame;
   @Input() size: "BIG" | "SMALL" = "SMALL";
   @Input() thumbnailOnly = false;
   @Input() thumbnailOnlyDragMode = false;
@@ -35,6 +36,24 @@ export class PlayerAvatarComponent implements OnDestroy {
     return this.civDefs[this.index];
   }
 
+  get civilizationDef() {
+    if (!this.civGame?.separateLeaderCiv || !this.player?.civilization) {
+      return undefined;
+    }
+
+    return this.civGame.civilizations?.find(civ => civ.civKey === this.player.civilization);
+  }
+
+  get civBadgeSrc() {
+    return this.isMouseOver && this.civilizationDef
+      ? `https://playyourdamnturn.com/img/civs/${this.civilizationDef.imageFileName}`
+      : null;
+  }
+
+  get civBadgeSize() {
+    return this.size === "BIG" ? "24px" : "14px";
+  }
+
   get tooltipHtml() {
     if (this.player) {
       const profile = this.gamePlayerProfiles[this.player.steamId];
@@ -48,6 +67,10 @@ export class PlayerAvatarComponent implements OnDestroy {
 
       if (this.civDef) {
         civDesc = this.civDef.fullDisplayName;
+      }
+
+      if (this.civilizationDef) {
+        civDesc += ` - ${this.civilizationDef.civDisplayName}`;
       }
 
       let result = `${playerName} /<br />${civDesc}`;

@@ -22,6 +22,8 @@ export interface CivGame {
     turnTimerSupported: boolean;
     assetPrefix: string;
     leaders: Array<CivDef>;
+    separateLeaderCiv?: boolean;
+    civilizations?: Array<CivDef>;
     dlcs: Array<DLC>;
     gameSpeeds: Array<GameSpeed>;
     mapSizes: Array<MapSize>;

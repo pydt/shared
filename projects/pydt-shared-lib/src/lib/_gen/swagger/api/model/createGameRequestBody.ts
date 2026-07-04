@@ -29,6 +29,7 @@ export interface CreateGameRequestBody {
     turnTimerVacationHandling?: CreateGameRequestBody.TurnTimerVacationHandlingEnum;
     password?: string;
     player1Civ: string;
+    player1Civilization?: string;
 }
 export namespace CreateGameRequestBody {
     export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';

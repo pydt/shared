@@ -14,4 +14,5 @@
 export interface ChangeCivRequestBody { 
     steamId?: string;
     playerCiv: string;
+    playerCivilization?: string;
 }
