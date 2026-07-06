@@ -16,4 +16,5 @@ import { CivGame } from './civGame';
 export interface PydtMetadata { 
     civGames: Array<CivGame>;
     randomCiv: CivDef;
+    randomCivilization: CivDef;
 }
