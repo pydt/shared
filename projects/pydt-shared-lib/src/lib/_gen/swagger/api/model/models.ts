@@ -10,6 +10,7 @@ export * from './createGameRequestBody';
 export * from './currentUserDataWithPud';
 export * from './dLC';
 export * from './deleteWebPushBody';
+export * from './dlcGroup';
 export * from './errorResponse';
 export * from './gAMEFLAG';
 export * from './game';

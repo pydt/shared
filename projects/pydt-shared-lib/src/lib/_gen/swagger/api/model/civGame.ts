@@ -11,6 +11,7 @@
  */
 import { CivDef } from './civDef';
 import { DLC } from './dLC';
+import { DlcGroup } from './dlcGroup';
 import { GameSpeed } from './gameSpeed';
 import { MapSize } from './mapSize';
 import { PlatformSaveLocation } from './platformSaveLocation';
@@ -25,6 +26,7 @@ export interface CivGame {
     separateLeaderCiv?: boolean;
     civilizations?: Array<CivDef>;
     dlcs: Array<DLC>;
+    dlcGroups?: Array<DlcGroup>;
     gameSpeeds: Array<GameSpeed>;
     mapSizes: Array<MapSize>;
     maps: Array<any>;
