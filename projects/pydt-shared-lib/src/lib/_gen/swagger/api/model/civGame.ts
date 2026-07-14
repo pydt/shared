@@ -35,4 +35,5 @@ export interface CivGame {
     savePath: string;
     saveExtension: string;
     runUrls: { [key: string]: string; };
+    awaitWriteFinish: boolean;
 }
