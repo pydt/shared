@@ -1,5 +1,4 @@
-import { Inject, Injectable, Optional } from "@angular/core";
-import { CACHE_INVALIDATION_MINUTES_TOKEN } from "./profile-cache.service";
+import { Injectable } from "@angular/core";
 import { HashedPydtMetadata } from "./_gen/swagger/api";
 import { MetadataService } from "./_gen/swagger/api/api/metadata.service";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
@@ -11,12 +10,7 @@ export class MetadataCacheService implements HttpInterceptor {
   private cachedData: HashedPydtMetadata | undefined;
   private dataPromise: Promise<HashedPydtMetadata> | undefined;
 
-  constructor(
-    private api: MetadataService,
-    @Optional() @Inject(CACHE_INVALIDATION_MINUTES_TOKEN) private cacheInvalidationMinutes: number,
-  ) {
-    this.cacheInvalidationMinutes = this.cacheInvalidationMinutes || 60;
-  }
+  constructor(private api: MetadataService) {}
 
   async getCivGameMetadata() {
     if (!this.cachedData) {

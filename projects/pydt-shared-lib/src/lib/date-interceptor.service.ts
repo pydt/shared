@@ -23,12 +23,6 @@ export class DateInterceptor implements HttpInterceptor {
       return;
     }
 
-    if (object instanceof Array) {
-      for (const item of object) {
-        this.convertDates(item);
-      }
-    }
-
     for (const key of Object.keys(object)) {
       const value = object[key];
 

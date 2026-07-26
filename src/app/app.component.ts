@@ -84,6 +84,7 @@ export class AppComponent implements OnInit {
     savePath: "",
     saveExtension: "Civ7Save",
     runUrls: {},
+    awaitWriteFinish: false,
   };
 
   player: GamePlayer = {
