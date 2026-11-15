@@ -12,6 +12,7 @@
 import { GAMEFLAG } from './gAMEFLAG';
 import { GamePlayer } from './gamePlayer';
 import { RecordNumberNumber_ } from './recordNumberNumber_';
+import { RecordStringUnknown_ } from './recordStringUnknown_';
 
 
 export interface Game { 
@@ -62,6 +63,7 @@ export interface Game {
     gameVideoUrl?: string;
     dataVersion?: number;
     flags?: Array<GAMEFLAG>;
+    saveHandlerData?: RecordStringUnknown_;
 }
 export namespace Game {
     export type RandomOnlyEnum = 'EITHER' | 'FORCE_RANDOM' | 'FORCE_LEADER';

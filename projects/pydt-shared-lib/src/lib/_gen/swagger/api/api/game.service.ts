@@ -564,6 +564,11 @@ export class GameService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (api_key) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'

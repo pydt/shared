@@ -12,6 +12,7 @@
 import { GAMEFLAG } from './gAMEFLAG';
 import { GamePlayer } from './gamePlayer';
 import { RecordNumberNumber_ } from './recordNumberNumber_';
+import { RecordStringUnknown_ } from './recordStringUnknown_';
 
 
 export interface OpenSlotsGame { 
@@ -62,6 +63,7 @@ export interface OpenSlotsGame {
     gameVideoUrl?: string;
     dataVersion?: number;
     flags?: Array<GAMEFLAG>;
+    saveHandlerData?: RecordStringUnknown_;
     joinAfterStart: boolean;
     substitutionRequested: boolean;
 }

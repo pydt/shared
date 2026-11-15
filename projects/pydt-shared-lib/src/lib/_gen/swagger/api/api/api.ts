@@ -1,5 +1,7 @@
 export * from './auth.service';
 import { AuthService } from './auth.service';
+export * from './client.service';
+import { ClientService } from './client.service';
 export * from './game.service';
 import { GameService } from './game.service';
 export * from './metadata.service';
@@ -10,4 +12,4 @@ export * from './user.service';
 import { UserService } from './user.service';
 export * from './webhook.service';
 import { WebhookService } from './webhook.service';
-export const APIS = [AuthService, GameService, MetadataService, StatsService, UserService, WebhookService];
+export const APIS = [AuthService, ClientService, GameService, MetadataService, StatsService, UserService, WebhookService];
