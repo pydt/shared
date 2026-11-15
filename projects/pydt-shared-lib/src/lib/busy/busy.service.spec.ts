@@ -11,7 +11,7 @@ describe("BusyService", () => {
 
   const passthroughHandler: HttpHandler = {
     handle: () => of(new HttpResponse()),
-  } as HttpHandler;
+  };
 
   it("notifies subscribers as busy count goes above and back to zero", () => {
     const values: boolean[] = [];

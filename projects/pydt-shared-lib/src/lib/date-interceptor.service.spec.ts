@@ -9,10 +9,9 @@ describe("DateInterceptor", () => {
     interceptor = new DateInterceptor();
   });
 
-  const handlerReturning = (body: unknown): HttpHandler =>
-    ({
-      handle: () => of(new HttpResponse({ body })),
-    }) as HttpHandler;
+  const handlerReturning = (body: unknown): HttpHandler => ({
+    handle: () => of(new HttpResponse({ body })),
+  });
 
   const intercept = <T>(body: T): Promise<T> =>
     new Promise(resolve => {

@@ -13,11 +13,10 @@ const buildMetadata = (hash: string): HashedPydtMetadata => ({
   metadata: { civGames: [] } as unknown as PydtMetadata,
 });
 
-const handlerWithHash = (hash?: string): HttpHandler =>
-  ({
-    handle: () =>
-      of(new HttpResponse({ headers: hash ? new HttpHeaders({ "Metadata-Hash": hash }) : new HttpHeaders() })),
-  }) as HttpHandler;
+const handlerWithHash = (hash?: string): HttpHandler => ({
+  handle: () =>
+    of(new HttpResponse({ headers: hash ? new HttpHeaders({ "Metadata-Hash": hash }) : new HttpHeaders() })),
+});
 
 describe("MetadataCacheService", () => {
   let api: FakeMetadataService;
