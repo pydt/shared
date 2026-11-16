@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { BusyService } from "./busy.service";
 
 @Component({
@@ -14,6 +14,7 @@ import { BusyService } from "./busy.service";
   template: ` <div [@visibilityChanged]="busyValue ? 'shown' : 'hidden'" class="pydt-busy backdrop">
     <div class="pydt-busy spinner"></div>
   </div>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class BusyComponent implements OnInit {

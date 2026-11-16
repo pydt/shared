@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -rf dist/pydt-shared-models
 mkdir dist/pydt-shared-models
-./node_modules/.bin/tsc -d projects/pydt-shared-lib/src/model/* --outDir dist/pydt-shared-models
+./node_modules/.bin/tsc --ignoreConfig --module commonjs --target es2020 --strict false -d projects/pydt-shared-lib/src/model/* --outDir dist/pydt-shared-models
 cp projects/pydt-shared-lib/package.json dist/pydt-shared-models
 
 node > dist/pydt-shared-models/package.json.new <<EOF

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { CivDef, CivGame, Game, GamePlayer, SteamProfileMap } from "pydt-shared-lib";
 
 const svgDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
@@ -18,6 +18,7 @@ const DEMO_IMAGE_OVERRIDES: Record<string, string> = {
   selector: "pydt-shared",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AppComponent implements OnInit {

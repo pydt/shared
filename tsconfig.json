@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "strict": false,
     "outDir": "./dist/out-tsc",
     "esModuleInterop": true,
     "sourceMap": true,
@@ -11,10 +11,9 @@
     "experimentalDecorators": true,
     "target": "ES2022",
     "strictNullChecks": true,
-    "typeRoots": ["node_modules/@types"],
     "paths": {
-      "pydt-shared-lib": ["dist/pydt-shared-lib"],
-      "pydt-shared-lib/*": ["dist/pydt-shared-lib/*"]
+      "pydt-shared-lib": ["./dist/pydt-shared-lib"],
+      "pydt-shared-lib/*": ["./dist/pydt-shared-lib/*"]
     },
     "useDefineForClassFields": false
   }

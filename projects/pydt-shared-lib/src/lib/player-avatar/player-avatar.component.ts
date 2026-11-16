@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { TooltipDirective } from "ngx-bootstrap/tooltip";
 import { SteamProfileMap } from "../profile-cache.service";
 import { CivDef, CivGame, Game, GamePlayer, SteamProfile } from "../_gen/swagger/api";
@@ -7,6 +7,7 @@ import { CivDef, CivGame, Game, GamePlayer, SteamProfile } from "../_gen/swagger
   selector: "pydt-player-avatar",
   templateUrl: "./player-avatar.component.html",
   styleUrls: ["./player-avatar.component.css"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PlayerAvatarComponent implements OnDestroy {

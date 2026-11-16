@@ -9,7 +9,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "experimentalDecorators": true,
-    "downlevelIteration": true,
     "importHelpers": true,
     "types": []
   },
@@ -18,7 +17,8 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "strictTemplates": false
   },
   "exclude": ["src/test.ts", "**/*.spec.ts"]
 }
