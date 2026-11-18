@@ -27,6 +27,7 @@ export interface GameRequestBody {
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     turnTimerVacationHandling?: GameRequestBody.TurnTimerVacationHandlingEnum;
+    maxRecentTurnAverageMinutes?: number;
     password?: string;
 }
 export namespace GameRequestBody {

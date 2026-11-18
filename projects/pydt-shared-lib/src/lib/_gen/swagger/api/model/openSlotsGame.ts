@@ -34,6 +34,7 @@ export interface OpenSlotsGame {
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     turnTimerVacationHandling?: OpenSlotsGame.TurnTimerVacationHandlingEnum;
+    maxRecentTurnAverageMinutes?: number;
     firstTurnEndDate?: Date;
     lastTurnEndDate?: Date;
     turnsPlayed?: number;

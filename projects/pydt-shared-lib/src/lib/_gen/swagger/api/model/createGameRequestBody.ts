@@ -27,6 +27,7 @@ export interface CreateGameRequestBody {
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     turnTimerVacationHandling?: CreateGameRequestBody.TurnTimerVacationHandlingEnum;
+    maxRecentTurnAverageMinutes?: number;
     password?: string;
     player1Civ: string;
     player1Civilization?: string;

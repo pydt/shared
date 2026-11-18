@@ -34,6 +34,7 @@ export interface Game {
     allowJoinAfterStart?: boolean;
     turnTimerMinutes?: number;
     turnTimerVacationHandling?: Game.TurnTimerVacationHandlingEnum;
+    maxRecentTurnAverageMinutes?: number;
     firstTurnEndDate?: Date;
     lastTurnEndDate?: Date;
     turnsPlayed?: number;
