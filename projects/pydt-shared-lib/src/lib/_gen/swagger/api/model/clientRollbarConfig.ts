@@ -12,7 +12,7 @@
 
 
 /**
- * Remote switch for the desktop client's Rollbar reporting. The client fetches this on startup and again every hour, so changes reach clients that are left running without a client release. Edit CLIENT_ROLLBAR_CONFIG below and deploy the API.
+ * Remote switch for the desktop client's Rollbar reporting. The client fetches  this on startup and again every hour, so changes reach clients that are left  running without a client release. Edit CLIENT_ROLLBAR_CONFIG below and deploy  the API.
  */
 export interface ClientRollbarConfig { 
     enabled: boolean;

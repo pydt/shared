@@ -42,4 +42,6 @@ export interface User {
     banned?: boolean;
     canCreateMultipleGames?: boolean;
     dataVersion?: number;
+    recentTurnAverage?: number;
+    recentTurnCount?: number;
 }

@@ -29,4 +29,6 @@ export interface UserTurnData {
     steamId: string;
     avatarSmall: string;
     displayName: string;
+    recentTurnAverage?: number;
+    recentTurnCount?: number;
 }
