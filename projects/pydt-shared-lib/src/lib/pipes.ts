@@ -33,10 +33,7 @@ export const TURN_TIMER_VACATION_OPTIONS = [
   },
 ];
 
-@Pipe({
-  name: "gamespeed",
-  standalone: false,
-})
+@Pipe({ name: "gamespeed" })
 export class GameSpeedPipe implements PipeTransform {
   transform(game: Game, games: CivGame[]): string {
     if (!games) {
@@ -49,10 +46,7 @@ export class GameSpeedPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: "map",
-  standalone: false,
-})
+@Pipe({ name: "map" })
 export class MapPipe implements PipeTransform {
   transform(game: Game, games: CivGame[]): string {
     if (!games) {
@@ -65,10 +59,7 @@ export class MapPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: "mapsize",
-  standalone: false,
-})
+@Pipe({ name: "mapsize" })
 export class MapSizePipe implements PipeTransform {
   transform(game: Game, games: CivGame[]): string {
     if (!games) {
@@ -81,20 +72,14 @@ export class MapSizePipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: "randomOnly",
-  standalone: false,
-})
+@Pipe({ name: "randomOnly" })
 export class RandomOnlyPipe implements PipeTransform {
   transform(game: Game): string {
     return RANDOM_ONLY_OPTIONS.find(x => x.key === game.randomOnly)?.label || RANDOM_ONLY_OPTIONS[0].label;
   }
 }
 
-@Pipe({
-  name: "turnTimerVacation",
-  standalone: false,
-})
+@Pipe({ name: "turnTimerVacation" })
 export class TurnTimerVacationPipe implements PipeTransform {
   transform(game: Game): string {
     return (

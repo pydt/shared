@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, inject } from "@angular/core";
 import { BusyService } from "./busy.service";
 
 @Component({
@@ -15,12 +15,11 @@ import { BusyService } from "./busy.service";
     <div class="pydt-busy spinner"></div>
   </div>`,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
 })
 export class BusyComponent implements OnInit {
-  public busyValue = false;
+  private busyService = inject(BusyService);
 
-  constructor(private busyService: BusyService) {}
+  public busyValue = false;
 
   public ngOnInit() {
     this.busyService.subscribeBusy(isBusy => {

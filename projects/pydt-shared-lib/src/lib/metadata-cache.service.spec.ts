@@ -1,3 +1,4 @@
+import { Injector } from "@angular/core";
 import { HttpHandler, HttpHeaders, HttpRequest, HttpResponse } from "@angular/common/http";
 import { firstValueFrom, Observable, of } from "rxjs";
 import { HashedPydtMetadata, PydtMetadata } from "./_gen/swagger/api";
@@ -24,7 +25,9 @@ describe("MetadataCacheService", () => {
 
   beforeEach(() => {
     api = { metadata: jasmine.createSpy("metadata") };
-    service = new MetadataCacheService(api as unknown as MetadataService);
+    service = Injector.create({
+      providers: [MetadataCacheService, { provide: MetadataService, useValue: api }],
+    }).get(MetadataCacheService);
   });
 
   it("fetches metadata from the API and caches it", async () => {

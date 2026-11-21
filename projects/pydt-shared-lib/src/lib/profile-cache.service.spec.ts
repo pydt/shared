@@ -1,6 +1,16 @@
+import { Injector } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
 import { Game, GamePlayer, SteamProfile, UserService } from "./_gen/swagger/api";
-import { ProfileCacheService } from "./profile-cache.service";
+import { CACHE_INVALIDATION_MINUTES_TOKEN, ProfileCacheService } from "./profile-cache.service";
+
+const createService = (api: FakeUserService, cacheInvalidationMinutes: number) =>
+  Injector.create({
+    providers: [
+      ProfileCacheService,
+      { provide: UserService, useValue: api },
+      { provide: CACHE_INVALIDATION_MINUTES_TOKEN, useValue: cacheInvalidationMinutes },
+    ],
+  }).get(ProfileCacheService);
 
 interface FakeUserService {
   steamProfiles: jasmine.Spy<(steamIds: string) => Observable<SteamProfile[]>>;
@@ -33,7 +43,7 @@ describe("ProfileCacheService", () => {
 
   beforeEach(() => {
     api = { steamProfiles: jasmine.createSpy("steamProfiles") };
-    service = new ProfileCacheService(api as unknown as UserService, 60);
+    service = createService(api, 60);
   });
 
   it("fetches uncached profiles from the API", async () => {
@@ -76,7 +86,7 @@ describe("ProfileCacheService", () => {
   it("re-fetches a profile once its cache entry has expired", async () => {
     // A tiny (sub-millisecond-scale) invalidation window lets this test wait out a real expiry
     // instead of mocking the clock, which conflicts with zone.js's patched timers in this environment.
-    service = new ProfileCacheService(api as unknown as UserService, 1 / 60000);
+    service = createService(api, 1 / 60000);
     api.steamProfiles.and.returnValue(of([buildProfile("111")]));
 
     await service.getProfiles(["111"]);

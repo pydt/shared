@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject, Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class BusyService implements HttpInterceptor {
   private busyLevel = 0;
   private busyStream = new Subject<boolean>();

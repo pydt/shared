@@ -1,8 +1,8 @@
-import { Inject, Injectable, InjectionToken, Optional } from "@angular/core";
+import { Injectable, InjectionToken, inject } from "@angular/core";
 import { Game, SteamProfile, UserService } from "./_gen/swagger/api";
 import { firstValueFrom } from "rxjs";
 
-export const CACHE_INVALIDATION_MINUTES_TOKEN = new InjectionToken("CACHE_INVALIDATION_MINUTES_TOKEN");
+export const CACHE_INVALIDATION_MINUTES_TOKEN = new InjectionToken<number>("CACHE_INVALIDATION_MINUTES_TOKEN");
 
 interface SteamProfileWithInvalidDate extends SteamProfile {
   invalidDate?: Date;
@@ -12,17 +12,13 @@ export interface SteamProfileMap {
   [index: string]: SteamProfile;
 }
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class ProfileCacheService {
+  private api = inject(UserService);
+  private cacheInvalidationMinutes = inject(CACHE_INVALIDATION_MINUTES_TOKEN, { optional: true }) || 60;
+
   private cache: SteamProfileMap = {};
   private lastRequest: Promise<SteamProfileMap> = Promise.resolve({});
-
-  constructor(
-    private api: UserService,
-    @Optional() @Inject(CACHE_INVALIDATION_MINUTES_TOKEN) private cacheInvalidationMinutes: number,
-  ) {
-    this.cacheInvalidationMinutes = this.cacheInvalidationMinutes || 60;
-  }
 
   getProfilesForGames(games: Game[]) {
     const steamIds = games

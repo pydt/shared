@@ -8,7 +8,7 @@ import { CivDef, CivGame, Game, GamePlayer, SteamProfile } from "../_gen/swagger
   templateUrl: "./player-avatar.component.html",
   styleUrls: ["./player-avatar.component.css"],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [TooltipDirective],
 })
 export class PlayerAvatarComponent implements OnDestroy {
   @Input() game: Game;

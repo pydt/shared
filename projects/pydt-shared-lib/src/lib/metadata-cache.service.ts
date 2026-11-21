@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { HashedPydtMetadata } from "./_gen/swagger/api";
 import { MetadataService } from "./_gen/swagger/api/api/metadata.service";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
 import { firstValueFrom, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class MetadataCacheService implements HttpInterceptor {
+  private api = inject(MetadataService);
+
   private cachedData: HashedPydtMetadata | undefined;
   private dataPromise: Promise<HashedPydtMetadata> | undefined;
-
-  constructor(private api: MetadataService) {}
 
   async getCivGameMetadata() {
     if (!this.cachedData) {
