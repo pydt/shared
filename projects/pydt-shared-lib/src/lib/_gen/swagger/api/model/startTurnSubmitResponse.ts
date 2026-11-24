@@ -13,4 +13,5 @@
 
 export interface StartTurnSubmitResponse { 
     putUrl: string;
+    fallbackPutUrl?: string;
 }
